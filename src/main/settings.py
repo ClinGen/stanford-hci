@@ -8,9 +8,15 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see:
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 # Built-in libraries:
 from pathlib import Path
+
+# Third-party dependencies:
+from dotenv import load_dotenv
+
+# Set environment variables.
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/.
 
 # SECURITY WARNING: Keep the secret key used in production secret.
-SECRET_KEY = "django-insecure-4mf+5i-ee6wj&im+z3n)^q6yiy0u8nse^psl7!!vb)44)08(s("
+SECRET_KEY = os.getenv("HCI_SECRET_KEY")
 
 # SECURITY WARNING: Don't run with debug turned on in production.
 DEBUG = True
@@ -33,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "hci.apps.HCIConfig"
 ]
 
 MIDDLEWARE = [
@@ -69,11 +76,14 @@ WSGI_APPLICATION = "main.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": os.getenv("HCI_DB_ENGINE"),
+        "NAME": os.getenv("HCI_DB_NAME"),
+        "USER": os.getenv("HCI_DB_USER"),
+        "PASSWORD": os.getenv("HCI_DB_PASSWORD"),
+        "HOST": os.getenv("HCI_DB_HOST"),
+        "PORT": os.getenv("HCI_DB_PORT"),
     }
 }
-
 
 # Password validation:
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
