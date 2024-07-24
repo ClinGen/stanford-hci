@@ -1,6 +1,6 @@
-# How-to guides
+# How-to Guides
 
-## Set up Postgres for local development
+## Set up Postgres for Local Development
 
 - Install Postgres version 16: `brew install postgresql@16`
 - Start the database server: `brew services start postgresql@16`
