@@ -10,13 +10,7 @@
     </head>
     <body>
         <h1>Clinical Genome HLA Curation</h1>
-        <nav>
-            <a href="/" {% if request.resolver_match.view_name == 'index' %}class="active"{% endif %}>Home</a>
-            <a href="/curation" {% if request.resolver_match.view_name == 'curation' %}class="active"{% endif %}>Curations</a>
-            <a href="/disease" {% if request.resolver_match.view_name == 'disease' %}class="active"{% endif %}>Diseases</a>
-            <a href="/allele-haplotype" {% if request.resolver_match.view_name == 'allele-haplotype' %}class="active"{% endif %}>Alleles/Haplotypes</a>
-            <a href="/publication" {% if request.resolver_match.view_name == 'publication' %}class="active"{% endif %}>Publications</a>
-        </nav>
+        {% block nav %}{% endblock %}
         {% block content %}{% endblock %}
     </body>
 </html>

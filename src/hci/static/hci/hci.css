@@ -9,10 +9,19 @@ a {
 
 html {
     font-family: sans-serif;
+    margin: 2em;
 }
 
 /* Classes in alphabetical order. */
 
 .active {
     text-decoration: underline;
+}
+
+.center {
+    text-align: center;
+}
+
+.error {
+    color: red;
 }

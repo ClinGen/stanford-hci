@@ -1,0 +1,31 @@
+{% extends "hci/base.html" %}
+{% block title %}Login{% endblock %}
+{% block description %}The login page for the HLA curation interface.{% endblock %}
+{% block content %}
+        <!-- Begin login page content. -->
+        <div>
+            {% if form.errors %}
+            <p class="error">Username and password didn't match. Please try again.</p>
+            {% endif %}
+            {% if next %}
+                {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed, please log in with an account that has access.</p>
+                {% else %}
+            <p>Please log in to see this page.</p>
+                {% endif %}
+            {% endif %}
+
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <label for="username">{{ form.username.label_tag }}</label>
+                <input type="text" id="username" name="username" placeholder="Your username"><br>
+                <label for="password">{{ form.password.label_tag }}</label>
+                <input type="password" id="password" name="password" placeholder="Your password">
+                <input type="submit" value="Log In">
+                <input type="hidden" name="next" value="{{ next }}">
+            </form>
+
+            <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+        </div>
+        <!-- End login page content. -->
+{% endblock %}
