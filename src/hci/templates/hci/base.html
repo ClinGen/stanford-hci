@@ -5,15 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>HCI | {% block title %}{% endblock %}</title>
         <meta name="description" content="{% block description %}{% endblock %}">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'hci/hci.css' %}">
     </head>
     <body>
         <h1>Clinical Genome HLA Curation</h1>
         <nav>
-            <a href="/">Home</a>
-            <a href="/curation">Curations</a>
-            <a href="/disease">Diseases</a>
-            <a href="/allele-haplotype">Alleles/Haplotypes</a>
-            <a href="/publication">Publications</a>
+            <a href="/" {% if request.resolver_match.view_name == 'index' %}class="active"{% endif %}>Home</a>
+            <a href="/curation" {% if request.resolver_match.view_name == 'curation' %}class="active"{% endif %}>Curations</a>
+            <a href="/disease" {% if request.resolver_match.view_name == 'disease' %}class="active"{% endif %}>Diseases</a>
+            <a href="/allele-haplotype" {% if request.resolver_match.view_name == 'allele-haplotype' %}class="active"{% endif %}>Alleles/Haplotypes</a>
+            <a href="/publication" {% if request.resolver_match.view_name == 'publication' %}class="active"{% endif %}>Publications</a>
         </nav>
         {% block content %}{% endblock %}
     </body>
