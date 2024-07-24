@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>HCI | {% block title %}{% endblock %}</title>
+        <meta name="description" content="{% block description %}{% endblock %}">
+    </head>
+    <body>
+        <h1>Clinical Genome HLA Curation</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/curation">Curations</a>
+            <a href="/disease">Diseases</a>
+            <a href="/allele-haplotype">Alleles/Haplotypes</a>
+            <a href="/publication">Publications</a>
+        </nav>
+        {% block content %}{% endblock %}
+    </body>
+</html>

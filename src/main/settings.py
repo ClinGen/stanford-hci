@@ -8,7 +8,9 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see:
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
+
 import os
+
 # Built-in libraries:
 from pathlib import Path
 
@@ -39,7 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "hci.apps.HCIConfig"
+    "hci.apps.HCIConfig",
 ]
 
 MIDDLEWARE = [

@@ -6,5 +6,6 @@ from django.db import models
 
 class Curation(models.Model):
     """Define the shape of an HLA curation."""
-    disease = models.CharField()
-    hla_allele = models.CharField()
+
+    disease: models.CharField = models.CharField()
+    hla_allele: models.CharField = models.CharField()

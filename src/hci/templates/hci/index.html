@@ -1,0 +1,65 @@
+{% extends "hci/base.html" %}
+{% block title %}Home{% endblock %}
+{% block description %}The home page for the HLA curation interface.{% endblock %}
+{% block content %}
+        <!-- Begin home page content. -->
+        <h2>Welcome, User.</h2>
+        <p>You are curating as part of the HLA Expert Panel.</p>
+        <div>
+            <button>Add Curation</button>
+            <button>Add Disease</button>
+            <button>Add Allele/Haplotype</button>
+            <button>Add Publication</button>
+        </div>
+
+        <h3>Your HLA Expert Panel Curations</h3>
+        <table>
+            <tr>
+                <th>Allele/Haplotype</th>
+                <th>Disease</th>
+                <th>Status</th>
+                <th>Date Created</th>
+                <th>Last Modified</th>
+            </tr>
+            <tr>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+            </tr>
+        </table>
+
+        <h3>All HLA Expert Panel Curations</h3>
+        <table>
+            <tr>
+                <th>Allele/Haplotype</th>
+                <th>Disease</th>
+                <th>Status</th>
+                <th>Date Created</th>
+                <th>Last Modified</th>
+            </tr>
+            <tr>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+            </tr>
+        </table>
+        <!-- End home page content. -->
+{% endblock %}

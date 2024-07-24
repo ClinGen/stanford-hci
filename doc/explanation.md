@@ -8,8 +8,8 @@ interface to look.
 
 ## Data Model
 
-The HCI data model can be found [here](./img/data-model.svg). It
-uses information engineering notation as shown below:
+The HCI data model can be found [here](./img/data-model.svg). It uses
+information engineering notation as shown below:
 
 <img src="./img/information-engineering-notation.png" alt="A key for information engineering notation.">
 
