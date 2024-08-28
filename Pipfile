@@ -18,4 +18,4 @@ django-stubs = {extras = ["compatible-mypy"], version = "5.*"}
 mdformat = "0.*"
 
 [requires]
-python_version = "3.12"
+python_version = "3.10"
