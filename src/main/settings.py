@@ -32,7 +32,7 @@ SECRET_KEY = os.getenv("HCI_SECRET_KEY")
 # SECURITY WARNING: Don't run with debug turned on in production.
 DEBUG = True
 
-ALLOWED_HOSTS: list[str] = []
+ALLOWED_HOSTS = ["hci.clinicalgenome.org"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
