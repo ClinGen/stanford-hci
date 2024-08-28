@@ -9,8 +9,24 @@ exception to this is managing dependencies via Pipenv.
 # use their context parameters.
 # pylint: disable=unused-argument
 
+# Built-in libraries:
+import sys
+
 # Third-party dependencies:
+from dotenv import dotenv_values
+from dotenv import load_dotenv
 from invoke import task
+
+# Set environment variables.
+load_dotenv()
+
+# Environment variable files:
+ENV_TEMPLATE = ".env.template"
+ENV_ACTUAL = ".env"
+
+# Configs:
+TEMPLATE_CONF = dotenv_values(ENV_TEMPLATE)
+ACTUAL_CONF = dotenv_values(ENV_ACTUAL)
 
 
 @task
@@ -34,7 +50,15 @@ def types(c):
     c.run("mypy .")
 
 
-@task(pre=[fmt, lint, types])
+@task
+def env_same(c):
+    """Ensure environment variable keys match."""
+    if TEMPLATE_CONF.keys() != ACTUAL_CONF.keys():
+        print(".env keys do not match. Check your .env files.")
+        sys.exit(1)
+
+
+@task(pre=[fmt, lint, types, env_same])
 def check(c):
     """Run all code checks."""
 
