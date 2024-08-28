@@ -7,7 +7,7 @@ name = "pypi"
 django = "5.*"
 psycopg = {extras = ["binary"] }
 python-dotenv = "1.*"
-daphne = "*"
+daphne = "4.*"
 
 [dev-packages]
 black = "24.*"
