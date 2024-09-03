@@ -3,63 +3,73 @@
 {% block description %}The home page for the HLA curation interface.{% endblock %}
 {% block content %}
         <!-- Begin home page content. -->
-        <h2>Welcome, User.</h2>
-        <p>You are curating as part of the HLA Expert Panel.</p>
-        <div>
-            <button>Add Curation</button>
-            <button>Add Disease</button>
-            <button>Add Allele/Haplotype</button>
-            <button>Add Publication</button>
+        <div class="block">
+            <section class="hero is-primary">
+                <div class="hero-body">
+                    <h2 class="title">Welcome, User.</h2>
+                    <p class="subtitle">You are curating as part of the HLA Expert Panel.</p>
+                </div>
+            </section>
+        </div>
+        <div class="block">
+            <button class="button is-responsive">Add Curation</button>
+            <button class="button is-responsive">Add Disease</button>
+            <button class="button is-responsive">Add Allele/Haplotype</button>
+            <button class="button is-responsive">Add Publication</button>
         </div>
 
-        <h3>Your HLA Expert Panel Curations</h3>
-        <table>
-            <tr>
-                <th>Allele/Haplotype</th>
-                <th>Disease</th>
-                <th>Status</th>
-                <th>Date Created</th>
-                <th>Last Modified</th>
-            </tr>
-            <tr>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-            </tr>
-            <tr>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-            </tr>
-        </table>
+        <div class="block">
+            <h3 class="title is-4">Your HLA Expert Panel Curations</h3>
+            <table class="table">
+                <tr>
+                    <th>Allele/Haplotype</th>
+                    <th>Disease</th>
+                    <th>Status</th>
+                    <th>Date Created</th>
+                    <th>Last Modified</th>
+                </tr>
+                <tr>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                </tr>
+                <tr>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                </tr>
+            </table>
+        </div>
 
-        <h3>All HLA Expert Panel Curations</h3>
-        <table>
-            <tr>
-                <th>Allele/Haplotype</th>
-                <th>Disease</th>
-                <th>Status</th>
-                <th>Date Created</th>
-                <th>Last Modified</th>
-            </tr>
-            <tr>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-            </tr>
-            <tr>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-            </tr>
-        </table>
+        <div class="block">
+            <h3 class="title is-4">All HLA Expert Panel Curations</h3>
+            <table class="table">
+                <tr>
+                    <th>Allele/Haplotype</th>
+                    <th>Disease</th>
+                    <th>Status</th>
+                    <th>Date Created</th>
+                    <th>Last Modified</th>
+                </tr>
+                <tr>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                </tr>
+                <tr>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                    <td>...</td>
+                </tr>
+            </table>
+        </div>
         <!-- End home page content. -->
 {% endblock %}

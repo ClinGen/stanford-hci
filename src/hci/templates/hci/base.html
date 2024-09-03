@@ -6,11 +6,15 @@
         <title>HCI | {% block title %}{% endblock %}</title>
         <meta name="description" content="{% block description %}{% endblock %}">
         {% load static %}
-        <link rel="stylesheet" href="{% static 'hci/hci.css' %}">
+        <link rel="stylesheet" href="{% static 'hci/bulma-v1.0.2.min.css' %}">
     </head>
     <body>
-        <h1>Clinical Genome HLA Curation</h1>
-        {% block nav %}{% endblock %}
-        {% block content %}{% endblock %}
+        <section class="section">
+            <div class="container">
+                <h1 class="title">Clinical Genome HLA Curation</h1>
+                {% block nav %}{% endblock %}
+                {% block content %}{% endblock %}
+            </div>
+        </section>
     </body>
 </html>
