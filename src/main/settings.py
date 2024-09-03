@@ -34,6 +34,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["hci.clinicalgenome.org", "localhost"]
 
+CSRF_TRUSTED_ORIGINS = ["https://hci.clinicalgenome.org"]
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
