@@ -7,6 +7,8 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path("", views.index, name="index"),
+    path("", views.index_view, name="index"),
     path("accounts/", include("django.contrib.auth.urls")),
+    path("affiliation/", views.affiliation_view, name="affiliation"),
+    path("logout/", views.logout_view, name="custom_logout"),
 ]
