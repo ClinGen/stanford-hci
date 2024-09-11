@@ -11,7 +11,8 @@ def index_view(request):
     """Show basic info at the index route."""
     context = {
         "email": request.user.email,
-        "affiliation": "HLA Expert Panel"
+        "affiliation": "HLA Expert Panel",
+        "username": request.user.username,
     }
     return render(request, "hci/index.html", context)
 
@@ -26,8 +27,5 @@ def logout_view(request):
 @login_required
 def affiliation_view(request):
     """Show the user the affiliation configuration page."""
-    context = {
-        "email": request.user.email,
-        "affiliation": "HLA Expert Panel"
-    }
+    context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
     return render(request, "hci/affiliation.html", context)

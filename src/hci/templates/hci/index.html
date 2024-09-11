@@ -6,8 +6,8 @@
         <div class="block">
             <section class="hero is-light">
                 <div class="hero-body">
-                    <h2 class="title">Welcome, User.</h2>
-                    <p class="subtitle">You are curating as part of the HLA Expert Panel.</p>
+                    <h2 class="title">Welcome, {{ username }}.</h2>
+                    <p class="subtitle">You are curating as part of the {{ affiliation }} affiliation.</p>
                 </div>
             </section>
         </div>
@@ -19,7 +19,7 @@
         </div>
 
         <div class="block">
-            <h3 class="title is-4">Your HLA Expert Panel Curations</h3>
+            <h3 class="title is-4">Your {{ affiliation }} Curations</h3>
             <table class="table">
                 <tr>
                     <th>Allele/Haplotype</th>
@@ -46,7 +46,7 @@
         </div>
 
         <div class="block">
-            <h3 class="title is-4">All HLA Expert Panel Curations</h3>
+            <h3 class="title is-4">All {{ affiliation }} Curations</h3>
             <table class="table">
                 <tr>
                     <th>Allele/Haplotype</th>
