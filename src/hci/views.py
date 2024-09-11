@@ -29,3 +29,31 @@ def affiliation_view(request):
     """Show the user the affiliation configuration page."""
     context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
     return render(request, "hci/affiliation.html", context)
+
+
+@login_required
+def new_curation_view(request):
+    """Show the new curation page."""
+    context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
+    return render(request, "hci/new_curation.html", context)
+
+
+@login_required
+def new_disease_view(request):
+    """Show the new curation page."""
+    context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
+    return render(request, "hci/new_disease.html", context)
+
+
+@login_required
+def new_allele_haplotype_view(request):
+    """Show the new curation page."""
+    context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
+    return render(request, "hci/new_allele_haplotype.html", context)
+
+
+@login_required
+def new_publication_view(request):
+    """Show the new curation page."""
+    context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
+    return render(request, "hci/new_publication.html", context)

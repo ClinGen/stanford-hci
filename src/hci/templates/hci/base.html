@@ -15,18 +15,20 @@
         <script src="https://unpkg.com/htmx.org@2.0.2"></script>
     </head>
     <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-        <section class="section">
-            <div class="container">
-                {% if user.is_authenticated %}
-                    <div class="has-text-right">
-                        <p>{{ email }} | <a hx-post="{% url 'custom_logout' %}" hx-swap="innerHTML" hx-target="body">Log Out</a></p>
-                        <p>{{ affiliation }} | <a href="{% url 'affiliation' %}">Change Affiliation</a></p>
-                    </div>
-                {% endif %}
-                <h1 class="title">Clinical Genome HLA Curation</h1>
-                {% block nav %}{% endblock %}
-                {% block content %}{% endblock %}
-            </div>
-        </section>
+        <div hx-boost="true">
+            <section class="section">
+                <div class="container">
+                    {% if user.is_authenticated %}
+                        <div class="has-text-right">
+                            <p>{{ email }} | <a hx-post="{% url 'custom_logout' %}" hx-swap="innerHTML" hx-target="body">Log Out</a></p>
+                            <p>{{ affiliation }} | <a href="{% url 'affiliation' %}">Change Affiliation</a></p>
+                        </div>
+                    {% endif %}
+                    <h1 class="title">Clinical Genome HLA Curation</h1>
+                    {% block nav %}{% endblock %}
+                    {% block content %}{% endblock %}
+                </div>
+            </section>
+        </div>
     </body>
 </html>
