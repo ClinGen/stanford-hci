@@ -4,26 +4,34 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+# Constants:
+DECIMAL_PLACES = 5
+DECIMAL_MAX_DIGITS = 5
+
 
 class Disease(models.Model):
     """Define the shape of a disease."""
+
     mondo_id: models.CharField = models.CharField()
 
 
 class Allele(models.Model):
     """Define the shape of an allele."""
+
     imgt_name: models.CharField = models.CharField()
     car_id: models.CharField = models.CharField()
 
 
 class Haplotype(models.Model):
     """Define the shape of a haplotype."""
+
     chromosome_mapping_order: models.CharField = models.CharField()
-    constituent_alleles: models.ManyToManyField = models.ManyToManyField(Allele, on_delete=models.PROTECT)
+    constituent_alleles: models.ManyToManyField = models.ManyToManyField(Allele)
 
 
 class Publication(models.Model):
     """Define the shape of a publication."""
+
     publication_id: models.CharField = models.CharField()
     publication_type: models.CharField = models.CharField()
     author: models.CharField = models.CharField()
@@ -33,6 +41,7 @@ class Publication(models.Model):
 
 class Curator(models.Model):
     """Define the shape of curator."""
+
     affiliation_id: models.IntegerField = models.IntegerField()
     affiliation_name: models.CharField = models.CharField()
     user: models.OneToOneField = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -84,41 +93,59 @@ class Association(models.Model):
 
     # Statistics (power):
     num_cases_with_variant: models.PositiveIntegerField = models.PositiveIntegerField()
-    num_cases_genotyped_or_sequenced: models.PositiveIntegerField = models.PositiveIntegerField()
+    num_cases_genotyped_or_sequenced: models.PositiveIntegerField = (
+        models.PositiveIntegerField()
+    )
     case_frequency: models.CharField = models.CharField()
-    num_controls_with_variant: models.PositiveIntegerField = models.PositiveIntegerField()
-    num_controls_genotyped_or_sequenced: models.PositiveIntegerField = models.PositiveIntegerField()
+    num_controls_with_variant: models.PositiveIntegerField = (
+        models.PositiveIntegerField()
+    )
+    num_controls_genotyped_or_sequenced: models.PositiveIntegerField = (
+        models.PositiveIntegerField()
+    )
     control_frequency: models.CharField = models.CharField()
     total_cohort_size: models.PositiveIntegerField = models.PositiveIntegerField()
 
     # Statistics (value):
     test_statistic: models.CharField = models.CharField()
     value: models.IntegerField = models.IntegerField()
-    confidence_interval_from: models.IntegerField()
-    confidence_interval_to: models.IntegerField()
-    standard_error: models.DecimalField = models.DecimalField()
+    confidence_interval_from: models.IntegerField = models.IntegerField()
+    confidence_interval_to: models.IntegerField = models.IntegerField()
+    standard_error: models.DecimalField = models.DecimalField(
+        decimal_places=DECIMAL_PLACES, max_digits=DECIMAL_MAX_DIGITS
+    )
 
     # Statistics (significance):
-    p_value: models.DecimalField = models.CharField()
+    p_value: models.DecimalField = models.DecimalField(
+        decimal_places=DECIMAL_PLACES, max_digits=DECIMAL_MAX_DIGITS
+    )
     p_value_type: models.CharField = models.CharField()
     is_conditional: models.BooleanField = models.BooleanField()
     condition_on: models.TextField = models.TextField()
 
     direction_of_effect: models.CharField = models.CharField()
     comments: models.TextField = models.TextField()
-    score: models.DecimalField = models.DecimalField()
+    score: models.DecimalField = models.DecimalField(
+        decimal_places=DECIMAL_PLACES, max_digits=DECIMAL_MAX_DIGITS
+    )
 
 
 class Classification(models.Model):
     """Define the shape of a classification."""
-    publication: models.ForeignKey = models.ForeignKey(Publication, on_delete=models.PROTECT)
+
+    publication: models.ForeignKey = models.ForeignKey(
+        Publication, on_delete=models.PROTECT
+    )
     curator: models.ForeignKey = models.ForeignKey(Curator, on_delete=models.PROTECT)
-    association: models.ManyToManyField = models.ManyToManyField(Association, on_delete=models.PROTECT)
+    association: models.ManyToManyField = models.ManyToManyField(Association)
 
 
 class Curation(models.Model):
     """Define the shape of an HLA curation."""
+
     disease: models.ForeignKey = models.ForeignKey(Disease, on_delete=models.PROTECT)
     allele: models.ForeignKey = models.ForeignKey(Allele, on_delete=models.PROTECT)
-    haplotype: models.ForeignKey = models.ForeignKey(Haplotype, on_delete=models.PROTECT)
-    classifications: models.ManyToManyField = models.ManyToManyField(Classification, on_delete=models.PROTECT)
+    haplotype: models.ForeignKey = models.ForeignKey(
+        Haplotype, on_delete=models.PROTECT
+    )
+    classifications: models.ManyToManyField = models.ManyToManyField(Classification)
