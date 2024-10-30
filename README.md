@@ -10,6 +10,7 @@ haplotypes.
   - Tutorials are lessons that take the reader by the hand through a series of
     steps to complete a project of some kind. Unlike how-to guides, tutorials
     don't assume lots of prerequisite knowledge.
+  - [Using the `run` script](./doc/tutorial.md#using-the-run-script)
 - [How-To Guides](./doc/howto.md) (problem-oriented)
   - How-to guides take the reader through the steps required to solve a
     real-world problem. They are recipes, directions to achieve a specific end.
