@@ -19,7 +19,7 @@ if [ "${APP_NAME}" = "${FIND_APP_NAME}" ]; then
     exit 1
 fi
 
-cat << EOF
+cat <<EOF
 When renaming your project you'll need to re-create a new database.
 
 This can easily be done with Docker, but before this script does it
@@ -31,14 +31,15 @@ EOF
 while true; do
     read -p "Run docker compose down -v (y/n)? " -r yn
     case "${yn}" in
-        [Yy]* )
-          printf "\n--------------------------------------------------------\n"
-          docker compose down -v
-          printf -- "--------------------------------------------------------\n"
+    [Yy]*)
+        printf "\n--------------------------------------------------------\n"
+        docker compose down -v
+        printf -- "--------------------------------------------------------\n"
 
-          break;;
-        [Nn]* ) exit;;
-        * ) echo "";;
+        break
+        ;;
+    [Nn]*) exit ;;
+    *) echo "" ;;
     esac
 done
 
@@ -46,12 +47,12 @@ done
 # The core of the script which renames a few things.
 # -----------------------------------------------------------------------------
 find . -type f -exec \
-  perl -i \
+    perl -i \
     -pe "s/(${FIND_APP_NAME}${FIND_FRAMEWORK}|${FIND_APP_NAME})/${APP_NAME}/g;" \
     -pe "s/${FIND_MODULE_NAME}/${MODULE_NAME}/g;" {} +
 # -----------------------------------------------------------------------------
 
-cat << EOF
+cat <<EOF
 
 --------------------------------------------------------
 Your project has been renamed successfully!
@@ -60,28 +61,31 @@ Your project has been renamed successfully!
 EOF
 
 function init_git_repo {
-  [ -d .git/ ] && rm -rf .git/
+    [ -d .git/ ] && rm -rf .git/
 
-cat << EOF
+    cat <<EOF
 
 --------------------------------------------------------
 $(git init)
 --------------------------------------------------------
 EOF
 
-  git symbolic-ref HEAD refs/heads/main
+    git symbolic-ref HEAD refs/heads/main
 }
 
 while true; do
     read -p "Do you want to init a new local git repo (y/n)? " -r yn
     case "${yn}" in
-        [Yy]* ) init_git_repo; break;;
-        [Nn]* ) break;;
-        * ) echo "";;
+    [Yy]*)
+        init_git_repo
+        break
+        ;;
+    [Nn]*) break ;;
+    *) echo "" ;;
     esac
 done
 
-cat << EOF
+cat <<EOF
 
 We're done here. Everything worked!
 
