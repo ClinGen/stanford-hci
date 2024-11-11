@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>HCI | {% block title %}{% endblock %}</title>
+        <meta name="description" content="{% block description %}{% endblock %}">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'bulma_1.0.2_min.css' %}">
+        <script src="{% static 'htmx_2.0.3_min.js' %}"></script>
+    </head>
+    <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+        <div hx-boost="true">
+            <section class="section">
+                <div class="container">
+                    {% block content %}{% endblock %}
+                </div>
+            </section>
+        </div>
+    </body>
+</html>
