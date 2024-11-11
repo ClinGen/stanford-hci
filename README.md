@@ -12,6 +12,7 @@ haplotypes.
     don't assume lots of prerequisite knowledge.
   - [Getting started](./doc/tutorial.md#getting-started)
   - [Using the `run` script](./doc/tutorial.md#using-the-run-script)
+  - [Updating and installing dependencies](./doc/tutorial.md#updating-and-installing-dependencies)
 - [How-To Guides](./doc/howto.md) (problem-oriented)
   - How-to guides take the reader through the steps required to solve a
     real-world problem. They are recipes, directions to achieve a specific end.
