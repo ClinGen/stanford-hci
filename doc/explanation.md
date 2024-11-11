@@ -30,3 +30,12 @@ Each service is configured with build instructions, environment variables,
 volumes, and other settings to ensure they work together seamlessly. Docker
 Compose allows you to start, stop, and manage these services as a single unit,
 simplifying the development and deployment process.
+
+## Using PyCharm
+
+PyCharm is a popular integrated development environment (IDE) for Python
+developers. I use PyCharm to work on this project because it provides a suite
+of tools for code analysis, debugging, and version control. I've checked in the
+`.idea` directory to the repository, which contains project-specific settings.
+If you're using PyCharm, you can open the project by selecting the root
+directory and opening it as a PyCharm project.

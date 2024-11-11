@@ -25,6 +25,7 @@ haplotypes.
     different perspectives. You might imagine a discussion document being read
     at leisure, rather than over the code.
   - [How Docker is used in this project](./doc/explanation.md#how-docker-is-used-in-this-project)
+  - [Using PyCharm](./doc/explanation.md#using-pycharm)
 - Reference guides (information-oriented)
   - Reference guides are technical descriptions of the machinery and how to
     operate it. Reference guides have one job only: to describe. They are
