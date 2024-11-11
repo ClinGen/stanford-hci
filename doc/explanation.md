@@ -1,16 +1,9 @@
 # Explanations
 
-## Wireframes
-
-The HCI's wireframes (used in development) can be found
-[here](./img/wireframes.svg). These wireframes show how we want the user
-interface to look.
-
-## Data Model
-
-The HCI data model can be found [here](./img/data-model.svg). It uses
-information engineering notation as shown below:
-
-<img src="./img/information-engineering-notation.png" alt="A key for information engineering notation.">
-
-The data model shows the relationships between the classes in the HCI.
+Explanation, or discussions, clarify and illuminate a particular topic.
+They broaden the documentation’s coverage of a topic. Explanations can
+equally well be described as discussions; they are discursive in nature.
+They are a chance for the documentation to relax and step back from the
+software, taking a wider view, illuminating it from a higher level or
+even from different perspectives. You might imagine a discussion
+document being read at leisure, rather than over the code.
