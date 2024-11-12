@@ -1,0 +1,12 @@
+{% extends "layouts/base.html" %}
+{% block nav %}
+    <nav class="navbar is-primary block" role="navigation" aria-label="main navigation">
+        <div class="navbar-start">
+            <a href="/" {% if request.resolver_match.view_name == 'index' %}class="navbar-item has-text-weight-bold"{% endif %} class="navbar-item">Home</a>
+            <a href="/curation" {% if request.resolver_match.view_name == 'curation' %}class="navbar-item has-text-weight-bold"{% endif %} class="navbar-item">Curations</a>
+            <a href="/disease" {% if request.resolver_match.view_name == 'disease' %}class="navbar-item has-text-weight-bold"{% endif %} class="navbar-item">Diseases</a>
+            <a href="/allele_haplotype" {% if request.resolver_match.view_name == 'allele_haplotype' %}class="navbar-item has-text-weight-bold"{% endif %} class="navbar-item">Alleles/Haplotypes</a>
+            <a href="/publication" {% if request.resolver_match.view_name == 'publication' %}class="navbar-item has-text-weight-bold"{% endif %} class="navbar-item">Publications</a>
+        </div>
+    </nav>
+{% endblock %}
