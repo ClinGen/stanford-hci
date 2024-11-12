@@ -1,15 +1,16 @@
-import os
+"""This module defines the views for the various pages of the HCI."""
 
-from django import get_version
-from django.conf import settings
+# Third-party dependencies:
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 
+@login_required
 def home(request):
-    context = {
-        "debug": settings.DEBUG,
-        "django_ver": get_version(),
-        "python_ver": os.environ["PYTHON_VERSION"],
-    }
+    """This is the view for the main page of the HCI.
 
-    return render(request, "pages/home.html", context)
+    The home page can be thought of as the main hub of the HCI. It is where the
+    user can view their curations and their affiliation's curations. It also
+    has links to the other pages of the HCI.
+    """
+    return render(request, "pages/home.html")

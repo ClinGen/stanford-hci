@@ -1,0 +1,51 @@
+{% extends "layouts/base.html" %}
+{% block title %}Login{% endblock %}
+{% block description %}The login page for the HLA curation interface.{% endblock %}
+{% block content %}
+    <div class="block">
+        {% if form.errors %}
+            <div class="block">
+                <p class="has-text-danger">Username and password didn't match. Please try again.</p>
+            </div>
+        {% endif %}
+        {% if next %}
+            {% if user.is_authenticated %}
+                <div class="block">
+                    <p>Your account doesn't have access to this page. To proceed, please log in with an account that has access.</p>
+                </div>
+            {% else %}
+                <div class="block">
+                    <p>Please log in to see this page.</p>
+                </div>
+            {% endif %}
+        {% endif %}
+
+        <div class="block">
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="field">
+                    <label for="id_username">{{ form.username.label_tag }}</label>
+                    <div class="control">
+                        <input type="text" id="id_username" name="username" placeholder="Your username" autocomplete="username" class="input column is-half">
+                    </div>
+                </div>
+                <div class="field">
+                    <label for="id_password">{{ form.password.label_tag }}</label>
+                    <div class="control">
+                        <input type="password" id="id_password" name="password" placeholder="Your password" autocomplete="current-password" class="input column is-half">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <button type="submit" class="button is-link">Log In</button>
+                    </div>
+                </div>
+                <input type="hidden" name="next" value="{{ next }}">
+            </form>
+        </div>
+
+        <div class="block">
+            <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+        </div>
+    </div>
+{% endblock %}
