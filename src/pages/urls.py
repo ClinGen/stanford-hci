@@ -6,6 +6,7 @@ from pages import views
 urlpatterns = [
     # Pages:
     path("", views.home, name="home"),
+    path("affiliation/", views.affiliation_view, name="affiliation"),
     path(
         "allele_haplotype/new/",
         views.new_allele_haplotype,

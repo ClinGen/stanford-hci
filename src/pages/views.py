@@ -21,6 +21,13 @@ def home(request):
 
 
 @login_required
+def affiliation_view(request):
+    """The affiliation page allows the user to configure their affiliation."""
+    context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
+    return render(request, "pages/affiliation.html", context)
+
+
+@login_required
 def new_curation(request):
     """The new curation page allows the user to start a new curation."""
     context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
