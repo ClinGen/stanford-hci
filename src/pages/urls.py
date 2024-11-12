@@ -17,4 +17,5 @@ urlpatterns = [
     path("publication/new/", views.new_publication, name="new_publication"),
     # Login/logout:
     path("accounts/", include("django.contrib.auth.urls")),
+    path("logout/", views.custom_logout, name="custom_logout"),
 ]

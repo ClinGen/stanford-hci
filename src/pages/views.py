@@ -1,6 +1,8 @@
 """This module defines the views for the various pages of the HCI."""
 
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 from django.shortcuts import render
 
 
@@ -18,6 +20,13 @@ def home(request):
         "username": request.user.username,
     }
     return render(request, "pages/home.html", context)
+
+
+@login_required
+def custom_logout(request):
+    """This view logs the user out and redirects them to the home page."""
+    logout(request)
+    return redirect(home)
 
 
 @login_required
