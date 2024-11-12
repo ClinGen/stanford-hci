@@ -31,7 +31,7 @@ ALLOWED_HOSTS = list(map(str.strip, allowed_hosts.split(",")))
 
 # Application definitions
 INSTALLED_APPS = [
-    "pages.apps.PagesConfig",
+    "hci.apps.HCIConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

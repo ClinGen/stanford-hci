@@ -1,7 +1,7 @@
 from django.urls import include
 from django.urls import path
 
-from pages import views
+from hci import views
 
 urlpatterns = [
     # Pages:
