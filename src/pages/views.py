@@ -21,7 +21,7 @@ def home(request):
 
 
 @login_required
-def affiliation_view(request):
+def affiliation(request):
     """The affiliation page allows the user to configure their affiliation."""
     context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
     return render(request, "pages/affiliation.html", context)
