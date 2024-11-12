@@ -10,7 +10,9 @@ haplotypes.
   - Tutorials are lessons that take the reader by the hand through a series of
     steps to complete a project of some kind. Unlike how-to guides, tutorials
     don't assume lots of prerequisite knowledge.
+  - [Getting started](./doc/tutorial.md#getting-started)
   - [Using the `run` script](./doc/tutorial.md#using-the-run-script)
+  - [Updating and installing dependencies](./doc/tutorial.md#updating-and-installing-dependencies)
 - [How-To Guides](./doc/howto.md) (problem-oriented)
   - How-to guides take the reader through the steps required to solve a
     real-world problem. They are recipes, directions to achieve a specific end.
@@ -24,6 +26,8 @@ haplotypes.
     taking a wider view, illuminating it from a higher level or even from
     different perspectives. You might imagine a discussion document being read
     at leisure, rather than over the code.
+  - [How Docker is used in this project](./doc/explanation.md#how-docker-is-used-in-this-project)
+  - [Using PyCharm](./doc/explanation.md#using-pycharm)
 - Reference guides (information-oriented)
   - Reference guides are technical descriptions of the machinery and how to
     operate it. Reference guides have one job only: to describe. They are
