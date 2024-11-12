@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Pipenv (stanford-hci)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Pipenv (stanford-hci)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.13.0 Docker Compose (web)" project-jdk-type="Python SDK" />
 </project>
