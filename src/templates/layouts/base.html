@@ -16,6 +16,7 @@
     </head>
     <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
         <div hx-boost="true">
+            {% block nav %}{% endblock %}
             <section class="section">
                 <div class="container">
                     {% block content %}{% endblock %}
