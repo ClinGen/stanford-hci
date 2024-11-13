@@ -33,7 +33,8 @@ sure any lock files get copied from Docker's image (thanks to volumes) into your
 code repo and now you can commit those files to
 version control like usual.
 
-You can check out the `run` script what these commands do in more detail.
+You can check out the `run` script to see what these commands do in more
+detail.
 
 As for the `requirements-lock.txt` file, this ensures that the same exact
 versions of every package you have (including dependencies of dependencies) get
