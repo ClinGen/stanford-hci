@@ -60,7 +60,7 @@ def new_allele_haplotype(request):
 
 @login_required
 def new_publication(request):
-    """The new publication page allows the user to add a new publication to
-    the HCI."""
+    """The new publication page allows the user to add a new publication to the
+    HCI."""
     context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
     return render(request, "hci/new_publication.html", context)

@@ -28,14 +28,6 @@ You can run `./run pip3:outdated` to get a list of outdated dependencies based
 on what you currently have installed. Once you've figured out what you want to
 update, go make those updates in your `requirements.txt` file.
 
-Then to update your dependencies you can run `./run pip3:install`. That'll make
-sure any lock files get copied from Docker's image (thanks to volumes) into your
-code repo and now you can commit those files to
-version control like usual.
-
-You can check out the `run` script to see what these commands do in more
-detail.
-
 As for the `requirements-lock.txt` file, this ensures that the same exact
 versions of every package you have (including dependencies of dependencies) get
 used the next time you build the project. This file is the output of
@@ -43,8 +35,6 @@ running `pip3 freeze`. You can check how it works by looking at
 [`bin/pip3-install`](../bin/pip3-install).
 
 You should never modify the lock files by hand. Add your top level Python
-dependencies to `requirements.txt`, then run the `./run` command(s) mentioned
-earlier.
-
-If you wish to install a dependency, add the dependency to `requirements.txt`,
-then run `./run pip3:install`.
+dependencies to `requirements.txt`, then run `./bin/pip3-install`. Then remember
+to `docker compose up --build` to see the changes reflected in your Docker
+container.

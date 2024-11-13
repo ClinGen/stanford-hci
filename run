@@ -83,6 +83,11 @@ function format:imports {
     cmd isort . "${@}"
 }
 
+function format:docstrings {
+    # Format Python docstrings.
+    cmd docformatter --in-place --wrap-descriptions 79 --wrap-summaries 79 --recursive .
+}
+
 function format {
     # Format Python code.
     cmd black . "${@}"

@@ -12,7 +12,8 @@ class Disease(models.Model):
 
     The Mondo Disease Ontology (Mondo) aims to harmonize disease definitions
     across the world. A Mondo ID is a unique identifier for a disease. For more
-    information, see: https://mondo.monarchinitiative.org.
+    information, see:
+    https://mondo.monarchinitiative.org
     """
 
     mondo_id: models.CharField = models.CharField()
@@ -21,10 +22,12 @@ class Disease(models.Model):
 class Allele(models.Model):
     """An allele is one of two or more versions of DNA sequence (a single base
     or a segment of bases) at a given genomic location. For more information,
-    see: https://www.genome.gov/genetics-glossary/Allele.
+    see:
+    https://www.genome.gov/genetics-glossary/Allele
 
     An allele is uniquely identified by its IPD-IMGT/HLA name. For more
-    information, see: https://www.ebi.ac.uk/ipd/imgt/hla.
+    information, see:
+    https://www.ebi.ac.uk/ipd/imgt/hla
     """
 
     imgt_name: models.CharField = models.CharField()
@@ -36,7 +39,8 @@ class Haplotype(models.Model):
     polymorphisms) that tend to be inherited together. A specific haplotype
     typically reflects a unique combination of variants that reside near each
     other on a chromosome. For more information,
-    see: https://www.genome.gov/genetics-glossary/haplotype.
+    see:
+    https://www.genome.gov/genetics-glossary/haplotype
 
     A haplotype is characterized by its chromosome mapping order and its
     constituent alleles.

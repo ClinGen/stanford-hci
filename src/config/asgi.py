@@ -1,5 +1,4 @@
-"""
-This module provides the ASGI config. (It's boilerplate.)
+"""This module provides the ASGI config. (It's boilerplate.)
 
 It exposes the ASGI callable as a module-level variable named `application`.
 

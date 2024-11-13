@@ -1,5 +1,4 @@
-"""
-This module provides the WSGI application for the HCI. (It's boilerplate.)
+"""This module provides the WSGI application for the HCI. (It's boilerplate.)
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

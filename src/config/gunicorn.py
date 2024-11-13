@@ -1,6 +1,7 @@
-"""
-This module provides the Gunicorn config. Gunicorn is a popular WSGI HTTP server
-for Python. (It comes from django-docker-example.)
+"""This module provides the Gunicorn config.
+
+Gunicorn is a popular WSGI HTTP server for Python. (It comes from django-
+docker-example.)
 """
 
 import multiprocessing

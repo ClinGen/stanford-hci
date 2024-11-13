@@ -1,5 +1,4 @@
-"""
-This module provides the Django URL configuration for the HCI.
+"""This module provides the Django URL configuration for the HCI.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/

@@ -1,5 +1,7 @@
-"""This module defines the views for the up app. The up app is used to check
-the status of the application and its databases."""
+"""This module defines the views for the up app.
+
+The up app is used to check the status of the application and its databases.
+"""
 
 from django.conf import settings
 from django.db import connection
