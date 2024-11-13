@@ -29,7 +29,7 @@
     <option name="TEMPLATE_FOLDERS">
       <list>
         <option value="$MODULE_DIR$/src/templates" />
-        <option value="$MODULE_DIR$/src/pages/templates" />
+        <option value="$MODULE_DIR$/src/hci/templates" />
       </list>
     </option>
   </component>
