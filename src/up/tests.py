@@ -1,3 +1,5 @@
+"""This module contains some basic tests that ensure the app is functioning."""
+
 from django.test import TestCase
 
 
