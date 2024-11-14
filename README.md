@@ -1,5 +1,7 @@
 # Stanford ClinGen's HLA Curation Interface (HCI)
 
+![CI](https://github.com/clingen/stanford-hci/workflows/CI/badge.svg?branch=main)
+
 This repository houses the HCI's code and documentation. The HCI is a
 tool researchers can use to curate information about HLA alleles and
 haplotypes.

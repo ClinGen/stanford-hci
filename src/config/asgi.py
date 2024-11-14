@@ -1,9 +1,8 @@
-"""
-ASGI config for hci project.
+"""This module provides the ASGI config. (It's boilerplate.)
 
 It exposes the ASGI callable as a module-level variable named `application`.
 
-For more information on this file, see
+For more information on this file, see:
 https://docs.djangoproject.com/en/5.1/howto/deployment/asgi/
 """
 

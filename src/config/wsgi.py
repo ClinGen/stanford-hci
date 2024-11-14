@@ -1,5 +1,4 @@
-"""
-WSGI config for hci project.
+"""This module provides the WSGI application for the HCI. (It's boilerplate.)
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

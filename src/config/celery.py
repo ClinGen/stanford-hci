@@ -1,3 +1,10 @@
+"""This module provides the Celery config. (It comes from django-docker-
+example.)
+
+Celery is a distributed task queue. It is a great tool for running long tasks
+in the background or at scheduled times.
+"""
+
 import os
 
 from celery import Celery

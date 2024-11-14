@@ -19,7 +19,7 @@ def home(request):
         "affiliation": "HLA Expert Panel",
         "username": request.user.username,
     }
-    return render(request, "pages/home.html", context)
+    return render(request, "hci/home.html", context)
 
 
 @login_required
@@ -33,21 +33,21 @@ def custom_logout(request):
 def affiliation(request):
     """The affiliation page allows the user to configure their affiliation."""
     context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
-    return render(request, "pages/affiliation.html", context)
+    return render(request, "hci/affiliation.html", context)
 
 
 @login_required
 def new_curation(request):
     """The new curation page allows the user to start a new curation."""
     context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
-    return render(request, "pages/new_curation.html", context)
+    return render(request, "hci/new_curation.html", context)
 
 
 @login_required
 def new_disease(request):
     """The new disease page allows the user to add a new disease to the HCI."""
     context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
-    return render(request, "pages/new_disease.html", context)
+    return render(request, "hci/new_disease.html", context)
 
 
 @login_required
@@ -55,12 +55,12 @@ def new_allele_haplotype(request):
     """The new allele/haplotype allows the user to add a new allele/haplotype
     to the HCI."""
     context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
-    return render(request, "pages/new_allele_haplotype.html", context)
+    return render(request, "hci/new_allele_haplotype.html", context)
 
 
 @login_required
 def new_publication(request):
-    """The new publication page allows the user to add a new publication to
-    the HCI."""
+    """The new publication page allows the user to add a new publication to the
+    HCI."""
     context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
-    return render(request, "pages/new_publication.html", context)
+    return render(request, "hci/new_publication.html", context)

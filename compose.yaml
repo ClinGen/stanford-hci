@@ -1,3 +1,7 @@
+# If your IDE or editor is complaining about the environment variables, you can
+# safely ignore the errors or warnings. Docker Compose supports using
+# environment variables.
+
 x-app: &default-app
   build:
     context: "."

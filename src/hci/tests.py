@@ -1,6 +1,5 @@
 """This module defines the tests for the pages of the HCI."""
 
-# Third-party dependencies:
 from django.test import TestCase
 
 

@@ -1,3 +1,5 @@
+"""This module defines the URL paths for the up app."""
+
 from django.urls import path
 
 from up import views

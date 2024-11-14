@@ -1,3 +1,5 @@
+"""This module defines the URL paths for the HCI app."""
+
 from django.urls import include
 from django.urls import path
 
