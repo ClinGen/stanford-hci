@@ -22,14 +22,14 @@ function dev {
 # Build the app for production deployment.
 function build {
     cd example &&
-        python manage.py collectstatic &&
+        python manage.py collectstatic --no-input &&
         cd .. &&
         pip install -r requirements-lock.txt
 }
 
 # The prod function runs the Django application in production mode.
 function prod {
-    cd example && gunicorn --workers 2 example.wsgi
+    cd example && gunicorn --workers 2 --bind 0.0.0.0:8000 example.wsgi
 }
 
 # Run the task the user supplies to the run script and time it.
