@@ -7,4 +7,7 @@
 - Clone the repo.
 - Make a directory for your virtual environment in the root of this repo:
   `mkdir .venv`.
-- Install dependencies: `pipenv sync --dev`.
+- Install Python dependencies: `pipenv sync --dev`.
+- Install other dependencies:
+    - [ShellCheck](https://www.shellcheck.net/)
+    - [sh](https://github.com/mvdan/sh)

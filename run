@@ -23,12 +23,14 @@ function fmt {
     black .
     docformatter .
     isort .
+    shfmt -i 4 -w ./run
 }
 
 # Lint the source code.
 function lint {
     cd src && pylint .
     cd .. || exit
+    shellcheck ./run
 }
 
 # Run a type checker on the source code. This will look at the PEP 484 type
