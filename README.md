@@ -11,3 +11,4 @@
 - Install other dependencies:
     - [ShellCheck](https://www.shellcheck.net/)
     - [sh](https://github.com/mvdan/sh)
+    - [hadolint](https://github.com/hadolint/hadolint)

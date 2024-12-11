@@ -31,6 +31,7 @@ function lint {
     cd src && pylint .
     cd .. || exit
     shellcheck ./run
+    hadolint ./Dockerfile
 }
 
 # Run a type checker on the source code. This will look at the PEP 484 type
