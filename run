@@ -87,9 +87,54 @@ function check {
 # Convenience tasks
 #===============================================================================
 
+# Build the app for production deployment.
+function build {
+    cd src &&
+        python manage.py collectstatic --no-input
+}
+
+function prod {
+    cd src && gunicorn --workers 2 --bind 0.0.0.0:8000 config.wsgi
+}
+
 # The dev function runs the Django application in development mode.
 function dev {
     cd src && python manage.py runserver
+}
+
+#===============================================================================
+# Container tasks
+#===============================================================================
+
+# Install the project's dependencies in a container.
+function container:deps {
+    # The container won't have Pipenv, so we need to install it.
+    pip install pipenv
+    # Use Pipenv to generate a plain-old requirements file so we can install
+    # dependencies globally.
+    pipenv requirements > requirements.txt
+    pip install -r requirements.txt
+}
+
+# Build the HCI Docker image.
+function container:build {
+    docker buildx build --tag hci:latest .
+}
+
+# Remove all containers and images.
+function container:purge {
+    # We want word splitting here.
+    # shellcheck disable=SC2046
+    docker container remove --volumes --force $(docker container list --all --quiet)
+    # We want word splitting here.
+    # shellcheck disable=SC2046
+    docker image remove --force $(docker image list --all --quiet)
+}
+
+# Run the Docker container.
+function container {
+    docker container run --publish 8000:8000 --detach hci:latest
+    echo "http://0.0.0.0:8000"
 }
 
 #===============================================================================
