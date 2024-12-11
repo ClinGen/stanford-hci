@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+#
+# This script can be used to run most command line tasks for this project. You
+# can create an alias for your shell:
+#     alias run="./run"
+# This script is inspired by https://github.com/adriancooney/Taskfile. This
+# script assumes you're running it from the root of the repository.
+
+# Exit immediately if a command returns a non-zero status.
+set -o errexit
+
+# The return value of a pipeline is the value of the last (rightmost) command to
+# exit with a non-zero status, or zero if all commands in the pipeline exit
+# successfully.
+set -o pipefail
+
+#===============================================================================
+# Code quality tasks
+#===============================================================================
+
+# Format source code, format docstrings, and sort imports.
+function fmt {
+    black .
+    docformatter .
+    isort .
+}
+
+# Lint the source code.
+function lint {
+    cd src && pylint .
+    cd .. || exit
+}
+
+# Run a type checker on the source code. This will look at the PEP 484 type
+# hints in the code and statically analyze them. See
+# https://peps.python.org/pep-0484/ for more information.
+function type {
+    cd src && mypy .
+    cd .. || exit
+}
+
+# Run the whole test suite.
+function test {
+    cd src && python manage.py test
+    cd .. || exit
+}
+
+# Compare the environment variable keys in the .env file to the environment
+# variable keys in the .env.template file. The keys should be the same.
+function envsame() {
+    ACTUAL_ENV_FILE=".env"
+    TEMPLATE_ENV_FILE=".env.template"
+
+    function extract_keys {
+        # Extract lines that are not comments and only return the key part of
+        # each line.
+        grep -E '^[^#]*=' "$1" | sed 's/=.*//' | sort
+    }
+
+    actual_keys=$(extract_keys "$ACTUAL_ENV_FILE")
+    template_keys=$(extract_keys "$TEMPLATE_ENV_FILE")
+
+    if [ "$actual_keys" == "$template_keys" ]; then
+        echo "The keys in $ACTUAL_ENV_FILE and $TEMPLATE_ENV_FILE are the same."
+    else
+        echo "The keys in $ACTUAL_ENV_FILE and $TEMPLATE_ENV_FILE do not match."
+        echo "Differences:"
+        echo "Keys in $ACTUAL_ENV_FILE but not in $TEMPLATE_ENV_FILE:"
+        comm -23 <(echo "$actual_keys") <(echo "$template_keys")
+        echo "Keys in $TEMPLATE_ENV_FILE but not in $ACTUAL_ENV_FILE:"
+        comm -13 <(echo "$actual_keys") <(echo "$template_keys")
+    fi
+}
+
+# Run all code quality checks.
+function check {
+    fmt
+    lint
+    type
+    test
+    envsame
+}
+
+#===============================================================================
+# Convenience tasks
+#===============================================================================
+
+# The dev function runs the Django application in development mode.
+function dev {
+    cd src && python manage.py runserver
+}
+
+#===============================================================================
+# Driver code
+#===============================================================================
+
+# Run the task the user supplies to the run script and time it.
+TIMEFORMAT=$'\nTask completed in %3lR'
+time "${@:-help}"

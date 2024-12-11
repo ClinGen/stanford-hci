@@ -4,11 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-python-dotenv = "1.*"
 django = "5.*"
+python-dotenv = "1.*"
 
 [dev-packages]
 black = "24.*"
+django-stubs = {extras = ["compatible-mypy"], version = "5.*"}
 docformatter = "1.*"
 invoke = "2.*"
 isort = "5.*"
