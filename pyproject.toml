@@ -1,8 +1,15 @@
-[tool.black]
-line-length = 79
+[tool.docformatter]
+black = true
+in-place = true
+recursive = true
+style = "sphinx"
 
-[tool.isort]
-profile = "black"
-line_length = 79
-force_single_line = true
-skip = ["migrations"]
+[tool.pylint.main]
+# Files or directories to be skipped. They should be base names, not paths.
+ignore = [".venv"]
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "config.settings"

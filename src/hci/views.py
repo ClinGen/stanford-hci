@@ -2,17 +2,16 @@
 
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 
 @login_required
 def home(request):
     """This is the view for the main page of the HCI.
 
-    The home page can be thought of as the main hub of the HCI. It is where the
-    user can view their curations and their affiliation's curations. It also
-    has links to the other pages of the HCI.
+    The home page can be thought of as the main hub of the HCI. It is where the user can
+    view their curations and their affiliation's curations. It also has links to the
+    other pages of the HCI.
     """
     context = {
         "email": request.user.email,
@@ -52,15 +51,14 @@ def new_disease(request):
 
 @login_required
 def new_allele_haplotype(request):
-    """The new allele/haplotype allows the user to add a new allele/haplotype
-    to the HCI."""
+    """The new allele/haplotype allows the user to add a new allele/haplotype to the
+    HCI."""
     context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
     return render(request, "hci/new_allele_haplotype.html", context)
 
 
 @login_required
 def new_publication(request):
-    """The new publication page allows the user to add a new publication to the
-    HCI."""
+    """The new publication page allows the user to add a new publication to the HCI."""
     context = {"email": request.user.email, "affiliation": "HLA Expert Panel"}
     return render(request, "hci/new_publication.html", context)

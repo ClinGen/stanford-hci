@@ -3,7 +3,8 @@
 # This script can be used to run most command line tasks for this project. You
 # can create an alias for your shell:
 #     alias run="./run"
-# This script is inspired by https://github.com/adriancooney/Taskfile.
+# This script is inspired by https://github.com/adriancooney/Taskfile. This
+# script assumes you're running it from the root of the repository.
 
 # Exit immediately if a command returns a non-zero status.
 set -o errexit
@@ -13,169 +14,134 @@ set -o errexit
 # successfully.
 set -o pipefail
 
-# If DC is unset, use the default value to the right of the colon.
-DC="${DC:-exec}"
+#===============================================================================
+# Code quality tasks
+#===============================================================================
 
-# If we're running in CI we need to disable TTY allocation for docker compose
-# commands that enable it by default, such as exec and run.
-TTY=""
-if [[ ! -t 1 ]]; then
-    TTY="-T"
-fi
-
-# -----------------------------------------------------------------------------
-# Helper functions start with _ and aren't listed in this script's help menu.
-# -----------------------------------------------------------------------------
-
-function _dc {
-    docker compose "${DC}" ${TTY} "${@}"
+# Format source code, format docstrings, and sort imports.
+function fmt {
+    black .
+    docformatter .
+    isort .
+    shfmt -i 4 -w ./run
 }
 
-function _build_run_down {
-    docker compose build
-    docker compose run ${TTY} "${@}"
-    docker compose down
-}
-
-# -----------------------------------------------------------------------------
-# Named functions are listed in the script's help menu.
-# -----------------------------------------------------------------------------
-
-function cmd {
-    # Run any command you want in the web container.
-    _dc web "${@}"
-}
-
-function manage {
-    # Run any manage.py commands.
-
-    # We need to collectstatic before we run our tests.
-    if [ "${1-''}" == "test" ]; then
-        cmd python3 manage.py collectstatic --no-input
-    fi
-
-    cmd python3 manage.py "${@}"
-}
-
-function lint:dockerfile {
-    # Lint the Dockerfile.
-    docker container run --rm -i \
-        hadolint/hadolint hadolint --ignore DL3008 -t style "${@}" - <Dockerfile
-}
-
-function lint:bash {
-    # Lint the run script and everything in the bin directory.
-    shellcheck run bin/*
-}
-
+# Lint the source code.
 function lint {
-    # Lint Python code.
-    cmd flake8 "${@}"
+    cd src && pylint .
+    cd .. || exit
+    shellcheck ./run
+    hadolint ./Dockerfile
 }
 
-function format:bash {
-    # Run the shell formatter on the provided file.
-    shfmt -i 4 -w run bin/*
+# Run a type checker on the source code. This will look at the PEP 484 type
+# hints in the code and statically analyze them. See
+# https://peps.python.org/pep-0484/ for more information.
+function type {
+    cd src && mypy .
+    cd .. || exit
 }
 
-function format:imports {
-    # Sort Python imports.
-    cmd isort . "${@}"
+# Run the whole test suite.
+function test {
+    cd src && python manage.py test
+    cd .. || exit
 }
 
-function format:docstrings {
-    # Format Python docstrings.
-    cmd docformatter --in-place --wrap-descriptions 79 --wrap-summaries 79 --recursive .
+# Compare the environment variable keys in the .env file to the environment
+# variable keys in the .env.template file. The keys should be the same.
+function envsame() {
+    ACTUAL_ENV_FILE=".env"
+    TEMPLATE_ENV_FILE=".env.template"
+
+    function extract_keys {
+        # Extract lines that are not comments and only return the key part of
+        # each line.
+        grep -E '^[^#]*=' "$1" | sed 's/=.*//' | sort
+    }
+
+    actual_keys=$(extract_keys "$ACTUAL_ENV_FILE")
+    template_keys=$(extract_keys "$TEMPLATE_ENV_FILE")
+
+    if [ "$actual_keys" == "$template_keys" ]; then
+        echo "The keys in $ACTUAL_ENV_FILE and $TEMPLATE_ENV_FILE are the same."
+    else
+        echo "The keys in $ACTUAL_ENV_FILE and $TEMPLATE_ENV_FILE do not match."
+        echo "Differences:"
+        echo "Keys in $ACTUAL_ENV_FILE but not in $TEMPLATE_ENV_FILE:"
+        comm -23 <(echo "$actual_keys") <(echo "$template_keys")
+        echo "Keys in $TEMPLATE_ENV_FILE but not in $ACTUAL_ENV_FILE:"
+        comm -13 <(echo "$actual_keys") <(echo "$template_keys")
+    fi
 }
 
-function format {
-    # Format Python code.
-    cmd black . "${@}"
-}
-
-function quality {
-    # Perform all Python code quality commands together.
-    format:imports
-    format
+# Run all code quality checks.
+function check {
+    fmt
     lint
+    type
+    test
+    envsame
 }
 
-function secret {
-    # Generate a random secret that can be used for your SECRET_KEY and more.
-    cmd python3 -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+#===============================================================================
+# Convenience tasks
+#===============================================================================
+
+# Build the app for production deployment.
+function build {
+    cd src &&
+        python manage.py collectstatic --no-input
 }
 
-function shell {
-    # Start a shell session in the web container.
-    cmd bash "${@}"
+function prod {
+    cd src && gunicorn --workers 2 --bind 0.0.0.0:8000 config.wsgi
 }
 
-function psql {
-    # Connect to Postgres.
-    # shellcheck disable=SC1091
-    . .env # Set the environment variables defined in the .env file.
-    _dc postgres psql -U "${POSTGRES_USER}" "${@}"
+# The dev function runs the Django application in development mode.
+function dev {
+    cd src && python manage.py runserver
 }
 
-function redis-cli {
-    # Connect to Redis.
-    _dc redis redis-cli "${@}"
+#===============================================================================
+# Container tasks
+#===============================================================================
+
+# Install the project's dependencies in a container.
+function container:deps {
+    # The container won't have Pipenv, so we need to install it.
+    pip install pipenv
+    # Use Pipenv to generate a plain-old requirements file so we can install
+    # dependencies globally.
+    pipenv requirements > requirements.txt
+    pip install -r requirements.txt
 }
 
-function pip3:install {
-    # Install pip3 dependencies and write lock file.
-    _build_run_down web bash -c "cd .. && bin/pip3-install"
+# Build the HCI Docker image.
+function container:build {
+    docker buildx build --tag hci:latest .
 }
 
-function pip3:outdated {
-    # List any installed packages that are outdated.
-    cmd pip3 list --outdated
+# Remove all containers and images.
+function container:purge {
+    # We want word splitting here.
+    # shellcheck disable=SC2046
+    docker container remove --volumes --force $(docker container list --all --quiet)
+    # We want word splitting here.
+    # shellcheck disable=SC2046
+    docker image remove --force $(docker image list --all --quiet)
 }
 
-function ci:install-deps {
-    # Install Continuous Integration (CI) dependencies.
-    sudo apt-get install -y curl shellcheck
-    sudo curl \
-        -L https://raw.githubusercontent.com/nickjj/wait-until/v0.2.0/wait-until \
-        -o /usr/local/bin/wait-until && sudo chmod +x /usr/local/bin/wait-until
+# Run the Docker container.
+function container {
+    docker container run --publish 8000:8000 --detach hci:latest
+    echo "http://0.0.0.0:8000"
 }
 
-function ci:test {
-    # Execute the Continuous Integration (CI) pipeline.
-    #
-    # It's expected that your CI environment has these tools available:
-    #   - https://github.com/koalaman/shellcheck
-    #   - https://github.com/nickjj/wait-until
-    shellcheck run bin/*
-    lint:dockerfile "${@}"
+#===============================================================================
+# Driver code
+#===============================================================================
 
-    cp --no-clobber .env.example .env
-
-    docker compose build
-    docker compose up -d
-
-    # shellcheck disable=SC1091
-    . .env
-    wait-until "docker compose exec -T \
-    -e PGPASSWORD=${POSTGRES_PASSWORD} postgres \
-    psql -U ${POSTGRES_USER} ${POSTGRES_USER} -c 'SELECT 1'"
-
-    docker compose logs
-
-    lint "${@}"
-    format:imports --check
-    format --check
-    manage migrate
-    manage test
-}
-
-function help {
-    printf "%s <task> [args]\n\nTasks:\n" "${0}"
-
-    compgen -A function | grep -v "^_" | cat -n
-
-    printf "\nExtended help:\n  Each task has comments for general usage\n"
-}
-
+# Run the task the user supplies to the run script and time it.
 TIMEFORMAT=$'\nTask completed in %3lR'
 time "${@:-help}"

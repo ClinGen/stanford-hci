@@ -10,9 +10,8 @@ DECIMAL_MAX_DIGITS = 5
 class Disease(models.Model):
     """A disease is uniquely identified by its Mondo ID.
 
-    The Mondo Disease Ontology (Mondo) aims to harmonize disease definitions
-    across the world. A Mondo ID is a unique identifier for a disease. For more
-    information, see:
+    The Mondo Disease Ontology (Mondo) aims to harmonize disease definitions across the
+    world. A Mondo ID is a unique identifier for a disease. For more information, see:
     https://mondo.monarchinitiative.org
     """
 
@@ -47,16 +46,14 @@ class Haplotype(models.Model):
     """
 
     chromosome_mapping_order: models.CharField = models.CharField()
-    constituent_alleles: models.ManyToManyField = models.ManyToManyField(
-        Allele
-    )
+    constituent_alleles: models.ManyToManyField = models.ManyToManyField(Allele)
 
 
 class Publication(models.Model):
     """A publication is a scientific article.
 
-    A publication is uniquely identified by its ID and type. For example, a
-    PubMed publication has a PubMed ID, and a "pubmed" type.
+    A publication is uniquely identified by its ID and type. For example, a PubMed
+    publication has a PubMed ID, and a "pubmed" type.
     """
 
     publication_id: models.CharField = models.CharField()
@@ -70,9 +67,7 @@ class Curator(models.Model):
     """A curator is a user with an affiliation."""
 
     affiliation_id: models.IntegerField = models.IntegerField()
-    user: models.OneToOneField = models.OneToOneField(
-        User, on_delete=models.CASCADE
-    )
+    user: models.OneToOneField = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
 class Association(models.Model):
@@ -108,12 +103,8 @@ class Association(models.Model):
     not_phenotypes: models.CharField = models.CharField()
     not_phenotypes_free_text: models.TextField = models.TextField()
     age_range_type: models.CharField = models.CharField()
-    age_range_value_from: models.PositiveIntegerField = (
-        models.PositiveIntegerField()
-    )
-    age_range_value_to: models.PositiveIntegerField = (
-        models.PositiveIntegerField()
-    )
+    age_range_value_from: models.PositiveIntegerField = models.PositiveIntegerField()
+    age_range_value_to: models.PositiveIntegerField = models.PositiveIntegerField()
     age_range_unit: models.CharField = models.CharField()
 
     # Demographic info (ancestry):
@@ -124,9 +115,7 @@ class Association(models.Model):
     num_females: models.PositiveIntegerField = models.PositiveIntegerField()
 
     # Statistics (power):
-    num_cases_with_variant: models.PositiveIntegerField = (
-        models.PositiveIntegerField()
-    )
+    num_cases_with_variant: models.PositiveIntegerField = models.PositiveIntegerField()
     num_cases_genotyped_or_sequenced: models.PositiveIntegerField = (
         models.PositiveIntegerField()
     )
@@ -138,9 +127,7 @@ class Association(models.Model):
         models.PositiveIntegerField()
     )
     control_frequency: models.CharField = models.CharField()
-    total_cohort_size: models.PositiveIntegerField = (
-        models.PositiveIntegerField()
-    )
+    total_cohort_size: models.PositiveIntegerField = models.PositiveIntegerField()
 
     # Statistics (value):
     test_statistic: models.CharField = models.CharField()
@@ -172,9 +159,7 @@ class Classification(models.Model):
     publication: models.ForeignKey = models.ForeignKey(
         Publication, on_delete=models.PROTECT
     )
-    curator: models.ForeignKey = models.ForeignKey(
-        Curator, on_delete=models.PROTECT
-    )
+    curator: models.ForeignKey = models.ForeignKey(Curator, on_delete=models.PROTECT)
     association: models.ManyToManyField = models.ManyToManyField(Association)
 
 
@@ -182,15 +167,9 @@ class Curation(models.Model):
     """A curation is a set of classifications for a given disease and allele or
     haplotype."""
 
-    disease: models.ForeignKey = models.ForeignKey(
-        Disease, on_delete=models.PROTECT
-    )
-    allele: models.ForeignKey = models.ForeignKey(
-        Allele, on_delete=models.PROTECT
-    )
+    disease: models.ForeignKey = models.ForeignKey(Disease, on_delete=models.PROTECT)
+    allele: models.ForeignKey = models.ForeignKey(Allele, on_delete=models.PROTECT)
     haplotype: models.ForeignKey = models.ForeignKey(
         Haplotype, on_delete=models.PROTECT
     )
-    classifications: models.ManyToManyField = models.ManyToManyField(
-        Classification
-    )
+    classifications: models.ManyToManyField = models.ManyToManyField(Classification)
