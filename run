@@ -224,4 +224,4 @@ function container:ci {
 
 # Run the task the user supplies to the run script and time it.
 TIMEFORMAT=$'\nTask completed in %3lR'
-time "${@:-help}"
+time "${@}"
