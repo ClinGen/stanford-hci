@@ -18,32 +18,74 @@ set -o pipefail
 # Code quality tasks
 #===============================================================================
 
-# Format source code, format docstrings, and sort imports.
-function fmt {
-    black .
-    docformatter .
-    isort .
-    shfmt -i 4 -w ./run
+# Format Python source code, format Python docstrings, and sort Python imports.
+function fmt:python {
+    # Check if the first argument is `--check`. The `--check` flag makes it so
+    # that the formatting is checked for correctness rather than correcting
+    # it.
+    if [[ "$1" == "--check" ]]; then
+        black --check .
+        docformatter --check .
+        isort --check .
+    else
+        black .
+        docformatter .
+        isort .
+    fi
+
 }
 
-# Lint the source code.
-function lint {
+# Format Bash scripts.
+function fmt:bash {
+    # Check if the first argument is `--check`. The `--check` flag makes it so
+    # that the formatting is checked for correctness rather than correcting
+    # it.
+    if [[ "$1" == "--check" ]]; then
+        shfmt --indent 4 --diff ./run
+    else
+        shfmt --indent 4 --write ./run
+    fi
+}
+
+# Format YAML files.
+function fmt:yaml {
+    # Check if the first argument is `--check`. The `--check` flag makes it so
+    # that the formatting is checked for correctness rather than correcting
+    # it.
+    if [[ "$1" == "--check" ]]; then
+        yamlfmt -lint ./.github/workflows/ci.yml
+    else
+        yamlfmt ./.github/workflows/ci.yml
+    fi
+
+}
+
+# Lint the Python source code.
+function lint:python {
     cd src && pylint .
     cd .. || exit
+}
+
+# Lint Bash scripts.
+function lint:bash {
     shellcheck ./run
+}
+
+# Lint the Dockerfile.
+function lint:docker {
     hadolint ./Dockerfile
 }
 
-# Run a type checker on the source code. This will look at the PEP 484 type
-# hints in the code and statically analyze them. See
+# Run a type checker on the Python source code. This will look at the PEP 484
+# type hints in the code and statically analyze them. See
 # https://peps.python.org/pep-0484/ for more information.
-function type {
+function type:python {
     cd src && mypy .
     cd .. || exit
 }
 
-# Run the whole test suite.
-function test {
+# Run the Django test suite.
+function test:python {
     cd src && python manage.py test
     cd .. || exit
 }
@@ -75,12 +117,39 @@ function envsame() {
     fi
 }
 
-# Run all code quality checks.
+# Run Python code quality checks.
+function check:python {
+    # The `--check` flag makes it so that the code formatting is checked for
+    # correctness rather than correcting it.
+    fmt:python --check
+    lint:python
+    type:python
+    test:python
+}
+
+# Run Bash script quality checks.
+function check:bash {
+    fmt:bash --check
+    lint:bash
+}
+
+# Run Dockerfile quality checks.
+function check:docker {
+    lint:docker
+}
+
+# Run YAML quality checks.
+function check:yaml {
+    fmt:yaml --check
+}
+
+# Run all checks. Could be used as part of a pre-commit hook to be run on your
+# machine.
 function check {
-    fmt
-    lint
-    type
-    test
+    check:python --check
+    check:bash --check
+    check:docker
+    check:yaml --check
     envsame
 }
 
@@ -94,11 +163,12 @@ function build {
         python manage.py collectstatic --no-input
 }
 
+# Run the Django application in production mode.
 function prod {
     cd src && gunicorn --workers 2 --bind 0.0.0.0:8000 config.wsgi
 }
 
-# The dev function runs the Django application in development mode.
+# Run the Django application in development mode.
 function dev {
     cd src && python manage.py runserver
 }
@@ -113,7 +183,7 @@ function container:deps {
     pip install pipenv
     # Use Pipenv to generate a plain-old requirements file so we can install
     # dependencies globally.
-    pipenv requirements > requirements.txt
+    pipenv requirements --dev >requirements.txt
     pip install -r requirements.txt
 }
 
@@ -134,8 +204,18 @@ function container:purge {
 
 # Run the Docker container.
 function container {
-    docker container run --publish 8000:8000 --detach hci:latest
+    docker container run --name hci_container --publish 8000:8000 --detach hci:latest
     echo "http://0.0.0.0:8000"
+}
+
+# Run an arbitrary command in the (presumably) running Docker container.
+function container:cmd {
+    docker exec --interactive --tty hci_container "${@}"
+}
+
+# Run continuous integration (CI) checks.
+function container:ci {
+    container:cmd ./run check:python
 }
 
 #===============================================================================
