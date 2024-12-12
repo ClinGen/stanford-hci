@@ -1,0 +1,12 @@
+# Directories:
+**/.mypy_cache
+**/__pycache__
+**/public
+.git
+.github
+.idea
+.venv
+
+# Files:
+**/db.sqlite3
+.env

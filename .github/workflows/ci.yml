@@ -1,0 +1,22 @@
+name: "CI"
+on:
+  pull_request:
+    branches:
+      - "*"
+  push:
+    branches:
+      - "main"
+jobs:
+  test:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v2"
+      - name: "Build the HCI Docker container"
+        run: |
+          ./run container:build
+      - name: "Run the HCI Docker container"
+        run: |
+          ./run container
+      - name: "Run the CI checks in the HCI Docker container"
+        run: |-
+          ./run container:ci
