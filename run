@@ -210,7 +210,7 @@ function container {
 
 # Run an arbitrary command in the (presumably) running Docker container.
 function container:cmd {
-    docker exec --interactive --tty hci_container "${@}"
+    docker exec hci_container "${@}"
 }
 
 # Run continuous integration (CI) checks.
