@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+boto3 = "1.*"
 django = "5.*"
 gunicorn = "23.*"
 python-dotenv = "1.*"
@@ -11,6 +12,7 @@ whitenoise = "6.*"
 
 [dev-packages]
 black = "24.*"
+boto3-stubs = "1.*"
 django-stubs = {extras = ["compatible-mypy"], version = "5.*"}
 docformatter = "1.*"
 invoke = "2.*"

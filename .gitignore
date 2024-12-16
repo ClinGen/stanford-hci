@@ -3,7 +3,10 @@
 .venv
 __pycache__
 public
+.terraform
 
 # Files:
 .env
 db.sqlite3
+secrets.tfvars
+secrets.tfvars.enc

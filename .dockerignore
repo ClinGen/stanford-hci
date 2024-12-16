@@ -6,7 +6,10 @@
 .github
 .idea
 .venv
+infra
 
 # Files:
 **/db.sqlite3
+**/secrets.tfvars
+**/secrets.tfvars.enc
 .env

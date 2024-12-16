@@ -60,6 +60,21 @@ function fmt:yaml {
 
 }
 
+# Format the HashiCorp Configuration Language (HCL) files, i.e. the Terraform
+# files.
+function fmt:terraform {
+    cd infra || exit
+    # Check if the first argument is `--check`. The `--check` flag makes it so
+    # that the formatting is checked for correctness rather than correcting
+    # it.
+    if [[ "$1" == "--check" ]]; then
+        terraform fmt -check
+    else
+        terraform fmt
+    fi
+    cd .. || exit
+}
+
 # Lint the Python source code.
 function lint:python {
     cd src && pylint .
@@ -76,6 +91,14 @@ function lint:docker {
     hadolint ./Dockerfile
 }
 
+# Lint the HashiCorp Configuration Language (HCL) files, i.e. the Terraform
+# files.
+function lint:terraform {
+    cd infra || exit
+    terraform validate
+    cd .. || exit
+}
+
 # Run a type checker on the Python source code. This will look at the PEP 484
 # type hints in the code and statically analyze them. See
 # https://peps.python.org/pep-0484/ for more information.
@@ -88,33 +111,6 @@ function type:python {
 function test:python {
     cd src && python manage.py test
     cd .. || exit
-}
-
-# Compare the environment variable keys in the .env file to the environment
-# variable keys in the .env.template file. The keys should be the same.
-function envsame() {
-    ACTUAL_ENV_FILE=".env"
-    TEMPLATE_ENV_FILE=".env.template"
-
-    function extract_keys {
-        # Extract lines that are not comments and only return the key part of
-        # each line.
-        grep -E '^[^#]*=' "$1" | sed 's/=.*//' | sort
-    }
-
-    actual_keys=$(extract_keys "$ACTUAL_ENV_FILE")
-    template_keys=$(extract_keys "$TEMPLATE_ENV_FILE")
-
-    if [ "$actual_keys" == "$template_keys" ]; then
-        echo "The keys in $ACTUAL_ENV_FILE and $TEMPLATE_ENV_FILE are the same."
-    else
-        echo "The keys in $ACTUAL_ENV_FILE and $TEMPLATE_ENV_FILE do not match."
-        echo "Differences:"
-        echo "Keys in $ACTUAL_ENV_FILE but not in $TEMPLATE_ENV_FILE:"
-        comm -23 <(echo "$actual_keys") <(echo "$template_keys")
-        echo "Keys in $TEMPLATE_ENV_FILE but not in $ACTUAL_ENV_FILE:"
-        comm -13 <(echo "$actual_keys") <(echo "$template_keys")
-    fi
 }
 
 # Run Python code quality checks.
@@ -143,6 +139,12 @@ function check:yaml {
     fmt:yaml --check
 }
 
+# Run Terraform quality checks.
+function check:terraform {
+    fmt:terraform --check
+    lint:terraform
+}
+
 # Run all checks. Could be used as part of a pre-commit hook to be run on your
 # machine.
 function check {
@@ -150,7 +152,6 @@ function check {
     check:bash --check
     check:docker
     check:yaml --check
-    envsame
 }
 
 #===============================================================================
@@ -171,6 +172,26 @@ function prod {
 # Run the Django application in development mode.
 function dev {
     cd src && python manage.py runserver
+}
+
+# Encrypt the secrets file.
+function encrypt {
+    set +o history # Temporarily turn off Bash history.
+    echo "Password:"
+    read -r password
+    openssl enc -aes-256-cbc -pbkdf2 -salt -in ./infra/secrets.tfvars -out ./infra/secrets.tfvars.enc -pass "pass:$password"
+    rm ./infra/secrets.tfvars
+    set -o history # Turn Bash history back on.
+}
+
+# Decrypt the secrets file.
+function decrypt {
+    set +o history # Temporarily turn off Bash history.
+    echo "Password:"
+    read -r password
+    openssl enc -d -aes-256-cbc -pbkdf2 -salt -in ./infra/secrets.tfvars.enc -out ./infra/secrets.tfvars -pass "pass:$password"
+    rm ./infra/secrets.tfvars.enc
+    set -o history # Turn Bash history back on.
 }
 
 #===============================================================================
