@@ -1,12 +1,70 @@
-# Directories:
-.mypy_cache
-.venv
-__pycache__
-public
+# This file prevents files and directories from being added to Git.
+
+# CAUTION: The syntax for `.gitignore` is slightly different than the syntax
+# for `.dockerignore`.
+
+#===============================================================================
+# General
+#===============================================================================
+
+# Files
+#-------------------------------------------------------------------------------
+
+# This file holds environment variables that are specific to the machine the
+# HCI is running on.
+.env
+
+#===============================================================================
+# Infrastructure as Code
+#===============================================================================
+
+# Directories
+#-------------------------------------------------------------------------------
+
+# The `.terraform` directory houses the AWS provider plugin that allows
+# Terraform to interface with AWS. It also has a `terraform.tfstate` file, which
+# is a cached version of the backend state file which is stored in AWS's S3
+# service. We don't need to track any of the files in this directory.
 .terraform
 
-# Files:
-.env
+#===============================================================================
+# Python / Django
+#===============================================================================
+
+# Directories
+#-------------------------------------------------------------------------------
+
+# This directory is the cache for the type checker. We don't need to track it.
+.mypy_cache
+
+# This is the virtual environment directory. It contains a copy of Python and
+# it should contain the project's dependencies.
+.venv
+
+# The `__pycache__` directory houses cached Python bytecode. It shouldn't be
+# tracked.
+__pycache__
+
+# This is the directory where static files are collected when the Django
+# `collectstatic` command is run. This is essentially a build artifact and
+# doesn't need to be tracked.
+public
+
+# Files
+#-------------------------------------------------------------------------------
+
+# This is the SQLite database file. It is created by Django when running the app
+# locally. We don't track it because it's only used in local development, and it
+# isn't a text file.
 db.sqlite3
+
+#===============================================================================
+# Secrets
+#===============================================================================
+
+# Files
+#-------------------------------------------------------------------------------
+
+# This is the unencrypted secrets file used by Terraform to create secrets in
+# AWS's Secrets Manager service.
 secrets.tfvars
-secrets.tfvars.enc

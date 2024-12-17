@@ -14,12 +14,11 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     steps:
       - uses: "actions/checkout@v2"
+      - name: "Set up for CI"
+        run: ./run ci:setup
       - name: "Build the HCI Docker container"
-        run: |
-          ./run container:build
+        run: ./run container:build
       - name: "Run the HCI Docker container"
-        run: |
-          ./run container
-      - name: "Run the CI checks in the HCI Docker container"
-        run: |-
-          ./run container:ci
+        run: ./run container
+      - name: "Run the CI checks in the container"
+        run: ./run ci

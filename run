@@ -145,8 +145,31 @@ function check:terraform {
     lint:terraform
 }
 
-# Run all checks. Could be used as part of a pre-commit hook to be run on your
-# machine.
+# Compare the environment variable keys in the `.env` file to the environment
+# variable keys in the `.env.template` file. The keys should be the same.
+function envsame {
+    ENV_FILE_ACTUAL=".env"
+    ENV_FILE_TEMPLATE=".env.template"
+    function extract_keys {
+        # Extract lines that are not comments and only return the key part of
+        # each line.
+        grep -E '^[^#]*=' "$1" | sed 's/=.*//' | sort
+    }
+    actual_keys=$(extract_keys "$ENV_FILE_ACTUAL")
+    template_keys=$(extract_keys "$ENV_FILE_TEMPLATE")
+    if [ "$actual_keys" == "$template_keys" ]; then
+        echo "The keys in $ENV_FILE_ACTUAL and $ENV_FILE_TEMPLATE are the same."
+    else
+        echo "The keys in $ENV_FILE_ACTUAL and $ENV_FILE_TEMPLATE do not match."
+        echo "Differences:"
+        echo "Keys in $ENV_FILE_ACTUAL but not in $ENV_FILE_TEMPLATE:"
+        comm -23 <(echo "$actual_keys") <(echo "$template_keys")
+        echo "Keys in $ENV_FILE_TEMPLATE but not in $ENV_FILE_ACTUAL:"
+        comm -13 <(echo "$actual_keys") <(echo "$template_keys")
+    fi
+}
+
+# Run all code quality checks locally.
 function check {
     check:python --check
     check:bash --check
@@ -171,26 +194,55 @@ function prod {
 
 # Run the Django application in development mode.
 function dev {
+    # shellcheck source=/dev/null
     cd src && python manage.py runserver
 }
 
-# Encrypt the secrets file.
+# Encrypt a file.
+function _encrypt_file {
+    local input_file="$1"
+    local output_file="$2"
+    local password
+
+    read -prs "Enter password for encryption: " password
+    echo
+
+    openssl enc -aes-256-cbc -pbkdf2 -salt -in "$input_file" -out "$output_file" -pass "pass:$password"
+
+    # shellcheck disable=SC2181
+    if [[ $? -ne 0 ]]; then
+        echo "Encryption failed."
+    fi
+}
+
+# Decrypt a file.
+function _decrypt_file {
+    local input_file="$1"
+    local output_file="$2"
+    local password
+
+    read -prs "Enter password for decryption: " password
+    echo
+
+    openssl enc -d -aes-256-cbc -pbkdf2 -salt -in "$input_file" -out "$output_file" -pass "pass:$password"
+
+    # shellcheck disable=SC2181
+    if [[ $? -ne 0 ]]; then
+        echo "Decryption failed."
+    fi
+}
+
+# Encrypt all secrets.
 function encrypt {
     set +o history # Temporarily turn off Bash history.
-    echo "Password:"
-    read -r password
-    openssl enc -aes-256-cbc -pbkdf2 -salt -in ./infra/secrets.tfvars -out ./infra/secrets.tfvars.enc -pass "pass:$password"
-    rm ./infra/secrets.tfvars
+    _encrypt_file ./infra/secrets.tfvars ./infra/secrets.tfvars.enc
     set -o history # Turn Bash history back on.
 }
 
-# Decrypt the secrets file.
+# Decrypt all secrets.
 function decrypt {
     set +o history # Temporarily turn off Bash history.
-    echo "Password:"
-    read -r password
-    openssl enc -d -aes-256-cbc -pbkdf2 -salt -in ./infra/secrets.tfvars.enc -out ./infra/secrets.tfvars -pass "pass:$password"
-    rm ./infra/secrets.tfvars.enc
+    _decrypt_file ./infra/secrets.tfvars.enc ./infra/secrets.tfvars
     set -o history # Turn Bash history back on.
 }
 
@@ -234,8 +286,22 @@ function container:cmd {
     docker exec hci_container "${@}"
 }
 
+#===============================================================================
+# Continuous integration tasks
+#===============================================================================
+
+# Get the environment variables and secrets ready for building the Docker image
+# in CI.
+function ci:setup {
+    # The `.env.template` file should be set up for a production deployment, so
+    # all we need to do is make a copy of it without the `.template` extension.
+    cp .env.template .env
+    echo "export AWS_ACCESS_KEY_ID=\"$AWS_ACCESS_KEY_ID\"" >>.env
+    echo "export AWS_SECRET_ACCESS_KEY=\"$AWS_SECRET_ACCESS_KEY\"" >>.env
+}
+
 # Run continuous integration (CI) checks.
-function container:ci {
+function ci {
     container:cmd ./run check:python
 }
 
