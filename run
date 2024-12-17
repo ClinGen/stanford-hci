@@ -145,6 +145,30 @@ function check:terraform {
     lint:terraform
 }
 
+# Compare the environment variable keys in the .env.dev file to the environment
+# variable keys in the .env.prod file. The keys should be the same.
+function envsame() {
+    ENV_FILE_DEV=".env.dev"
+    ENV_FILE_PROD=".env.prod"
+    function extract_keys {
+        # Extract lines that are not comments and only return the key part of
+        # each line.
+        grep -E '^[^#]*=' "$1" | sed 's/=.*//' | sort
+    }
+    actual_keys=$(extract_keys "$ENV_FILE_DEV")
+    template_keys=$(extract_keys "$ENV_FILE_PROD")
+    if [ "$actual_keys" == "$template_keys" ]; then
+        echo "The keys in $ENV_FILE_DEV and $ENV_FILE_PROD are the same."
+    else
+        echo "The keys in $ENV_FILE_DEV and $ENV_FILE_PROD do not match."
+        echo "Differences:"
+        echo "Keys in $ENV_FILE_DEV but not in $ENV_FILE_PROD:"
+        comm -23 <(echo "$actual_keys") <(echo "$template_keys")
+        echo "Keys in $ENV_FILE_PROD but not in $ENV_FILE_DEV:"
+        comm -13 <(echo "$actual_keys") <(echo "$template_keys")
+    fi
+}
+
 # Run all checks. Could be used as part of a pre-commit hook to be run on your
 # machine.
 function check {
@@ -166,12 +190,14 @@ function build {
 
 # Run the Django application in production mode.
 function prod {
-    cd src && gunicorn --workers 2 --bind 0.0.0.0:8000 config.wsgi
+    # shellcheck source=/dev/null
+    source .env.prod && cd src && gunicorn --workers 2 --bind 0.0.0.0:8000 config.wsgi
 }
 
 # Run the Django application in development mode.
 function dev {
-    cd src && python manage.py runserver
+    # shellcheck source=/dev/null
+    source .env.dev && cd src && python manage.py runserver
 }
 
 # Encrypt the secrets file.
@@ -194,6 +220,14 @@ function decrypt {
     set -o history # Turn Bash history back on.
 }
 
+# Add AWS credentials to the production .env.prod environment variables file.
+# This is used in continuous integration. This function assumes the environment
+# variables are defined where the function runs.
+function creds {
+    echo "export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID" >>.env.prod
+    echo "export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY" >>.env.prod
+}
+
 #===============================================================================
 # Container tasks
 #===============================================================================
@@ -210,6 +244,8 @@ function container:deps {
 
 # Build the HCI Docker image.
 function container:build {
+    # shellcheck source=/dev/null
+    source .env.prod
     docker buildx build --tag hci:latest .
 }
 

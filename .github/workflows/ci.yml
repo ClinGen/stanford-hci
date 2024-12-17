@@ -14,12 +14,11 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
     steps:
       - uses: "actions/checkout@v2"
+      - name: "Add AWS credentials to environment variables file"
+        run: ./run creds
       - name: "Build the HCI Docker container"
-        run: |
-          ./run container:build
+        run: ./run container:build
       - name: "Run the HCI Docker container"
-        run: |
-          ./run container
+        run: ./run container
       - name: "Run the CI checks in the HCI Docker container"
-        run: |-
-          ./run container:ci
+        run: ./run container:ci
