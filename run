@@ -171,10 +171,10 @@ function envsame {
 
 # Run all code quality checks locally.
 function check {
-    check:python --check
-    check:bash --check
+    check:python
+    check:bash
     check:docker
-    check:yaml --check
+    check:yaml
 }
 
 #===============================================================================
