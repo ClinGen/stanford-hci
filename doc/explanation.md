@@ -3,6 +3,7 @@
 ## Contents
 
 - [Environment variables and secrets](#environment-variables-and-secrets)
+- [Infrastructure](#infrastructure)
 
 ## Environment variables and secrets
 
@@ -28,3 +29,8 @@ encryption algorithm. (It needs to be decrypted before it can be used.) Check
 the `run` script for how to encrypt and decrypt the `secrets.tfvars` file. The
 `secrets.tf` file declares the secrets to be stored in AWS's Secrets Manager
 service.
+
+## Infrastructure
+
+For an in-depth discussion of how I (Liam) made infrastructure decisions for
+this project, see [this PDF](./explanation-infrastructure.pdf).
