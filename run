@@ -204,11 +204,14 @@ function _encrypt_file {
     local output_file="$2"
     local password
 
-    read -prs "Enter password for encryption: " password
+    # Adding the `-r` flag makes this not work.
+    # shellcheck disable=SC2162
+    read -p "Enter password for encryption: " password
     echo
 
     openssl enc -aes-256-cbc -pbkdf2 -salt -in "$input_file" -out "$output_file" -pass "pass:$password"
 
+    # The above command is verbose, so we check its exit code indirectly.
     # shellcheck disable=SC2181
     if [[ $? -ne 0 ]]; then
         echo "Encryption failed."
@@ -221,11 +224,14 @@ function _decrypt_file {
     local output_file="$2"
     local password
 
-    read -prs "Enter password for decryption: " password
+    # Adding the `-r` flag makes this not work.
+    # shellcheck disable=SC2162
+    read -p "Enter password for decryption: " password
     echo
 
     openssl enc -d -aes-256-cbc -pbkdf2 -salt -in "$input_file" -out "$output_file" -pass "pass:$password"
 
+    # The above command is verbose, so we check its exit code indirectly.
     # shellcheck disable=SC2181
     if [[ $? -ne 0 ]]; then
         echo "Decryption failed."
@@ -235,14 +241,14 @@ function _decrypt_file {
 # Encrypt all secrets.
 function encrypt {
     set +o history # Temporarily turn off Bash history.
-    _encrypt_file ./infra/secrets.tfvars ./infra/secrets.tfvars.enc
+    _encrypt_file ./infra/tfvars/secrets.tfvars ./infra/tfvars/secrets.tfvars.enc
     set -o history # Turn Bash history back on.
 }
 
 # Decrypt all secrets.
 function decrypt {
     set +o history # Temporarily turn off Bash history.
-    _decrypt_file ./infra/secrets.tfvars.enc ./infra/secrets.tfvars
+    _decrypt_file ./infra/tfvars/secrets.tfvars.enc ./infra/tfvars/secrets.tfvars
     set -o history # Turn Bash history back on.
 }
 
@@ -284,6 +290,28 @@ function container {
 # Run an arbitrary command in the (presumably) running Docker container.
 function container:cmd {
     docker exec hci_container "${@}"
+}
+
+#===============================================================================
+# Terraform command line tasks
+#===============================================================================
+
+# These commands assume the `secrets.tfvars` file has been decrypted.
+
+# Run an arbitrary Terraform command using variables for the staging
+# environment.
+function tf:stag {
+    cd ./infra || exit
+    terraform "${@}" -var-file=./tfvars/staging.tfvars -var-file=./tfvars/secrets.tfvars
+    cd .. || exit
+}
+
+# Run an arbitrary Terraform command using variables for the production
+# environment.
+function tf:prod {
+    cd ./infra || exit
+    terraform "${@}" -var-file=./tfvars/production.tfvars -var-file=./tfvars/secrets.tfvars
+    cd .. || exit
 }
 
 #===============================================================================
