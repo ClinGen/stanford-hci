@@ -4,6 +4,7 @@
 
 - [Environment variables and secrets](#environment-variables-and-secrets)
 - [Infrastructure](#infrastructure)
+- [Using Colima](#using-colima)
 
 ## Environment variables and secrets
 
@@ -34,3 +35,11 @@ service.
 
 For an in-depth discussion of how I (Liam) made infrastructure decisions for
 this project, see [this PDF](./explanation-infrastructure.pdf).
+
+## Using Colima
+
+I (Liam) experienced several issues with Docker Desktop. I googled around and
+found [Colima](https://github.com/abiosoft/colima). Colima seems to solve some
+(maybe all) of the problems I was having with Docker Desktop. Docker Desktop was
+slow, and it seemed to be fairly resource-intensive. It also had some issues
+with certificates that I didn't want to deal with.

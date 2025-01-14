@@ -315,6 +315,19 @@ function tf:prod {
 }
 
 #===============================================================================
+# ECR tasks
+#===============================================================================
+
+# You need to set the account ID variable for these commands to succeed. Do
+# not add this variable to version control.
+# export AWS_ACCOUNT_ID="123"
+
+# Authenticate your Docker client to ECR.
+function ecr:auth {
+    aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin "$AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com"
+}
+
+#===============================================================================
 # Continuous integration tasks
 #===============================================================================
 

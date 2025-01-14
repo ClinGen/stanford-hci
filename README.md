@@ -12,3 +12,6 @@
     - [ShellCheck](https://www.shellcheck.net/)
     - [sh](https://github.com/mvdan/sh)
     - [hadolint](https://github.com/hadolint/hadolint)
+    - [Docker](https://www.docker.com/): `brew install docker`
+    - [Colima](https://github.com/abiosoft/colima): `brew install colima`
+- Start Colima: `colima start`.
