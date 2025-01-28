@@ -1,0 +1,1 @@
+hci_ecs_cluster_name = "production"

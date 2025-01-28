@@ -46,3 +46,13 @@ variable "hci_availability_zones" {
   type        = list(string)
   default     = ["us-west-2b", "us-west-2c"]
 }
+
+variable "hci_health_check_path" {
+  description = "This is the health check path for the HCI."
+  default     = "/ping/"
+}
+
+variable "hci_ecs_cluster_name" {
+  description = "This is the name of the ECS cluster for the HCI."
+  default     = "production"
+}
