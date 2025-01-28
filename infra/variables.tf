@@ -14,11 +14,6 @@ variable "hci_django_secret_key" {
 // Declare non-sensitive variables
 //==============================================================================
 
-variable "hci_registry_name" {
-  description = "This is the name of the registry where the HCI's Docker images live."
-  type = string
-}
-
 // Classless Inter-Domain Routing (CIDR) allows network routers to route data
 // packets to the respective device based on the indicated subnet. Instead of
 // classifying the IP address based on classes, routers retrieve the network

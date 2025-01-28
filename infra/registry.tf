@@ -3,7 +3,7 @@
 
 // Create the ECR repository.
 resource "aws_ecr_repository" "hci" {
-  name                 = var.hci_registry_name
+  name                 = "hci_registry_${terraform.workspace}"
   image_tag_mutability = "MUTABLE"
 
   image_scanning_configuration {

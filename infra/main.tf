@@ -12,6 +12,12 @@ provider "aws" {
   alias   = "stanford-clingen-projects"
   region  = "us-west-2"
   profile = "stanford-clingen-projects"
+  default_tags {
+    tags = {
+      Environment = terraform.workspace
+      Project       = "HCI"
+    }
+  }
 }
 
 //==============================================================================
