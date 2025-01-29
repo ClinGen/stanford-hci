@@ -15,7 +15,7 @@ provider "aws" {
   default_tags {
     tags = {
       Environment = terraform.workspace
-      Project       = "HCI"
+      Project     = "HCI"
     }
   }
 }

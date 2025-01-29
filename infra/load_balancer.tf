@@ -2,7 +2,7 @@
 
 // Create the load balancer.
 resource "aws_lb" "hci" {
-  name               = "${var.hci_ecs_cluster_name}_alb"
+  name               = "${var.hci_ecs_cluster_name}-alb"
   load_balancer_type = "application"
   internal           = false
   security_groups    = [aws_security_group.hci_load_balancer.id]
@@ -11,10 +11,10 @@ resource "aws_lb" "hci" {
 
 // Create the target group.
 resource "aws_alb_target_group" "hci_target_group" {
-  name     = "${var.hci_ecs_cluster_name}_tg"
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = aws_vpc.hci_vpc.id
+  name        = "${var.hci_ecs_cluster_name}-tg"
+  port        = 80
+  protocol    = "HTTP"
+  vpc_id      = aws_vpc.hci_vpc.id
   target_type = "ip"
 
   health_check {

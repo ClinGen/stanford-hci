@@ -60,7 +60,7 @@ resource "aws_route_table_association" "hci_private_route_2_association" {
 // Create an Elastic IP address for our network address translation (NAT)
 // gateway.
 resource "aws_eip" "hci_elastic_ip_for_nat_gw" {
-  domain                       = "vpc"
+  domain                    = "vpc"
   associate_with_private_ip = "10.0.0.5"
   depends_on                = [aws_internet_gateway.hci_igw]
 }

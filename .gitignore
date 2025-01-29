@@ -65,6 +65,6 @@ db.sqlite3
 # Files
 #-------------------------------------------------------------------------------
 
-# This is the unencrypted secrets file used by Terraform to create secrets in
+# These are the unencrypted secrets files used by Terraform to create secrets in
 # AWS's Secrets Manager service.
-secrets.tfvars
+*secrets.tfvars

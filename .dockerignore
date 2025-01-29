@@ -74,4 +74,4 @@ infra
 
 # Even though the `infra` directory is ignored, we want to make sure the
 # unencrypted secrets file doesn't leak into images or containers.
-**/secrets.tfvars
+**/*secrets.tfvars
