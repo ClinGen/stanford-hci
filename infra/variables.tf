@@ -56,3 +56,7 @@ variable "hci_ecs_cluster_name" {
   description = "This is the name of the ECS cluster for the HCI."
   default     = "production"
 }
+
+variable "hci_log_retention_in_days" {
+  default = 30
+}
