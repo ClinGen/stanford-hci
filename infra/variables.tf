@@ -52,11 +52,26 @@ variable "hci_health_check_path" {
   default     = "/ping/"
 }
 
-variable "hci_ecs_cluster_name" {
-  description = "This is the name of the ECS cluster for the HCI."
-  default     = "production"
-}
-
 variable "hci_log_retention_in_days" {
   default = 30
+}
+
+variable "hci_docker_image_url" {
+  description = "This is the URL for the Docker image to run in the ECS cluster."
+  default     = "<AWS_ACCOUNT_ID>.dkr.ecr.us-west-2.amazonaws.com/<HCI_ECR_NAME>:latest"
+}
+
+variable "hci_app_count" {
+  description = "This is the number of Docker containers to run."
+  default     = 2
+}
+
+variable "hci_fargate_cpu" {
+  description = "This is the amount of CPU for the Fargate task, e.g. '256' (.25 vCPU)."
+  default     = "256"
+}
+
+variable "hci_fargate_memory" {
+  description = "This is the amount of memory for the Fargate task, e.g. '512' (0.5GB)."
+  default     = "512"
 }
