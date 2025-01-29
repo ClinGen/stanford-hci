@@ -1,4 +1,4 @@
-// In this module we declare (but we don't define) the variables we will use.
+// In this file we declare (but we don't define) the variables we will use.
 
 //==============================================================================
 // Declare sensitive variables

@@ -1,4 +1,4 @@
-// This module defines the network resources for the HCI.
+// This file defines the network resources for the HCI.
 
 // Create a virtual private cloud (VPC).
 resource "aws_vpc" "hci_vpc" {

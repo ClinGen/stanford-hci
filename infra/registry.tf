@@ -1,4 +1,4 @@
-// This module houses anything related to the Elastic Container Registry
+// This file houses anything related to the Elastic Container Registry
 // repository where the Docker images for the HCI are stored.
 
 // Create the ECR repository.
