@@ -21,8 +21,8 @@ resource "aws_ecs_task_definition" "hci" {
       memory    = 512
       portMappings = [
         {
-          containerPort = 80
-          hostPort      = 80
+          containerPort = 8000
+          hostPort      = 8000
         }
       ]
       logConfiguration = {
