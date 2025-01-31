@@ -362,12 +362,12 @@ function ecr:auth {
 
 # Build and tag a Docker image for the staging ECR repository.
 function ecr:build:stag {
-    docker-buildx build --tag "$AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$HCI_ECR_NAME_STAG:latest" .
+    docker-buildx build --platform linux/amd64 --tag "$AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$HCI_ECR_NAME_STAG:latest" .
 }
 
 # Build and tag a Docker image for the production ECR repository.
 function ecr:build:prod {
-    docker-buildx build --tag "$AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$HCI_ECR_NAME_PROD:latest" .
+    docker-buildx build --platform linux/amd64 --tag "$AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$HCI_ECR_NAME_PROD:latest" .
 }
 
 # Push the latest image to the staging ECR repository.
