@@ -75,3 +75,13 @@ variable "hci_fargate_memory" {
   description = "This is the amount of memory for the Fargate task, e.g. '512' (0.5GB)."
   default     = "512"
 }
+
+variable "hci_autoscale_min" {
+  description = "Minimum autoscale (number of tasks)"
+  default     = "1"
+}
+
+variable "hci_autoscale_max" {
+  description = "Maximum autoscale (number of tasks)"
+  default     = "10"
+}
