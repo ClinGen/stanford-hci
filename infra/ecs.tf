@@ -38,11 +38,12 @@ resource "aws_ecs_task_definition" "hci" {
 }
 
 resource "aws_ecs_service" "hci" {
-  name            = "hci_service_${terraform.workspace}"
-  cluster         = aws_ecs_cluster.hci.id
-  task_definition = aws_ecs_task_definition.hci.arn
-  launch_type     = "FARGATE"
-  desired_count   = var.hci_app_count
+  name                 = "hci_service_${terraform.workspace}"
+  cluster              = aws_ecs_cluster.hci.id
+  task_definition      = aws_ecs_task_definition.hci.arn
+  launch_type          = "FARGATE"
+  desired_count        = var.hci_app_count
+  force_new_deployment = true
   network_configuration {
     subnets          = [aws_subnet.hci_public_subnet_1.id, aws_subnet.hci_public_subnet_2.id]
     security_groups  = [aws_security_group.hci_ecs_fargate.id]
