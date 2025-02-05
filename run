@@ -32,7 +32,6 @@ function fmt:python {
         docformatter .
         isort .
     fi
-
 }
 
 # Format Bash scripts.
@@ -78,6 +77,8 @@ function fmt:terraform {
 # Lint the Python source code.
 function lint:python {
     cd src && pylint .
+    cd .. || exit
+    cd scripts && pylint .
     cd .. || exit
 }
 
