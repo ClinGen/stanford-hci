@@ -185,7 +185,8 @@ function check {
 # Build the app for production deployment.
 function build {
     cd src &&
-        python manage.py collectstatic --no-input
+        python manage.py collectstatic --no-input &&
+        python manage.py migrate
 }
 
 # Run the Django application in production mode.
