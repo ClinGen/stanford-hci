@@ -19,7 +19,12 @@ TASK_ROLE = "hci_ecs_task_execution_role"
 @click.option(
     "--image", help="Docker image URL for the updated application", required=True
 )
-def update(cluster, service, image):
+@click.option(
+    "--workspace",
+    help="The Terraform workspace (either 'staging' or 'production')",
+    required=True,
+)
+def update(cluster, service, image, workspace):
     """Update the HCI's Fargate service."""
     client = boto3.client("ecs")
 
@@ -43,8 +48,8 @@ def update(cluster, service, image):
         memory=MEMORY,
         networkMode=NETWORK_MODE,
         requiresCompatibilities=COMPATIBILITIES,
-        executionRoleArn=EXECUTION_ROLE,
-        taskRoleArn=TASK_ROLE,
+        executionRoleArn=f"{EXECUTION_ROLE}_{workspace}",
+        taskRoleArn=f"{TASK_ROLE}_{workspace}",
     )
     new_task_arn = response["taskDefinition"]["taskDefinitionArn"]
 

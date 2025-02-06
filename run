@@ -382,6 +382,34 @@ function ecr:push:prod {
 }
 
 #===============================================================================
+# ECS tasks
+#===============================================================================
+
+# These are the staging and production names of our ECS clusters and services.
+ECS_CLUSTER_STAG="hci_cluster_staging"
+ECS_CLUSTER_PROD="hci_cluster_production"
+ECS_SERVICE_STAG="hci_service_staging"
+ECS_SERVICE_PROD="hci_service_production"
+
+# Update the HCI's staging ECS Fargate service.
+function ecs:update:stag {
+    python ./scripts/update.py \
+        --cluster=$ECS_CLUSTER_STAG \
+        --service=$ECS_SERVICE_STAG \
+        --image="$AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$HCI_ECR_NAME_STAG:latest" \
+        --workspace="staging"
+}
+
+# Update the HCI's production ECS Fargate service.
+function ecs:update:prod {
+    python ./scripts/update.py \
+        --cluster=$ECS_CLUSTER_PROD \
+        --service=$ECS_SERVICE_PROD \
+        --image="$AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$HCI_ECR_NAME_PROD:latest" \
+        --workspace="production"
+}
+
+#===============================================================================
 # Continuous integration tasks
 #===============================================================================
 
