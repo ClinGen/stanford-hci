@@ -10,6 +10,12 @@ variable "hci_django_secret_key" {
   sensitive   = true
 }
 
+variable "hci_rds_password" {
+  description = "This is the password for the HCI's RDS database."
+  type = string
+  sensitive = true
+}
+
 //==============================================================================
 // Declare non-sensitive variables
 //==============================================================================
@@ -66,22 +72,34 @@ variable "hci_app_count" {
   default     = 2
 }
 
+// Establish Fargate variables.
 variable "hci_fargate_cpu" {
   description = "This is the amount of CPU for the Fargate task, e.g. '256' (.25 vCPU)."
   default     = "256"
 }
-
 variable "hci_fargate_memory" {
   description = "This is the amount of memory for the Fargate task, e.g. '512' (0.5GB)."
   default     = "512"
 }
 
+// Establish autoscale variables.
 variable "hci_autoscale_min" {
-  description = "Minimum autoscale (number of tasks)"
+  description = "This is the minimum number of tasks the HCI will run."
   default     = "1"
 }
-
 variable "hci_autoscale_max" {
-  description = "Maximum autoscale (number of tasks)"
+  description = "This is the maximum number of tasks the HCI will run."
   default     = "10"
+}
+
+// Establish RDS variables.
+variable "hci_rds_db_name" {
+  description = "This is the name of the HCI's RDS database."
+}
+variable "hci_rds_username" {
+  description = "This is the username for the HCI's RDS database."
+}
+variable "hci_rds_instance_class" {
+  description = "This is the instance type for the HCI's RDS database."
+  default     = "db.t3.micro"
 }

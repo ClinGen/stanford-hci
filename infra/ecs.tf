@@ -33,8 +33,27 @@ resource "aws_ecs_task_definition" "hci" {
           awslogs-stream-prefix = "hci_logs_${terraform.workspace}"
         }
       }
+      environment = [
+        {
+          name = "RDS_DB_NAME"
+          value = var.hci_rds_db_name
+        },
+        {
+          name = "RDS_USERNAME"
+          value = var.hci_rds_username
+        },
+        {
+          name = "RDS_HOSTNAME"
+          value = aws_db_instance.hci_rds.address
+        },
+        {
+          name = "RDS_PORT"
+          value = "5432"
+        }
+      ]
     }
   ])
+  depends_on = [aws_db_instance.hci_rds]
 }
 
 resource "aws_ecs_service" "hci" {

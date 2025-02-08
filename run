@@ -268,6 +268,10 @@ function container:deps {
     # dependencies globally.
     pipenv requirements --dev >requirements.txt
     pip install -r requirements.txt
+    # psycopg (the Postgres driver) has Postgres as a dependency. As of this
+    # writing, the Dockerfile uses Python's official 3.13 image. The official
+    # 3.13 image uses Debian's "bookworm" release. Debian should include
+    # Postgres by default.
 }
 
 # Build the HCI Docker image.
