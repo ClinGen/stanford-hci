@@ -6,7 +6,7 @@ resource "aws_db_subnet_group" "hci_rds" {
 }
 
 resource "aws_db_instance" "hci_rds" {
-  identifier              = "hci_rds_${terraform.workspace}"
+  identifier              = "hci-rds-${terraform.workspace}"
   db_name                 = var.hci_rds_db_name
   username                = var.hci_rds_username
   password                = var.hci_rds_password
