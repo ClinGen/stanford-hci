@@ -74,3 +74,54 @@ resource "aws_ecs_service" "hci" {
     container_port   = 8000
   }
 }
+
+resource "aws_ecs_task_definition" "hci_db_migration" {
+  family                = "hci_db_migration_task"
+  network_mode          = "awsvpc"
+  requires_compatibilities = ["FARGATE"]
+  cpu                   = var.hci_fargate_cpu
+  memory                = var.hci_fargate_memory
+  execution_role_arn    = aws_iam_role.hci_ecs_task_execution_role.arn
+  container_definitions = jsonencode([
+    {
+      name  = "hci_db_migration_container"
+      image = var.hci_docker_image_url
+      environment: [
+        {
+            "name": "RDS_DB_NAME",
+            "value": var.hci_rds_db_name
+        },
+        {
+            "name": "RDS_USERNAME",
+            "value": var.hci_rds_username
+        },
+        {
+            "name": "RDS_PASSWORD",
+            "value": var.hci_rds_password
+        },
+        {
+            "name": "RDS_HOSTNAME",
+            "value": aws_db_instance.hci_rds.address
+        },
+        {
+            "name": "RDS_PORT",
+            "value": "5432"
+        }
+      ],
+      command = ["./run", "migrate"]
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-group         = "/ecs/hci_${terraform.workspace}"
+          awslogs-region        = "us-west-2"
+          awslogs-stream-prefix = "hci_logs_${terraform.workspace}"
+        }
+      }
+      portMappings = [
+        {
+          containerPort = 8000
+        }
+      ]
+    }
+  ])
+}

@@ -200,6 +200,12 @@ function dev {
     cd src && python manage.py runserver
 }
 
+# Migrate the Django database.
+function migrate {
+    cd src &&
+        python manage.py migrate
+}
+
 # Encrypt a file.
 function _encrypt_file {
     local input_file="$1"
