@@ -23,5 +23,4 @@ resource "aws_db_instance" "hci_rds" {
   publicly_accessible     = false
   backup_retention_period = 7
   skip_final_snapshot     = true
-  blue_green_update       = true
 }
