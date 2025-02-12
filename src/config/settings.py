@@ -31,7 +31,7 @@ SECRET_KEY = get_secret("hci_django_secret_key")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("HCI_DJANGO_DEBUG") == "True"
 
-ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0"]
+ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0", "hci-alb-staging-559050125.us-west-2.elb.amazonaws.com"]
 
 
 # Application definition
