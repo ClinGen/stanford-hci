@@ -35,6 +35,10 @@ resource "aws_ecs_task_definition" "hci" {
       }
       environment = [
         {
+          name = "HCI_HOST",
+          value = var.hci_host
+        },
+        {
           name = "RDS_DB_NAME"
           value = var.hci_rds_db_name
         },
@@ -87,6 +91,10 @@ resource "aws_ecs_task_definition" "hci_db_migration" {
       name  = "hci_db_migration_container"
       image = var.hci_docker_image_url
       environment: [
+        {
+          name = "HCI_HOST",
+          value = var.hci_host
+        },
         {
             "name": "RDS_DB_NAME",
             "value": var.hci_rds_db_name

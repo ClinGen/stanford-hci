@@ -10,6 +10,24 @@ variable "hci_django_secret_key" {
   sensitive   = true
 }
 
+variable "hci_django_superuser_username" {
+  description = "This is the HCI superuser's username."
+  type        = string
+  sensitive   = true
+}
+
+variable "hci_django_superuser_email" {
+  description = "This is the HCI superuser's email."
+  type        = string
+  sensitive   = true
+}
+
+variable "hci_django_superuser_password" {
+  description = "This is the HCI superuser's password."
+  type        = string
+  sensitive   = true
+}
+
 variable "hci_rds_password" {
   description = "This is the password for the HCI's RDS database."
   type = string
@@ -19,6 +37,12 @@ variable "hci_rds_password" {
 //==============================================================================
 // Declare non-sensitive variables
 //==============================================================================
+
+// This environment variable is either 'local', 'staging', or 'production'.
+variable "hci_host" {
+  description = "The host where the HCI is running."
+  type = string
+}
 
 // Classless Inter-Domain Routing (CIDR) allows network routers to route data
 // packets to the respective device based on the indicated subnet. Instead of

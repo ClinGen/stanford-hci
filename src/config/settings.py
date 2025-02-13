@@ -25,8 +25,12 @@ load_dotenv(dotenv_path=BASE_DIR.parent / ".env")
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
+# This is where the HCI is running. (Either 'local', 'staging', or
+# 'production'.)
+HCI_HOST = os.getenv("HCI_HOST")
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_secret("hci_django_secret_key")
+SECRET_KEY = get_secret(f"hci_django_secret_key_{HCI_HOST}")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("HCI_DJANGO_DEBUG") == "True"
@@ -92,7 +96,7 @@ if "RDS_DB_NAME" in os.environ:
             "ENGINE": "django.db.backends.postgresql",
             "NAME": os.environ["RDS_DB_NAME"],
             "USER": os.environ["RDS_USERNAME"],
-            "PASSWORD": get_secret("hci_rds_password"),
+            "PASSWORD": get_secret(f"hci_rds_password_{HCI_HOST}"),
             "HOST": os.environ["RDS_HOSTNAME"],
             "PORT": os.environ["RDS_PORT"],
         }
