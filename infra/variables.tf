@@ -103,3 +103,7 @@ variable "hci_rds_instance_class" {
   description = "This is the instance type for the HCI's RDS database."
   default     = "db.t3.micro"
 }
+
+variable "hci_subdomain" {
+  description = "This is the subdomain for the HCI."
+}

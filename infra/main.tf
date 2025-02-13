@@ -20,6 +20,14 @@ provider "aws" {
   }
 }
 
+// This is the AWS account that manages the clinicalgenome.org domain
+// and all of its subdomains.
+provider "aws" {
+  alias   = "route-53"
+  region  = "us-west-2"
+  profile = "route-53"
+}
+
 //==============================================================================
 // Configure Terraform.
 // -----------------------------------------------------------------------------
