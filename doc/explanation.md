@@ -19,9 +19,11 @@ easy enough to do. When we introduce containers, code pipelines, etc. making
 environment variables and secrets available to the application is more
 difficult. This is why most cloud service providers have a service like AWS's
 Secrets Manager service. Services like AWS's Secrets Manager allow us to
-securely store the environment variables and secrets the application needs. At
-runtime, the application can access them by making an HTTP request to the
-service.
+securely store the secrets the application needs. At runtime, the application
+can access the secrets stored in AWS Secrets Manager by making an HTTP request
+to the service. Most AWS services also allow you to set non-secret environment
+variables. For example, in our `ecs.tf` file, we set a handful of environment
+variables that are needed by the HCI app.
 
 We use AWS's Secrets Manager for the HCI. We define the secrets we want to store
 in AWS's Secrets Manager service in our Terraform code, and we set those secrets
