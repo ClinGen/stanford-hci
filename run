@@ -430,7 +430,7 @@ function ecs:update:prod {
 function ci:setup {
     # The `.env.template` file should be set up for a production deployment, so
     # all we need to do is make a copy of it without the `.template` extension.
-    cp .env.template .env
+    echo "export HCI_HOST=\"local\"" >.env
     echo "export AWS_ACCESS_KEY_ID=\"$AWS_ACCESS_KEY_ID\"" >>.env
     echo "export AWS_SECRET_ACCESS_KEY=\"$AWS_SECRET_ACCESS_KEY\"" >>.env
 }

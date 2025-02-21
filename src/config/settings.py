@@ -37,7 +37,7 @@ else:
     SECRET_KEY = get_secret(f"hci_django_secret_key_{HCI_HOST}")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("HCI_DJANGO_DEBUG") == "True"
+DEBUG = HCI_HOST == "local" or HCI_HOST is None
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
