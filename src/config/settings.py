@@ -30,7 +30,11 @@ load_dotenv(dotenv_path=BASE_DIR.parent / ".env")
 HCI_HOST = os.getenv("HCI_HOST")
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_secret(f"hci_django_secret_key_{HCI_HOST}")
+if HCI_HOST == "local" or HCI_HOST is None:
+    # If we're running locally or in CI, use the staging secret key.
+    SECRET_KEY = get_secret("hci_django_secret_key_staging")
+else:
+    SECRET_KEY = get_secret(f"hci_django_secret_key_{HCI_HOST}")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("HCI_DJANGO_DEBUG") == "True"
