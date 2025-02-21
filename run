@@ -297,11 +297,15 @@ function container:build:local {
     docker-buildx build --tag hci:latest .
 }
 
-# Remove all containers and images.
-function container:purge {
+# Remove all containers.
+function container:purge:containers {
     # We want word splitting here.
     # shellcheck disable=SC2046
     docker container remove --volumes --force $(docker container list --all --quiet)
+}
+
+# Remove all images.
+function container:purge:images {
     # We want word splitting here.
     # shellcheck disable=SC2046
     docker image remove --force $(docker image list --all --quiet)
