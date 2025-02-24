@@ -1,5 +1,5 @@
-// This file houses anything related to the Elastic Container Registry
-// repository where the Docker images for the HCI are stored.
+// Houses anything related to the Elastic Container Registry repository where
+// the Docker images for the HCI are stored.
 
 // Create the ECR repository.
 resource "aws_ecr_repository" "hci" {

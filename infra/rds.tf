@@ -1,4 +1,4 @@
-// This file configures our RDS database.
+// Configures our RDS database.
 
 resource "aws_db_subnet_group" "hci_rds" {
   name       = "hci_rds_${terraform.workspace}"

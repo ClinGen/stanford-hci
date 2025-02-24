@@ -1,4 +1,4 @@
-// Configure the subdomain for the HCI.
+// Configures the subdomain for the HCI.
 
 data "aws_route53_zone" "hci" {
   provider     = aws.route-53

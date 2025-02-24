@@ -1,4 +1,4 @@
-// This file configures logging for the HCI.
+// Configures logging for the HCI.
 
 resource "aws_cloudwatch_log_group" "hci_log_group" {
   name              = "/ecs/hci_${terraform.workspace}"

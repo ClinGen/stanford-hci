@@ -1,4 +1,4 @@
-// This file configures AWS Identity and Access Management (IAM) for the HCI.
+// Configures AWS Identity and Access Management (IAM) for the HCI.
 
 resource "aws_iam_role" "hci_ecs_task_execution_role" {
   name               = "hci_ecs_task_execution_role_${terraform.workspace}"

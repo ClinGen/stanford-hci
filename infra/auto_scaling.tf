@@ -1,3 +1,5 @@
+// Configures how we auto-scale our ECS service.
+
 resource "aws_appautoscaling_target" "hci_ecs_target" {
   max_capacity       = var.hci_autoscale_max
   min_capacity       = var.hci_autoscale_min

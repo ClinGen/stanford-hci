@@ -1,4 +1,4 @@
-// This file configures the security groups for the HCI.
+// Configures the security groups for the HCI.
 
 // Configure the application load balancer (ALB) security group.
 // (Internet -> ALB)

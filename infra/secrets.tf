@@ -1,5 +1,5 @@
-// This file establishes secrets needed by the HCI application. These secrets
-// are stored in AWS's Secrets Manager service.
+// Establishes secrets needed by the HCI application. These secrets are stored
+// in AWS's Secrets Manager service.
 
 resource "aws_secretsmanager_secret" "hci_django_secret_key" {
   name        = "hci_django_secret_key_${terraform.workspace}"

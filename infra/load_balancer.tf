@@ -1,4 +1,4 @@
-// Configure the load balancer for the HCI.
+// Configures the load balancer for the HCI.
 
 // Create the load balancer.
 resource "aws_lb" "hci" {

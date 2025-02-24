@@ -1,4 +1,4 @@
-// This file configures our ECS cluster.
+// Configures our ECS service.
 
 resource "aws_ecs_cluster" "hci" {
   name = "hci_cluster_${terraform.workspace}"

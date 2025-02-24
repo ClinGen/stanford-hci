@@ -1,5 +1,5 @@
-// This file configures our AWS providers, and it sets up the main Terraform
-// block where the Terraform "backend" is set up.
+// Configures our AWS providers, and it sets up the main Terraform block where
+// the Terraform "backend" is set up.
 
 //==============================================================================
 // Configure the providers.

@@ -1,4 +1,4 @@
-// This file outputs values that are obtained when you run `terraform apply`.
+// Outputs values that are obtained when you run `terraform apply`.
 
 output "alb_hostname" {
   value = aws_lb.hci.dns_name
