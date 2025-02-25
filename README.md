@@ -15,4 +15,5 @@
     - [Docker](https://www.docker.com/): `brew install docker`
     - [Docker buildx](https://www.docker.com/): `brew install docker-buildx`
     - [Colima](https://github.com/abiosoft/colima): `brew install colima`
+    - [Terraform](https://www.terraform.io/): `brew tap hashicorp/tap` and `brew install hashicorp/tap/terraform`
 - Start Colima: `colima start`.
