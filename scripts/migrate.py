@@ -64,8 +64,8 @@ def migrate(environment):
     ecs_db_migration_task_name = "hci_db_migration_task"
 
     # Extract the subnets and security groups from the Terraform output.
-    subnets = find_pattern_in_terraform_output(environment, r"subnet-([a-z0-9]+)")
-    security_groups = find_pattern_in_terraform_output(environment, r"sg-([a-z0-9]+)")
+    subnets = find_pattern_in_terraform_output(environment, r"subnet-[a-z0-9]+")
+    security_groups = find_pattern_in_terraform_output(environment, r"sg-[a-z0-9]+")
 
     # Run the migration.
     ecs_client = boto3.client("ecs")

@@ -417,12 +417,12 @@ function ecr:push:prod {
 
 # Migrate the staging database.
 function db:migrate:stag {
-    python ./scripts/migrate --environment=staging
+    python ./scripts/migrate.py --environment=staging
 }
 
 # Migrate the production database.
 function db:migrate:prod {
-    python ./scripts/migrate --environment=production
+    python ./scripts/migrate.py --environment=production
 }
 
 #===============================================================================
