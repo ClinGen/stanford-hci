@@ -360,6 +360,20 @@ function tf:prod {
     cd .. || exit
 }
 
+# Get outputs from the staging workspace.
+function tf:output:stag {
+    cd ./infra || exit
+    _switch_workspace_to_stag
+    terraform output
+}
+
+# Get outputs from the production workspace.
+function tf:output:prod {
+    cd ./infra || exit
+    _switch_workspace_to_prod
+    terraform output
+}
+
 #===============================================================================
 # ECR tasks
 #===============================================================================
@@ -395,6 +409,20 @@ function ecr:push:stag {
 # Push the latest image to the production ECR repository.
 function ecr:push:prod {
     docker push "$AWS_ACCOUNT_ID.dkr.ecr.us-west-2.amazonaws.com/$HCI_ECR_NAME_PROD:latest"
+}
+
+#===============================================================================
+# Database tasks
+#===============================================================================
+
+# Migrate the staging database.
+function db:migrate:stag {
+    python ./scripts/migrate --environment=staging
+}
+
+# Migrate the production database.
+function db:migrate:prod {
+    python ./scripts/migrate --environment=production
 }
 
 #===============================================================================
