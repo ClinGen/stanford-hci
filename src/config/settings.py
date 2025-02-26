@@ -44,6 +44,7 @@ ALLOWED_HOSTS = [
     "0.0.0.0",
     "hci-test.clinicalgenome.org",
     "hci.clinicalgenome.org",
+    "hci-alb-staging-559050125.us-west-2.elb.amazonaws.com"
 ]
 
 
