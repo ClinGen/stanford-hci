@@ -133,3 +133,73 @@ resource "aws_ecs_task_definition" "hci_db_migration" {
     }
   ])
 }
+
+// When you first create the infrastructure for the HCI, you'll need a
+// superuser. You can't SSH into Fargate ECS containers, so we have this
+// task.
+resource "aws_ecs_task_definition" "hci_createsuperuser" {
+  family                = "hci_createsuperuser_task"
+  network_mode          = "awsvpc"
+  requires_compatibilities = ["FARGATE"]
+  cpu                   = var.hci_fargate_cpu
+  memory                = var.hci_fargate_memory
+  execution_role_arn    = aws_iam_role.hci_ecs_task_execution_role.arn
+  container_definitions = jsonencode([
+    {
+      name  = "hci_createsuperuser_container"
+      image = var.hci_docker_image_url
+      environment: [
+        {
+          name = "HCI_HOST",
+          value = var.hci_host
+        },
+        {
+          "name": "RDS_DB_NAME",
+          "value": var.hci_rds_db_name
+        },
+        {
+          "name": "RDS_USERNAME",
+          "value": var.hci_rds_username
+        },
+        {
+          "name": "RDS_PASSWORD",
+          "value": var.hci_rds_password
+        },
+        {
+          "name": "RDS_HOSTNAME",
+          "value": aws_db_instance.hci_rds.address
+        },
+        {
+          "name": "RDS_PORT",
+          "value": "5432"
+        },
+        {
+          "name": "DJANGO_SUPERUSER_USERNAME",
+          "value": var.hci_django_superuser_username
+        },
+        {
+          "name": "DJANGO_SUPERUSER_PASSWORD",
+          "value": var.hci_django_superuser_password
+        },
+        {
+          "name": "DJANGO_SUPERUSER_EMAIL",
+          "value": var.hci_django_superuser_email
+        },
+      ],
+      command = ["./run", "createsuperuser"]
+      logConfiguration = {
+        logDriver = "awslogs"
+        options = {
+          awslogs-group         = "/ecs/hci_${terraform.workspace}"
+          awslogs-region        = "us-west-2"
+          awslogs-stream-prefix = "hci_logs_${terraform.workspace}"
+        }
+      }
+      portMappings = [
+        {
+          containerPort = 8000
+        }
+      ]
+    }
+  ])
+}

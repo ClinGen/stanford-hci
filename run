@@ -263,6 +263,16 @@ function decrypt {
     set -o history # Turn Bash history back on.
 }
 
+# Creates a Django superuser for the HCI.
+function createsuperuser {
+    # This function assumes you've set the following environment variables:
+    # DJANGO_SUPERUSER_USERNAME
+    # DJANGO_SUPERUSER_PASSWORD
+    # DJANGO_SUPERUSER_EMAIL
+    cd src &&
+        python manage.py createsuperuser --noinput
+}
+
 #===============================================================================
 # Container tasks
 #===============================================================================
@@ -417,12 +427,12 @@ function ecr:push:prod {
 
 # Migrate the staging database.
 function db:migrate:stag {
-    python ./scripts/migrate.py --environment=staging
+    python -m scripts.migrate --environment=staging
 }
 
 # Migrate the production database.
 function db:migrate:prod {
-    python ./scripts/migrate.py --environment=production
+    python -m scripts.migrate --environment=production
 }
 
 #===============================================================================
@@ -478,12 +488,12 @@ function ci {
 
 # Deploy the HCI to the staging environment.
 function deploy:stag {
-    python ./scripts/deploy.py --environment=staging
+    python -m scripts.deploy --environment=staging
 }
 
 # Deploy the HCI to the production environment.
 function deploy:prod {
-    python ./scripts/deploy.py --environment=production
+    python -m scripts.deploy --environment=production
 }
 
 #===============================================================================
