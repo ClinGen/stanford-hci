@@ -473,6 +473,20 @@ function ci {
 }
 
 #===============================================================================
+# Deployment tasks
+#===============================================================================
+
+# Deploy the HCI to the staging environment.
+function deploy:stag {
+    python ./scripts/deploy.py --environment=staging
+}
+
+# Deploy the HCI to the production environment.
+function deploy:prod {
+    python ./scripts/deploy.py --environment=production
+}
+
+#===============================================================================
 # Driver code
 #===============================================================================
 
