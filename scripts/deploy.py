@@ -22,16 +22,16 @@ import click
 def run(cmd: str):
     """Runs a command and prints a friendly error message if necessary."""
     try:
-        print(f"Running command: {cmd}")
+        print(f"  Running command: {cmd}")
         result = subprocess.run(
             cmd.split(" "), capture_output=True, check=True, text=True
         )
         if result.returncode == 0:
-            print("Done")
+            print("  Done")
         else:
             print(f"Done with return code {result.returncode}")
     except subprocess.CalledProcessError as err:
-        print(f"Error: Command {cmd} failed with return code {err.returncode}")
+        print(f"  Error: Command {cmd} failed with return code {err.returncode}")
         if err.stdout:
             print(f"    stdout: {err.stdout}")
         if err.stderr:
