@@ -6,8 +6,21 @@ tutorials, they typically assume a fair amount of prerequisite knowledge.
 
 ## Contents
 
+- [How to deploy the HCI](#how-to-deploy-the-hci)
 - [How to resolve Terraform state lock error](#how-to-resolve-terraform-state-lock-error)
 - [How to authenticate to ECR](#how-to-authenticate-to-ecr)
+
+## How to deploy the HCI
+
+I (Liam) wrote a script to deploy the HCI. There's an explanation of the
+script [here](./explanation.md#the-deploy-script). To use the script,
+invoke the following command, replacing `<environment>` with `stag` for
+the staging environment (`hci-test.clinicalgenome.org`) or `prod` for the
+production environment (`hci.clinicalgenome.org`).
+
+```
+./run deploy:<environment>
+```
 
 ## How to resolve Terraform state lock error
 
