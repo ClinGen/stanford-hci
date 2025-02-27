@@ -39,6 +39,22 @@ service.
 For an in-depth discussion of how I (Liam) made infrastructure decisions for
 this project, see [this PDF](./explanation-infrastructure.pdf).
 
+The core AWS services we use for the HCI are Elastic Container Service
+(ECS) and Relational Database Service (RDS). There's a lot more to the
+infrastructure than ECS and RDS, but they are the core services that we
+rely on. Everything else in the Terraform code can be thought of as
+stuff we need to wire everything up. ECS allows us to run our
+containerized application. We leverage Fargate, which (in theory) makes
+scaling the application and managing its infrastructure easier. RDS
+allows us to have a managed Postgres database.
+
+The beauty of having a containerized application is that we could (in
+theory) run it anywhere. We could move to a different cloud provider, we
+could run the container on a cheap virtual private server in the cloud,
+or we could run it on an on-prem server. Of course, that would be a fair
+bit of work, but the application code is decoupled from the
+infrastructure it runs on.
+
 ## Using Colima
 
 I (Liam) experienced several issues with Docker Desktop. I googled around and
@@ -86,7 +102,7 @@ You probably only need to do this if you haven't done it in a while.
 
 The deploy script will ask the user whether they want to build a new
 container image. A container image is basically a set of static files
-that contain all of the code and dependencies necessary to run an
+that contain all the code and dependencies necessary to run an
 application. If you've changed the source code of the application,
 you'll need to create a new container image.
 
