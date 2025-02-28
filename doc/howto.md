@@ -22,6 +22,15 @@ production environment (`hci.clinicalgenome.org`).
 ./run deploy:<environment>
 ```
 
+## How to create a superuser for the HCI
+
+When you first build the infrastructure for the HCI, you'll need to
+create a Django superuser. If the HCI were deployed on a platform with
+SSH access, you could SSH in, and create the superuser on the command
+line. Using Fargate means we don't have SSH access, so we have an ECS
+task that we can run via a script. The script can be found
+[here](../scripts/superuser.py).
+
 ## How to resolve Terraform state lock error
 
 I (Liam) have run into an issue a couple of times where if I hit `ctrl-c` when
