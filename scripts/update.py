@@ -1,6 +1,9 @@
 """This script provides a method for the developer to manually update the HCI's ECS
 Fargate service."""
 
+import os
+import sys
+
 import boto3
 import click
 
@@ -14,18 +17,28 @@ TASK_ROLE = "hci_ecs_task_execution_role"
 
 
 @click.command()
-@click.option("--cluster", help="Name of the ECS cluster", required=True)
-@click.option("--service", help="Name of the ECS service", required=True)
 @click.option(
-    "--image", help="Docker image URL for the updated application", required=True
-)
-@click.option(
-    "--workspace",
+    "--environment",
     help="The Terraform workspace (either 'staging' or 'production')",
     required=True,
 )
-def update(cluster, service, image, workspace):
+def update(environment):
     """Update the HCI's Fargate service."""
+
+    if environment == "staging":
+        cluster = "hci_cluster_staging"
+        service = "hci_service_staging"
+        registry_name = "hci_registry_staging"
+    elif environment == "production":
+        cluster = "hci_cluster_production"
+        service = "hci_service_production"
+        registry_name = "hci_registry_production"
+    else:
+        print(
+            f"  Error: Environment {environment} must be either 'staging' or 'production'"
+        )
+        sys.exit(1)
+
     client = boto3.client("ecs")
 
     # Get the task definition.
@@ -37,6 +50,7 @@ def update(cluster, service, image, workspace):
     container_definition = response["taskDefinition"]["containerDefinitions"][0].copy()
 
     # Update the image.
+    image = f"{os.getenv('AWS_ACCOUNT_ID')}.dkr.ecr.us-west-2.amazonaws.com/{registry_name}:latest"
     container_definition["image"] = image
 
     # Register a new task definition.
@@ -48,8 +62,8 @@ def update(cluster, service, image, workspace):
         memory=MEMORY,
         networkMode=NETWORK_MODE,
         requiresCompatibilities=COMPATIBILITIES,
-        executionRoleArn=f"{EXECUTION_ROLE}_{workspace}",
-        taskRoleArn=f"{TASK_ROLE}_{workspace}",
+        executionRoleArn=f"{EXECUTION_ROLE}_{environment}",
+        taskRoleArn=f"{TASK_ROLE}_{environment}",
     )
     new_task_arn = response["taskDefinition"]["taskDefinitionArn"]
 
