@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 
-@login_required
 def home(request):
     """This is the view for the main page of the HCI.
 
@@ -13,11 +12,17 @@ def home(request):
     view their curations and their affiliation's curations. It also has links to the
     other pages of the HCI.
     """
-    context = {
-        "email": request.user.email,
-        "affiliation": "HLA Expert Panel",
-        "username": request.user.username,
-    }
+    if request.user.is_authenticated:
+        context = {
+            "is_authenticated": True,
+            "email": request.user.email,
+            "affiliation": "HLA Expert Panel",
+            "username": request.user.username,
+        }
+    else:
+        context = {
+            "is_authenticated": False,
+        }
     return render(request, "hci/home.html", context)
 
 

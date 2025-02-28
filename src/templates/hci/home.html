@@ -5,8 +5,13 @@
     <div class="block">
         <section class="hero is-light">
             <div class="hero-body">
+                {% if is_authenticated %}
                 <h2 class="title">Welcome, {{ username }}.</h2>
                 <p class="subtitle">You are curating as part of the {{ affiliation }} affiliation.</p>
+                {% else %}
+                <h2 class="title">Welcome.</h2>
+                <p class="subtitle">To curate as part of an affiliation, please log in.</p>
+                {% endif %}
             </div>
         </section>
     </div>
@@ -17,6 +22,7 @@
         <a class="button is-responsive" href="{% url 'new_publication' %}">Add Publication</a>
     </div>
 
+    {% if is_authenticated %}
     <div class="block">
         <h3 class="title is-4">Your {{ affiliation }} Curations</h3>
         <table class="table">
@@ -43,7 +49,6 @@
             </tr>
         </table>
     </div>
-
     <div class="block">
         <h3 class="title is-4">All {{ affiliation }} Curations</h3>
         <table class="table">
@@ -70,4 +75,33 @@
             </tr>
         </table>
     </div>
+    {% endif %}
+
+    <div class="block">
+        <h3 class="title is-4">All Curations</h3>
+        <table class="table">
+            <tr>
+                <th>Allele/Haplotype</th>
+                <th>Disease</th>
+                <th>Status</th>
+                <th>Date Created</th>
+                <th>Last Modified</th>
+            </tr>
+            <tr>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+            </tr>
+        </table>
+    </div>
+
 {% endblock %}
