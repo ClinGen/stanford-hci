@@ -5,12 +5,11 @@
     <div class="block">
         <section class="hero is-light">
             <div class="hero-body">
+                <h2 class="title">HLA Curation Interface</h2>
                 {% if is_authenticated %}
-                <h2 class="title">Welcome, {{ username }}.</h2>
-                <p class="subtitle">You are curating as part of the {{ affiliation }} affiliation.</p>
+                <p class="subtitle">Welcome, {{ username }}. You are curating as part of the {{ affiliation }} affiliation.</p>
                 {% else %}
-                <h2 class="title">Welcome.</h2>
-                <p class="subtitle">To curate as part of an affiliation, please log in.</p>
+                <p class="subtitle">Welcome. To curate as part of an affiliation, please log in.</p>
                 {% endif %}
             </div>
         </section>
