@@ -5,12 +5,13 @@ name = "pypi"
 
 [packages]
 boto3 = "1.*"
+click = "8.*"
 django = "5.*"
 gunicorn = "23.*"
+psycopg = "3.*"
+pydantic = "2.*"
 python-dotenv = "1.*"
 whitenoise = "6.*"
-click = "8.*"
-psycopg = "3.*"
 
 [dev-packages]
 black = "24.*"

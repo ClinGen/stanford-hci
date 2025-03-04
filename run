@@ -110,7 +110,9 @@ function type:python {
 
 # Run the Django test suite.
 function test:python {
-    cd src && python manage.py test
+    cd src &&
+        python manage.py test &&
+        python -m unittest score.tests
     cd .. || exit
 }
 
