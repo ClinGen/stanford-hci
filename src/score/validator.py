@@ -16,7 +16,14 @@ class ValidStep1Data(BaseModel):
     d_phase: Literal[*steps.get_option_names("1D")]  # type: ignore
 
 
+class ValidStep2Data(BaseModel):
+    """Model the second step of the scoring process."""
+
+    typing_method: Literal[*steps.get_option_names("2")]  # type: ignore
+
+
 class ValidScoreData(BaseModel):
     """Model a classification score."""
 
     step_1: ValidStep1Data
+    step_2: ValidStep2Data

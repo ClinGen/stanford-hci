@@ -11,7 +11,7 @@ import logging
 from pydantic import ValidationError
 
 from score.steps import steps
-from score.validator import ValidScoreData, ValidStep1Data
+from score.validator import ValidScoreData, ValidStep1Data, ValidStep2Data
 
 logger = logging.getLogger(__name__)
 
@@ -30,8 +30,8 @@ def _get_points(option: str, step_number: str) -> float:
     )
 
 
-def calculate_step_1(data: ValidStep1Data) -> float:
-    """Calculate score for step 1."""
+def calculate_step_1_points(data: ValidStep1Data) -> float:
+    """Calculate points for step 1."""
     step_1_points = 0.0
     step_1_points += _get_points(data.a_allele_or_haplotype, "1A")
     step_1_points += _get_points(data.b_allele_resolution, "1B")
@@ -40,8 +40,18 @@ def calculate_step_1(data: ValidStep1Data) -> float:
     return step_1_points
 
 
+def calculate_step_2_points(data: ValidStep2Data) -> float:
+    """Calculate points for step 2."""
+    return _get_points(data.typing_method, "2")
+
+
 def calculate(data: dict) -> float:
-    """Calculate a score for an HLA classification."""
+    """Calculate a score for an HLA classification.
+
+    Raises:
+         ValidationError: Pydantic couldn't validate the data.
+         CalculatorException: An option couldn't be found.
+    """
     score = 0.0
 
     try:
@@ -50,6 +60,7 @@ def calculate(data: dict) -> float:
         logger.error("Unable to validate score")
         logger.error(err.errors())
 
-    score += calculate_step_1(data.step_1)  # type: ignore
+    score += calculate_step_1_points(data.step_1)  # type: ignore
+    score += calculate_step_2_points(data.step_2)  # type: ignore
 
     return score
