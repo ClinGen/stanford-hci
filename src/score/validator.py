@@ -55,6 +55,12 @@ class ValidStep4Data(BaseModel):
     cohort_size: Literal[*steps.get_option_names("4")]  # type: ignore
 
 
+class ValidStep5Data(BaseModel):
+    """Model the fifth step of the scoring process."""
+
+    additional_phenotypes: Literal[*steps.get_option_names("5")]  # type: ignore
+
+
 class ValidScoreData(BaseModel):
     """Model a classification score."""
 
@@ -62,6 +68,7 @@ class ValidScoreData(BaseModel):
     step_2: ValidStep2Data
     step_3: ValidStep3Data
     step_4: ValidStep4Data
+    step_5: ValidStep5Data
 
 
 if __name__ == "__main__":

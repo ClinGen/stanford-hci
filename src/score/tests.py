@@ -7,12 +7,14 @@ from score.calculator import (
     calculate_step_2_points,
     calculate_step_3_points,
     calculate_step_4_points,
+    calculate_step_5_points,
 )
 from score.validator import (
     ValidStep1Data,
     ValidStep2Data,
     ValidStep3Data,
     ValidStep4Data,
+    ValidStep5Data,
 )
 
 
@@ -51,6 +53,8 @@ class TestCalculator(unittest.TestCase):
         self.step_3_lists_expected_score = 2 + (1 + 2) + (1 + 1)
         self.step_4_data = {"cohort_size": "GWAS 2,500-4,999, Non-GWAS 100-249"}
         self.step_4_expected_score = 2
+        self.step_5_data = {"additional_phenotypes": "only disease tested"}
+        self.step_5_expected_score = 0
 
     def test_calculate_step_1(self):
         """Make sure we can calculate the points for step 1."""
@@ -86,6 +90,13 @@ class TestCalculator(unittest.TestCase):
         valid_step_4_data = ValidStep4Data(**self.step_4_data)
         self.assertEqual(
             self.step_4_expected_score, calculate_step_4_points(valid_step_4_data)
+        )
+
+    def test_calculate_step_5(self):
+        """Make sure we can calculate the points for step 5."""
+        valid_step_5_data = ValidStep5Data(**self.step_5_data)
+        self.assertEqual(
+            self.step_5_expected_score, calculate_step_5_points(valid_step_5_data)
         )
 
 

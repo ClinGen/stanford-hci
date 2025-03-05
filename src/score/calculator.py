@@ -20,6 +20,7 @@ from score.validator import (
     ValidStep2Data,
     ValidStep3Data,
     ValidStep4Data,
+    ValidStep5Data,
 )
 
 logger = logging.getLogger(__name__)
@@ -97,6 +98,11 @@ def calculate_step_4_points(data: ValidStep4Data) -> float:
     return _get_points(data.cohort_size, "4")
 
 
+def calculate_step_5_points(data: ValidStep5Data) -> float:
+    """Calculate points for step 5."""
+    return _get_points(data.additional_phenotypes, "5")
+
+
 def calculate(data: dict) -> float:
     """Calculate a score for an HLA classification.
 
@@ -117,6 +123,7 @@ def calculate(data: dict) -> float:
         score += calculate_step_2_points(data.step_2)  # type: ignore
         score += calculate_step_3_points(data.step_3)  # type: ignore
         score += calculate_step_4_points(data.step_4)  # type: ignore
+        score += calculate_step_5_points(data.step_4)  # type: ignore
     except CalculatorException as err:
         logger.error("Unable to calculate score")
         logger.error(err)

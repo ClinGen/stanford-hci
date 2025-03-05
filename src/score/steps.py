@@ -238,6 +238,20 @@ _steps_data = {
             ],
         },
         {
+            "step_number": "5",
+            "step_name": "Additional Phenotypes",
+            "step_options": [
+                {
+                    "option_name": "specific disease-related phenotype",
+                    "option_points": 2
+                },
+                {
+                    "option_name": "only disease tested",
+                    "option_points": 0
+                },
+            ],
+        },
+        {
             "step_number": "",
             "step_name": "",
             "step_options": [
