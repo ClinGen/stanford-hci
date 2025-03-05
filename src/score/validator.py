@@ -4,6 +4,7 @@ This module provides a way to make sure the data you've obtained from the HLA cu
 interface is valid for scoring.
 """
 
+import json
 from typing import List, Literal, Union
 
 from pydantic import BaseModel
@@ -48,9 +49,21 @@ class ValidStep3Data(BaseModel):
     c_statistics_effect_size: SingleOrSubset3C
 
 
+class ValidStep4Data(BaseModel):
+    """Model the fourth step of the scoring process."""
+
+    cohort_size: Literal[*steps.get_option_names("4")]  # type: ignore
+
+
 class ValidScoreData(BaseModel):
     """Model a classification score."""
 
     step_1: ValidStep1Data
     step_2: ValidStep2Data
     step_3: ValidStep3Data
+    step_4: ValidStep4Data
+
+
+if __name__ == "__main__":
+    score_data_json_schema = ValidScoreData.model_json_schema()
+    print(json.dumps(score_data_json_schema, indent=2))

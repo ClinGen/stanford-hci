@@ -212,6 +212,32 @@ _steps_data = {
             ],
         },
         {
+            "step_number": "4",
+            "step_name": "Cohort Size",
+            "step_options": [
+                {
+                    "option_name": "GWAS <1,000, Non-GWAS <50",
+                    "option_points": 0
+                },
+                {
+                    "option_name": "GWAS 1,000-2,499, Non-GWAS 50-99",
+                    "option_points": 1
+                },
+                {
+                    "option_name": "GWAS 2,500-4,999, Non-GWAS 100-249",
+                    "option_points": 2
+                },
+                {
+                    "option_name": "GWAS 5,000-9,999, Non-GWAS 250-499",
+                    "option_points": 3
+                },
+                {
+                    "option_name": "GWAS >=10,000, Non-GWAS >=500",
+                    "option_points": 4
+                },
+            ],
+        },
+        {
             "step_number": "",
             "step_name": "",
             "step_options": [

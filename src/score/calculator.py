@@ -19,6 +19,7 @@ from score.validator import (
     ValidStep1Data,
     ValidStep2Data,
     ValidStep3Data,
+    ValidStep4Data,
 )
 
 logger = logging.getLogger(__name__)
@@ -83,12 +84,17 @@ def calculate_step_2_points(data: ValidStep2Data) -> float:
 
 
 def calculate_step_3_points(data: ValidStep3Data) -> float:
-    """Calculate points for step 2."""
+    """Calculate points for step 3."""
     step_3_points = 0.0
     step_3_points += _get_points(data.a_statistics_p_value, "3A")
     step_3_points += _get_points(data.b_multiple_testing_correction, "3B")
     step_3_points += _get_points(data.c_statistics_effect_size, "3C")
     return step_3_points
+
+
+def calculate_step_4_points(data: ValidStep4Data) -> float:
+    """Calculate points for step 4."""
+    return _get_points(data.cohort_size, "4")
 
 
 def calculate(data: dict) -> float:
@@ -110,6 +116,7 @@ def calculate(data: dict) -> float:
         score += calculate_step_1_points(data.step_1)  # type: ignore
         score += calculate_step_2_points(data.step_2)  # type: ignore
         score += calculate_step_3_points(data.step_3)  # type: ignore
+        score += calculate_step_4_points(data.step_4)  # type: ignore
     except CalculatorException as err:
         logger.error("Unable to calculate score")
         logger.error(err)
