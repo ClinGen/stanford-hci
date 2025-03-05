@@ -61,6 +61,13 @@ class ValidStep5Data(BaseModel):
     additional_phenotypes: Literal[*steps.get_option_names("5")]  # type: ignore
 
 
+class ValidStep6Data(BaseModel):
+    """Model the sixth step of the scoring process."""
+
+    a_weighing_association: Literal[*steps.get_option_names("6A")]  # type: ignore
+    b_low_field_resolution: Literal[*steps.get_option_names("6B")]  # type: ignore
+
+
 class ValidScoreData(BaseModel):
     """Model a classification score."""
 
@@ -69,6 +76,7 @@ class ValidScoreData(BaseModel):
     step_3: ValidStep3Data
     step_4: ValidStep4Data
     step_5: ValidStep5Data
+    step_6: ValidStep6Data
 
 
 if __name__ == "__main__":

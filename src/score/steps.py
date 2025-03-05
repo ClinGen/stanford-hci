@@ -252,12 +252,30 @@ _steps_data = {
             ],
         },
         {
-            "step_number": "",
-            "step_name": "",
+            "step_number": "6A",
+            "step_name": "Weighing Association",
             "step_options": [
                 {
-                    "option_name": "",
+                    "option_name": "significant association with disease",
+                    "option_points": 1
+                },
+                {
+                    "option_name": "no significant association with disease",
                     "option_points": 0
+                },
+            ],
+        },
+        {
+            "step_number": "6B",
+            "step_name": "Low Field Resolution",
+            "step_options": [
+                {
+                    "option_name": "1-field resolution (from Step 1B)",
+                    "option_points": 0.5
+                },
+                {
+                    "option_name": ">1-field resolution",
+                    "option_points": 1
                 },
             ],
         },

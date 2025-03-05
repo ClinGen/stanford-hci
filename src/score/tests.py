@@ -8,6 +8,7 @@ from score.calculator import (
     calculate_step_3_points,
     calculate_step_4_points,
     calculate_step_5_points,
+    calculate_step_6_points,
 )
 from score.validator import (
     ValidStep1Data,
@@ -15,6 +16,7 @@ from score.validator import (
     ValidStep3Data,
     ValidStep4Data,
     ValidStep5Data,
+    ValidStep6Data,
 )
 
 
@@ -55,6 +57,11 @@ class TestCalculator(unittest.TestCase):
         self.step_4_expected_score = 2
         self.step_5_data = {"additional_phenotypes": "only disease tested"}
         self.step_5_expected_score = 0
+        self.step_6_data = {
+            "a_weighing_association": "significant association with disease",
+            "b_low_field_resolution": "1-field resolution (from Step 1B)",
+        }
+        self.step_6_expected_score = 0.5
 
     def test_calculate_step_1(self):
         """Make sure we can calculate the points for step 1."""
@@ -97,6 +104,13 @@ class TestCalculator(unittest.TestCase):
         valid_step_5_data = ValidStep5Data(**self.step_5_data)
         self.assertEqual(
             self.step_5_expected_score, calculate_step_5_points(valid_step_5_data)
+        )
+
+    def test_calculate_step_6(self):
+        """Make sure we can calculate the points for step 6."""
+        valid_step_6_data = ValidStep6Data(**self.step_6_data)
+        self.assertEqual(
+            self.step_6_expected_score, calculate_step_6_points(valid_step_6_data)
         )
 
 
