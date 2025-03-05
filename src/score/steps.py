@@ -1,4 +1,8 @@
-"""Provide models and data for the steps in scoring an HLA classification."""
+"""Provide models and data for the steps in scoring an HLA classification.
+
+This is the single source of truth for the data related to the HLA scoring framework
+steps.
+"""
 
 from typing import Dict, List
 
@@ -150,6 +154,60 @@ _steps_data = {
                 {
                     "option_name": "Whole Genome Sequencing and/or Panel-Based NGS (>50x coverage)",
                     "option_points": 5
+                },
+            ],
+        },
+        {
+            "step_number": "3A",
+            "step_name": "Statistics (p-value)",
+            "step_options": [
+                {
+                    "option_name": "GWAS >=1x10e-5, Non-GWAS >=0.05",
+                    "option_points": 0
+                },
+                {
+                    "option_name": "GWAS <1x10e-5, Non-GWAS <0.05",
+                    "option_points": 0.5
+                },
+                {
+                    "option_name": "GWAS <5x10e-8, Non-GWAS <0.01",
+                    "option_points": 1
+                },
+                {
+                    "option_name": "GWAS <1x10e-11, Non-GWAS <0.0005",
+                    "option_points": 1.5
+                },
+                {
+                    "option_name": "GWAS <1x10e-14, Non-GWAS <0.0001",
+                    "option_points": 2
+                },
+            ],
+        },
+        {
+            "step_number": "3B",
+            "step_name": "Multiple Testing Correction",
+            "step_options": [
+                {
+                    "option_name": "Overall correction for multiple testing",
+                    "option_points": 1
+                },
+                {
+                    "option_name": "2-step p-value correction",
+                    "option_points": 2
+                },
+            ],
+        },
+        {
+            "step_number": "3C",
+            "step_name": "Statistics (Effect Size)",
+            "step_options": [
+                {
+                    "option_name": "OR/RR: ≥2 or ≤0.5, Beta: ≥0.5 or ≤-0.5",
+                    "option_points": 1
+                },
+                {
+                    "option_name": "CI does not cross 1 (OR/RR) or 0 (beta)",
+                    "option_points": 1
                 },
             ],
         },
