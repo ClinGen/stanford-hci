@@ -14,11 +14,9 @@ def find_pattern_in_terraform_output(environment: str, pattern: str) -> List[str
     """Finds all instances of the given pattern in the Terraform output for the given
     environment.
 
-    Args:
-        environment: Either 'staging' or 'production'.
-        pattern: A regular expression.
-    Returns:
-        A list of the matches.
+    :param environment: Either 'staging' or 'production'.
+    :param pattern: A regular expression.
+    :returns: A list of the matches.
     """
     cmd = "./run tf:output:"
     if environment == "staging":

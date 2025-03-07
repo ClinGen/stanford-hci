@@ -55,9 +55,10 @@ def _get_points_for_multiple_options(options: List[str], step_number: str) -> fl
 def _get_points(option_or_options: str | List[str] | None, step_number: str) -> float:
     """Return points for the given option(s)/step combination.
 
-    Args:
-         option_or_options: A single option or a list of options.
-         step_number: The step number we're interested in getting points for, e.g. "1A".
+    :param option_or_options: A single option or a list of options.
+    :param step_number: The step number we're interested in getting points for, e.g. "1A".
+    :raises CalculatorException: If `option_or_options` is the wrong type.
+    :returns: The points for the given `option_or_options`.
     """
     if isinstance(option_or_options, str):
         return _get_points_for_single_option(option_or_options, step_number)
@@ -114,9 +115,9 @@ def calculate_step_6_points(data: ValidStep6Data) -> float:
 def calculate(data: dict) -> float:
     """Calculate a score for an HLA classification.
 
-    Raises:
-         ValidationError: Pydantic couldn't validate the data.
-         CalculatorException: An option couldn't be found.
+    :raises ValidationError: Couldn't validate data.
+    :raises CalculatorException: Something wrong with option(s).
+    :returns: The score for an HLA classification.
     """
     score = 0.0
 
