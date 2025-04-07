@@ -3,11 +3,14 @@
 {% block description %}The login page for the HLA curation interface.{% endblock %}
 {% block content %}
     <div class="block">
+        <h1 class="title">HCI Login</h1>
+
         {% if form.errors %}
             <div class="block">
                 <p class="has-text-danger">Username and password didn't match. Please try again.</p>
             </div>
         {% endif %}
+
         {% if next %}
             {% if user.is_authenticated %}
                 <div class="block">

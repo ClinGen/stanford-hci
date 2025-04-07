@@ -10,6 +10,10 @@ profile = "black"
 [tool.pylint.main]
 # Files or directories to be skipped. They should be base names, not paths.
 ignore = [".venv"]
+disable = [  # NOTE: Each disable should have a justification.
+    "too-many-ancestors",      # Too opinionated for Django.
+    "too-few-public-methods",  # Too opinionated for Django.
+]
 
 [tool.mypy]
 plugins = ["mypy_django_plugin.main"]

@@ -1,8 +1,23 @@
 """This module defines the views for the various pages of the HCI."""
 
-from django.contrib.auth import logout
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+
+from hci.forms import CustomSignUpForm
+
+
+def signup(request):
+    """This view provides the signup form for new users."""
+    if request.method == "POST":
+        form = CustomSignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("home")
+    else:
+        form = CustomSignUpForm()
+    return render(request, "registration/signup.html", {"form": form})
 
 
 def home(request):
