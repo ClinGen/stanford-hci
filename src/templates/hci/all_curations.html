@@ -1,0 +1,41 @@
+{% extends "layouts/nav.html" %}
+{% block title %}All Curations{% endblock %}
+{% block description %}Browse existing curations.{% endblock %}
+{% block content %}
+    <h1 class="title">All Curations</h1>
+    <div class="block">
+        <div class="field">
+            <div class="control">
+                <input type="text" id="curation_search" name="curation_search" placeholder="Search existing curations..." aria-label="Search existing curations" class="input column is-half">
+            </div>
+        </div>
+    </div>
+    <div class="block">
+        <table class="table">
+            <tr>
+                <th>Disease</th>
+                <th>Allele/Haplotype</th>
+                <th>Affiliation</th>
+                <th>Created By</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+            </tr>
+            <tr>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+            </tr>
+        </table>
+    </div>
+    <div class="block">
+        <a class="button is-responsive" href="{% url 'new_curation' %}">Add Curation</a>
+    </div>
+{% endblock %}

@@ -13,6 +13,7 @@ urlpatterns = [
         views.new_allele_haplotype,
         name="new_allele_haplotype",
     ),
+    path("curation/", views.all_curations, name="curation"),
     path("curation/new/", views.new_curation, name="new_curation"),
     path("disease/new/", views.new_disease, name="new_disease"),
     path("publication/new/", views.new_publication, name="new_publication"),

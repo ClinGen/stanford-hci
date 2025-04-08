@@ -55,6 +55,11 @@ def affiliation(request):
     return render(request, "hci/affiliation.html", context)
 
 
+def all_curations(request):
+    """The all curations page allows the user to browse existing curations."""
+    return render(request, "hci/all_curations.html")
+
+
 @login_required
 def new_curation(request):
     """The new curation page allows the user to start a new curation."""
