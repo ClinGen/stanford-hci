@@ -1,4 +1,4 @@
-"""This module contains all forms for the HCI."""
+"""Define forms used in the HCI."""
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm

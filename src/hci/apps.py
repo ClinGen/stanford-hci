@@ -1,9 +1,9 @@
-"""This module contains the Django configuration of the HCI app."""
+"""Configure apps."""
 
 from django.apps import AppConfig
 
 
 class HCIConfig(AppConfig):
-    """Configure the HCI Django app."""
+    """Configure the HCI app."""
 
     name = "hci"

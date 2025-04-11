@@ -1,4 +1,4 @@
-"""This module sets up custom middleware."""
+"""Set up custom middleware."""
 
 # pylint: skip-file
 # TODO(Liam): Don't skip lint in this module.
@@ -11,9 +11,12 @@ from django.utils.deprecation import MiddlewareMixin
 
 
 class HealthCheckMiddleware(MiddlewareMixin):
-    """This is the health check that we use in AWS to make sure the HCI is still alive
-    and well."""
+    """Establish a health check endpoint.
+
+    We can use this to monitor the status of the application.
+    """
 
     def process_request(self, request):
+        """Process the HTTP request."""
         if request.META["PATH_INFO"] == "/ping/":
             return HttpResponse("pong")

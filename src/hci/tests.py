@@ -1,4 +1,4 @@
-"""This module defines the tests for the pages of the HCI."""
+"""Define tests for the HCI."""
 
 from django.contrib.auth.models import User
 from django.test import Client, TestCase
@@ -33,14 +33,14 @@ class SignupViewTests(TestCase):
         }
 
     def test_signup_page_loads(self):
-        """Test that the signup page loads correctly with a GET request."""
+        """Make sure the signup page loads correctly with a GET request."""
         response = self.client.get(self.signup_url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "registration/signup.html")
         self.assertIsInstance(response.context["form"], CustomSignUpForm)
 
     def test_signup_successful(self):
-        """Test that a user can successfully sign up with valid data."""
+        """Make sure a user can successfully sign up with valid data."""
         response = self.client.post(self.signup_url, self.user_data)
 
         # Check we're redirected to home page.
@@ -58,7 +58,7 @@ class SignupViewTests(TestCase):
         self.assertEqual(user.last_name, "User")
 
     def test_signup_invalid_form(self):
-        """Test behavior when submitted form is invalid."""
+        """Make sure we can't sign up with invalid data."""
 
         # Remove required field.
         invalid_data = self.user_data.copy()
@@ -75,7 +75,7 @@ class SignupViewTests(TestCase):
         self.assertFalse(User.objects.filter(username="test_user").exists())
 
     def test_signup_password_mismatch(self):
-        """Test behavior when passwords don't match."""
+        """Make sure we can't sign up when passwords don't match."""
         invalid_data = self.user_data.copy()
         invalid_data["password2"] = "different_password"
 
@@ -90,7 +90,7 @@ class SignupViewTests(TestCase):
         self.assertFalse(User.objects.filter(username="test_user").exists())
 
     def test_signup_duplicate_username(self):
-        """Test attempting to create a user with an existing username."""
+        """Make sure we can't sign up with a duplicate username."""
 
         # Create a user first.
         User.objects.create_user(

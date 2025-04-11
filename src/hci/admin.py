@@ -1,1 +1,1 @@
-"""This module configures the Django admin page for the HCI app."""
+"""Configure the Django admin site for the HCI app."""

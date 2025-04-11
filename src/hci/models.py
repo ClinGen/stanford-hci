@@ -1,4 +1,8 @@
-"""This module contains ORM models of the data in the HCI."""
+"""Define ORM models of the data in the HCI.
+
+NOTE: The first line of the docstrings in this module do not need to be in the
+imperative mood.
+"""
 
 from django.contrib.auth.models import User
 from django.db import models
