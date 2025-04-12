@@ -24,7 +24,7 @@ class TestCalculator(unittest.TestCase):
     # pylint: disable=too-many-instance-attributes
     """Make sure the calculator works."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up test data for the unit tests."""
         self.step_1_data = {
             "a_allele_or_haplotype": "Allele",
@@ -63,21 +63,21 @@ class TestCalculator(unittest.TestCase):
         }
         self.step_6_expected_score = 0.5
 
-    def test_calculate_step_1(self):
+    def test_calculate_step_1(self) -> None:
         """Make sure we can calculate the points for step 1."""
         valid_step_1_data = ValidStep1Data(**self.step_1_data)
         self.assertEqual(
             self.step_1_expected_score, calculate_step_1_points(valid_step_1_data)
         )
 
-    def test_calculate_step_2(self):
+    def test_calculate_step_2(self) -> None:
         """Make sure we can calculate the points for step 2."""
         valid_step_2_data = ValidStep2Data(**self.step_2_data)
         self.assertEqual(
             self.step_2_expected_score, calculate_step_2_points(valid_step_2_data)
         )
 
-    def test_calculate_step_3_singles(self):
+    def test_calculate_step_3_singles(self) -> None:
         """Make sure we can calculate the points for step 3 with single options."""
         valid_step_3_data = ValidStep3Data(**self.step_3_data_singles)
         self.assertEqual(
@@ -85,28 +85,28 @@ class TestCalculator(unittest.TestCase):
             calculate_step_3_points(valid_step_3_data),
         )
 
-    def test_calculate_step_3_lists(self):
+    def test_calculate_step_3_lists(self) -> None:
         """Make sure we can calculate the points for step 3 with multiple options."""
         valid_step_3_data = ValidStep3Data(**self.step_3_data_lists)
         self.assertEqual(
             self.step_3_lists_expected_score, calculate_step_3_points(valid_step_3_data)
         )
 
-    def test_calculate_step_4(self):
+    def test_calculate_step_4(self) -> None:
         """Make sure we can calculate the points for step 4."""
         valid_step_4_data = ValidStep4Data(**self.step_4_data)
         self.assertEqual(
             self.step_4_expected_score, calculate_step_4_points(valid_step_4_data)
         )
 
-    def test_calculate_step_5(self):
+    def test_calculate_step_5(self) -> None:
         """Make sure we can calculate the points for step 5."""
         valid_step_5_data = ValidStep5Data(**self.step_5_data)
         self.assertEqual(
             self.step_5_expected_score, calculate_step_5_points(valid_step_5_data)
         )
 
-    def test_calculate_step_6(self):
+    def test_calculate_step_6(self) -> None:
         """Make sure we can calculate the points for step 6."""
         valid_step_6_data = ValidStep6Data(**self.step_6_data)
         self.assertEqual(

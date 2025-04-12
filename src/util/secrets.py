@@ -21,7 +21,11 @@ def get_secret(secret_name: str) -> str | None:
     )
     try:
         get_secret_value_response = client.get_secret_value(SecretId=secret_name)
-        return get_secret_value_response["SecretString"]
+        secret_string = get_secret_value_response["SecretString"]
+        if not isinstance(secret_string, str):
+            logger.error("SecretString is not a string")
+            return None
+        return secret_string
     except ClientError as error:
         logger.error("Unable to get secret key from AWS")
         logger.error(error)

@@ -6,7 +6,7 @@
 # TODO(Liam): Don't use deprecated `MiddlewareMixin`.
 # https://docs.djangoproject.com/en/5.1/topics/http/middleware/#writing-your-own-middleware
 
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.utils.deprecation import MiddlewareMixin
 
 
@@ -16,7 +16,8 @@ class HealthCheckMiddleware(MiddlewareMixin):
     We can use this to monitor the status of the application.
     """
 
-    def process_request(self, request):
+    def process_request(self, request: HttpRequest) -> HttpResponse | None:
         """Process the HTTP request."""
         if request.META["PATH_INFO"] == "/ping/":
             return HttpResponse("pong")
+        return None
