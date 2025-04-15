@@ -1,0 +1,12 @@
+[project]
+name = "hci"
+version = "0.1.0"
+description = "The HLA Curation Interface is a web application that biocurators can use to classify HLA alleles and haplotypes."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "ruff>=0.11.5",
+]
