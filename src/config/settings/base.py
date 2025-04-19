@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "apps.core.apps.CoreAppConfig",
     "apps.users.apps.UsersAppConfig",
 ]
 
@@ -33,6 +34,8 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
+            BASE_DIR / "templates",
+            BASE_DIR / "apps" / "core" / "templates",
             BASE_DIR / "apps" / "curations" / "templates",
             BASE_DIR / "apps" / "markers" / "templates",
             BASE_DIR / "apps" / "publications" / "templates",
@@ -72,11 +75,16 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-# Set where static files (CSS, JavaScript, images) are located.
+# URL to use when referring to static files located in `STATIC_ROOT`.
 STATIC_URL = "static/"
 
 # Set where production static files are served from.
 STATIC_ROOT = BASE_DIR / "public"
+
+# Set where static files that aren't specific to an application are located.
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 # Set the default primary key field type.
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

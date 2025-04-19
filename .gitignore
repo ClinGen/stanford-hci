@@ -1,4 +1,6 @@
+.env
 .mypy_cache
 .venv
 __pycache__
 db.sqlite3
+public

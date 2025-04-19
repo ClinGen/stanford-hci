@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
+    path("", include("apps.core.urls")),
     # path("", include("apps.curations.urls")),
     # path("", include("apps.diseases.urls")),
     # path("", include("apps.markers.urls")),

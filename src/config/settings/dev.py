@@ -18,6 +18,7 @@ from .base import (  # noqa: F401 (We don't care about unused imports in this co
     SECRET_KEY,
     STATIC_ROOT,
     STATIC_URL,
+    STATICFILES_DIRS,
     TEMPLATES,
     TIME_ZONE,
     USE_I18N,
