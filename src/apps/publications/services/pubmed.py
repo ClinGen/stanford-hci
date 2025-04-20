@@ -11,8 +11,8 @@ from apps.core.constants.third_party import Requests
 from apps.publications.constants.services import URLs
 
 
-class PubMedArticle:
-    """Provide a class that stores a PubMed article's info."""
+class PubMedArticleClient:
+    """Fetch a PubMed article's info."""
 
     def __init__(self, pmid: str) -> None:
         """Initialize the article info."""
