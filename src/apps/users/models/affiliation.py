@@ -2,7 +2,7 @@
 
 from django.db import models
 
-from apps.users.constants.model_constants import FieldLengths
+from apps.users.constants.models import FieldLengths
 
 
 class Affiliation(models.Model):

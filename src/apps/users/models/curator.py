@@ -3,7 +3,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from apps.users.constants.model_constants import DefaultValues
+from apps.users.constants.models import DefaultValues
 from apps.users.models.affiliation import Affiliation
 
 

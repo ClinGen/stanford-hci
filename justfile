@@ -20,6 +20,9 @@
 # NOTE: For the sake of simplicity, we assume the user of this justfile is invoking the
 # recipes from the root of the repository.
 
+# Make sure we load the `.env` file before we run commands.
+set dotenv-load := true
+
 #=======================================================================================
 # Public Recipes
 #=======================================================================================
@@ -35,7 +38,7 @@ type: _py_type
 
 # Run the test suite.
 test: _dj_makemigrations _dj_migrate
-    cd src && python manage.py test
+    cd src && pytest
 
 # Run all code quality checks.
 check: fmt lint type test _dj_check

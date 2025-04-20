@@ -9,6 +9,6 @@ urlpatterns = [
     # path("", include("apps.diseases.urls")),
     # path("", include("apps.markers.urls")),
     # path("", include("apps.publications.urls")),
-    # path("", include("apps.users.urls")),
+    path("users/", include("apps.users.urls")),
     path("admin/", admin.site.urls),
 ]
