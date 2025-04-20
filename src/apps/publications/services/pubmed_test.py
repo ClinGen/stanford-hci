@@ -4,7 +4,7 @@ from apps.publications.services.pubmed import PubMedArticleClient
 
 
 def test_client() -> None:
-    """Make sure we can get article info from PubMed."""
+    """Make sure we can get info about an article from PubMed."""
     pmid = "10446108"
     title = "HLA-DR and -DQ phenotypes in inflammatory bowel disease: a meta-analysis."
     article = PubMedArticleClient(pmid)
