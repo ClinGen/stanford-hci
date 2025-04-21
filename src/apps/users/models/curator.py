@@ -22,6 +22,12 @@ class Curator(models.Model):
         verbose_name="Active Affiliation",
     )
 
+    class Meta:
+        """Define metadata options."""
+
+        verbose_name = "Curator"
+        verbose_name_plural = "Curators"
+
     def __str__(self) -> str:
         """Return a string representation of the curator."""
         return f"{self.user.first_name} {self.user.last_name} ({self.user.email})"

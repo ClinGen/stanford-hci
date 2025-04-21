@@ -18,6 +18,12 @@ class Affiliation(models.Model):
         verbose_name="Affiliation Name",
     )
 
+    class Meta:
+        """Define metadata options."""
+
+        verbose_name = "Affiliation"
+        verbose_name_plural = "Affiliations"
+
     def __str__(self) -> str:
         """Return a string representation of the affiliation."""
         return f"{self.affiliation_name} ({self.affiliation_id})"

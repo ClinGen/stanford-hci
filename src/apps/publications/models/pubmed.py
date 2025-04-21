@@ -6,8 +6,8 @@ from django.db import models
 class PubMedArticle(models.Model):
     """A PubMed article is a scientific paper published in PubMed."""
 
-    pubmed_id: models.CharField = models.CharField()
-    title: models.CharField = models.CharField()
+    pubmed_id: models.CharField = models.CharField(verbose_name="PubMed ID")
+    title: models.CharField = models.CharField(verbose_name="Article Title")
 
     class Meta:
         """Define metadata options."""
