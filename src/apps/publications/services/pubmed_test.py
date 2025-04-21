@@ -1,4 +1,4 @@
-"""Test PubMed services."""
+"""Test PubMed service."""
 
 from apps.publications.services.pubmed import PubMedArticleClient
 

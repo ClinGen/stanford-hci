@@ -16,7 +16,7 @@ class AlleleClient:
         self.name = None
         self.version = None
 
-        # Fetch and populate the members.
+        # Fetch data populate the members.
         self._set_data()
         self._set_name()
         self._set_version()

@@ -20,7 +20,7 @@ class PubMedArticleClient:
         self._data = None
         self.title = None
 
-        # Fetch and populate the members.
+        # Fetch data populate the members.
         self._set_data()
         self._set_title()
 
