@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_htmx",
     "apps.core.apps.CoreAppConfig",
+    "apps.curations.apps.CurationsAppConfig",
     "apps.diseases.apps.DiseasesAppConfig",
     "apps.markers.apps.MarkersAppConfig",
     "apps.publications.apps.PublicationsAppConfig",

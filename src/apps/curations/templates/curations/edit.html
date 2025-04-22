@@ -1,0 +1,20 @@
+{% extends "layouts/nav.html" %}
+{% block title %}Edit Curation{% endblock %}
+{% block description %}The page where a curator can edit a curation in the HLA curation interface.{% endblock %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ step_1_form.as_p }}
+        <button type="submit" name="form" value="step_1">Save Step 1</button>
+    </form>
+    <form method="post">
+        {% csrf_token %}
+        {{ step_2_form.as_p }}
+        <button type="submit" name="form" value="step_2">Save Step 2</button>
+    </form>
+    <form method="post">
+        {% csrf_token %}
+        {{ step_3_form.as_p }}
+        <button type="submit" name="form" value="step_3">Save Step 3</button>
+    </form>
+{% endblock %}
