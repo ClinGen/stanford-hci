@@ -16,9 +16,9 @@
     </div>
     <div class="block">
         <a class="button is-responsive" href="#">Add Curation</a>
-        <a class="button is-responsive" href="/diseases/disease/new">Add Disease</a>
-        <a class="button is-responsive" href="/markers/allele/new">Add Allele/Haplotype</a>
-        <a class="button is-responsive" href="/publications/pubmed/new">Add Publication</a>
+        <a class="button is-responsive" href="{% url 'new_disease' %}">Add Disease</a>
+        <a class="button is-responsive" href="{% url 'new_allele' %}">Add Allele/Haplotype</a>
+        <a class="button is-responsive" href="{% url 'new_pubmed' %}">Add Publication</a>
     </div>
 
     {% if is_authenticated %}
