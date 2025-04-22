@@ -1,65 +1,22 @@
 {% extends "layouts/base.html" %}
 {% block title %}Signup{% endblock %}
 {% block description %}The signup page for the HLA curation interface.{% endblock %}
-
 {% block content %}
     <div class="block">
         <h1 class="title">HCI Signup</h1>
-
         <div class="block">
             <form method="post">
                 {% csrf_token %}
                 <p class="has-text-danger">{{ form.non_field_errors }}</p>
-                <div class="field">
-                    <div class="has-text-danger">{{ form.errors.username }}</div>
-                    <label for="username">{{ form.username.label_id }}</label>
-                    <div class="control">
-                        <input type="text" id="username" name="username" placeholder="Your username" autocomplete="username" class="input column is-half">
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="has-text-danger">{{ form.errors.email }}</div>
-                    <label for="email">{{ form.email.label_id }}</label>
-                    <div class="control">
-                        <input type="text" id="email" name="email" placeholder="Your email" autocomplete="email" class="input column is-half">
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="has-text-danger">{{ form.errors.first_name }}</div>
-                    <label for="first_name">{{ form.first_name.label_id }}</label>
-                    <div class="control">
-                        <input type="text" id="first_name" name="first_name" placeholder="Your given name" autocomplete="given-name" class="input column is-half">
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="has-text-danger">{{ form.errors.last_name }}</div>
-                    <label for="last_name">{{ form.last_name.label_id }}</label>
-                    <div class="control">
-                        <input type="text" id="last_name" name="last_name" placeholder="Your family name" autocomplete="family-name" class="input column is-half">
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="has-text-danger">{{ form.errors.password1 }}</div>
-                    <label for="password1">{{ form.password1.label_id }}</label>
-                    <div class="control">
-                        <input type="password" id="password1" name="password1" placeholder="Desired password" autocomplete="current-password" class="input column is-half">
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="has-text-danger">{{ form.errors.password2 }}</div>
-                    <label for="password2">{{ form.password2.label_id }}</label>
-                    <div class="control">
-                        <input type="password" id="password2" name="password2" placeholder="Confirm desired password" autocomplete="current-password" class="input column is-half">
-                    </div>
-                </div>
-                <div class="field">
-                    <div class="control">
-                        <button type="submit" class="button is-link">Sign Up</button>
-                    </div>
-                </div>
+                {% include "includes/_form_input.html" with field=form.username placeholder="Username" autocomplete="username" %}
+                {% include "includes/_form_input.html" with field=form.email placeholder="Email" autocomplete="email" %}
+                {% include "includes/_form_input.html" with field=form.first_name placeholder="First name" autocomplete="given-name" %}
+                {% include "includes/_form_input.html" with field=form.last_name placeholder="Last name" autocomplete="family-name" %}
+                {% include "includes/_form_input.html" with field=form.password1 type="password" placeholder="Password" autocomplete="current-password" %}
+                {% include "includes/_form_input.html" with field=form.password2 type="password" placeholder="Password confirmation" autocomplete="current-password" %}
+                {% include "includes/_form_submit_button.html" with text="Sign Up" %}
             </form>
         </div>
-
         <div class="block">
             <p>Already have an account? <a href="#">Log In</a></p>
         </div>
