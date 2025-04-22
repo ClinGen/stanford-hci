@@ -16,7 +16,7 @@ class PubMedArticleClient:
 
     def __init__(self, pmid: str) -> None:
         """Get info for the article."""
-        self.pmid = pmid
+        self.pubmed_id = pmid
         self._data = None
         self.title = None
 
@@ -28,7 +28,7 @@ class PubMedArticleClient:
         """Fetch the data from the PubMed API."""
         params = {
             "db": "pubmed",
-            "id": self.pmid,
+            "id": self.pubmed_id,
             "retmode": "xml",
             "api_key": os.getenv("PUBMED_API_KEY"),
         }

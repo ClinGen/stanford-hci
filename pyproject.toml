@@ -81,7 +81,7 @@ select = [
     "RUF",   # Ruff-specific rules (provide a set of miscellaneous lint rules)
     "TRY",   # tryceratops (provide a set of lint rules for try-except statements)
 ]
-ignore = ["COM812", "RUF100"]
+ignore = ["COM812", "RUF100", "RUF012"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
