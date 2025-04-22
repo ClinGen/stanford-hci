@@ -7,7 +7,7 @@ urlpatterns = [
     path("", include("apps.core.urls")),
     # path("", include("apps.curations.urls")),
     # path("", include("apps.diseases.urls")),
-    # path("", include("apps.markers.urls")),
+    path("markers/", include("apps.markers.urls")),
     path("publications/", include("apps.publications.urls")),
     path("users/", include("apps.users.urls")),
     path("admin/", admin.site.urls),

@@ -2,8 +2,8 @@
 
 from django.urls import path
 
-from apps.publications.views.pubmed import new_pubmed_article
+from apps.publications.views.pubmed import new_pubmed
 
 urlpatterns = [
-    path("pubmed/new", new_pubmed_article, name="new_pubmed_article"),
+    path("pubmed/new", new_pubmed, name="new_pubmed"),
 ]
