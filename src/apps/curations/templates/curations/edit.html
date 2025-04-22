@@ -2,19 +2,33 @@
 {% block title %}Edit Curation{% endblock %}
 {% block description %}The page where a curator can edit a curation in the HLA curation interface.{% endblock %}
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-        {{ step_1_form.as_p }}
-        <button type="submit" name="form" value="step_1">Save Step 1</button>
-    </form>
-    <form method="post">
-        {% csrf_token %}
-        {{ step_2_form.as_p }}
-        <button type="submit" name="form" value="step_2">Save Step 2</button>
-    </form>
-    <form method="post">
-        {% csrf_token %}
-        {{ step_3_form.as_p }}
-        <button type="submit" name="form" value="step_3">Save Step 3</button>
-    </form>
+    <h1 class="title is-2">Edit Curation</h1>
+    <details class="block" open>
+        <summary class="title is-3">Step 1</summary>
+        <form method="post">
+            {% csrf_token %}
+            {% include "includes/_form_select.html" with field=step_1_form.step_1a_marker_type %}
+            {% include "includes/_form_select.html" with field=step_1_form.step_1b_allele_resolution %}
+            {% include "includes/_form_select.html" with field=step_1_form.step_1c_zygosity %}
+            {% include "includes/_form_submit_button.html" with value="step_1" text="Save Step 1" %}
+        </form>
+    </details>
+    <details class="block">
+        <summary class="title is-3">Step 2</summary>
+        <form method="post">
+            {% csrf_token %}
+            {{ step_2_form.as_p }}
+            <button type="submit" name="form" value="step_2">Save Step 2</button>
+            {% include "includes/_form_submit_button.html" with value="step_2" text="Save Step 2" %}
+        </form>
+    </details>
+    <details class="block">
+        <summary class="title is-3">Step 3</summary>
+        <form method="post">
+            {% csrf_token %}
+            {{ step_3_form.as_p }}
+            <button type="submit" name="form" value="step_3">Save Step 3</button>
+            {% include "includes/_form_submit_button.html" with value="step_3" text="Save Step 3" %}
+        </form>
+    </details>
 {% endblock %}
