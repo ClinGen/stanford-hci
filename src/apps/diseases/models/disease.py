@@ -11,7 +11,10 @@ class Disease(models.Model):
     https://mondo.monarchinitiative.org
     """
 
-    mondo_id: models.CharField = models.CharField(verbose_name="Mondo ID")
+    mondo_id: models.CharField = models.CharField(
+        verbose_name="Mondo ID",
+        help_text="The Mondo Disease Ontology ID, e.g. MONDO_0005052.",
+    )
     label: models.CharField = models.CharField(verbose_name="Label")
 
     class Meta:

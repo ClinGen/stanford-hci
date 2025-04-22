@@ -6,7 +6,7 @@ from apps.markers.models.allele import Allele
 
 
 class AlleleForm(ModelForm):
-    """Add a PubMed article to the database."""
+    """Add an allele to the database."""
 
     class Meta:
         """Define metadata options."""

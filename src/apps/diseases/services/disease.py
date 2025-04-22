@@ -21,7 +21,7 @@ class DiseaseClient:
 
     def _set_data(self) -> None:
         """Fetch the data from the OLS Mondo API for the given disease."""
-        url = f"{URLs.OLS_MONDO_API}?iri={URLs.MONDO_IRI}/MONDO_{self.mondo_id}"
+        url = f"{URLs.OLS_MONDO_API}?iri={URLs.MONDO_IRI}/{self.mondo_id}"
         response = requests.get(url, timeout=Requests.DEFAULT_TIMEOUT)
         response.raise_for_status()
         json = response.json()
