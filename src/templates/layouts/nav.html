@@ -6,7 +6,11 @@
             <a href="/curation" {% if request.resolver_match.view_name == 'curation' %}class="navbar-item has-text-weight-bold"{% endif %} class="navbar-item">Curations</a>
             <a href="/disease" {% if request.resolver_match.view_name == 'disease' %}class="navbar-item has-text-weight-bold"{% endif %} class="navbar-item">Diseases</a>
             <a href="/allele_haplotype" {% if request.resolver_match.view_name == 'allele_haplotype' %}class="navbar-item has-text-weight-bold"{% endif %} class="navbar-item">Alleles/Haplotypes</a>
-            <a href="/publication" {% if request.resolver_match.view_name == 'publication' %}class="navbar-item has-text-weight-bold"{% endif %} class="navbar-item">Publications</a>
+            <!--
+            We don't boost this link because it goes to a view that will render a
+            partial template if it sees the HTMX `HX-Request` header set to `true`.
+            -->
+            <a hx-boost="false" href="{% url "all_pubmed" %}" {% if request.resolver_match.view_name == 'all_pubmed' %}class="navbar-item has-text-weight-bold"{% endif %} class="navbar-item">Publications</a>
         </div>
     </nav>
 {% endblock %}

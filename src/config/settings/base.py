@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_htmx",
     "apps.core.apps.CoreAppConfig",
     "apps.diseases.apps.DiseasesAppConfig",
     "apps.markers.apps.MarkersAppConfig",
@@ -29,6 +30,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
