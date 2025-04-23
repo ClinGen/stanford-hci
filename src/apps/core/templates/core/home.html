@@ -8,6 +8,7 @@
                 <h2 class="title">HLA Curation Interface</h2>
                 {% if is_authenticated %}
                 <p class="subtitle">Welcome, {{ first_name }}. You are curating as part of the {{ affiliation }} affiliation.</p>
+                <p class="helptext">If you need to change your affiliation, you can do so <a href="#">here</a>.</p>
                 {% else %}
                     <p class="subtitle">Welcome. To curate as part of an affiliation, please <a href="#">log in</a>.</p>
                 {% endif %}
@@ -17,7 +18,7 @@
     {% include "includes/_add_buttons.html" %}
     {% if is_authenticated %}
     <div class="block">
-        <h3 class="title is-4">Your {{ affiliation }} Curations</h3>
+        <h3 class="title is-4">Your Curations</h3>
         {% include "includes/_dummy_your_curations_table.html" %}
     </div>
     {% else %}
