@@ -20,7 +20,7 @@ def home(request: HttpRequest) -> HttpResponse:
             "is_authenticated": True,
             "email": request.user.email,
             "affiliation": "HLA Expert Panel",
-            "username": request.user.username,
+            "first_name": request.user.first_name,
         }
     else:
         context = {

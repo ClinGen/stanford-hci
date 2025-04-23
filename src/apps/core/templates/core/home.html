@@ -7,100 +7,23 @@
             <div class="hero-body">
                 <h2 class="title">HLA Curation Interface</h2>
                 {% if is_authenticated %}
-                <p class="subtitle">Welcome, {{ username }}. You are curating as part of the {{ affiliation }} affiliation.</p>
+                <p class="subtitle">Welcome, {{ first_name }}. You are curating as part of the {{ affiliation }} affiliation.</p>
                 {% else %}
-                <p class="subtitle">Welcome. To curate as part of an affiliation, please log in.</p>
+                    <p class="subtitle">Welcome. To curate as part of an affiliation, please <a href="#">log in</a>.</p>
                 {% endif %}
             </div>
         </section>
     </div>
-    <div class="block">
-        <a class="button is-responsive" href="#">Add Curation</a>
-        <a class="button is-responsive" href="{% url 'new_disease' %}">Add Disease</a>
-        <a class="button is-responsive" href="{% url 'new_allele' %}">Add Allele/Haplotype</a>
-        <a class="button is-responsive" href="{% url 'new_pubmed' %}">Add Publication</a>
-    </div>
-
+    {% include "includes/_add_buttons.html" %}
     {% if is_authenticated %}
     <div class="block">
         <h3 class="title is-4">Your {{ affiliation }} Curations</h3>
-        <table class="table">
-            <tr>
-                <th>Disease</th>
-                <th>Allele/Haplotype</th>
-                <th>Status</th>
-                <th>Date Created</th>
-                <th>Last Modified</th>
-            </tr>
-            <tr>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-            </tr>
-            <tr>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-            </tr>
-        </table>
+        {% include "includes/_dummy_your_curations_table.html" %}
     </div>
-    <div class="block">
-        <h3 class="title is-4">All {{ affiliation }} Curations</h3>
-        <table class="table">
-            <tr>
-                <th>Disease</th>
-                <th>Allele/Haplotype</th>
-                <th>Status</th>
-                <th>Date Created</th>
-                <th>Last Modified</th>
-            </tr>
-            <tr>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-            </tr>
-            <tr>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-            </tr>
-        </table>
-    </div>
-    {% endif %}
-
+    {% else %}
     <div class="block">
         <h3 class="title is-4">All Curations</h3>
-        <table class="table">
-            <tr>
-                <th>Allele/Haplotype</th>
-                <th>Disease</th>
-                <th>Status</th>
-                <th>Date Created</th>
-                <th>Last Modified</th>
-            </tr>
-            <tr>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-            </tr>
-            <tr>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
-            </tr>
-        </table>
+        {% include "includes/_dummy_all_curations.html" %}
     </div>
-
+    {% endif %}
 {% endblock %}

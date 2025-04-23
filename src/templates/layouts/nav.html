@@ -1,7 +1,13 @@
 {% extends "layouts/base.html" %}
+{% load static %}
 {% block nav %}
-    <nav class="navbar is-primary block" role="navigation" aria-label="main navigation">
-        <div class="navbar-start">
+    <nav class="navbar block" role="navigation" aria-label="main navigation">
+        <div class="navbar-start container">
+            <div class="navbar-item">
+                <a href="/">
+                    <img src="{% static 'clingen.svg' %}"  alt="The ClinGen logo."/>
+                </a>
+            </div>
             <a href="/" {% if request.resolver_match.view_name == 'home' %}class="navbar-item has-text-weight-bold"{% endif %} class="navbar-item">Home</a>
             <a href="/curation" {% if request.resolver_match.view_name == 'curation' %}class="navbar-item has-text-weight-bold"{% endif %} class="navbar-item">Curations</a>
             <a href="/disease" {% if request.resolver_match.view_name == 'disease' %}class="navbar-item has-text-weight-bold"{% endif %} class="navbar-item">Diseases</a>
@@ -11,6 +17,39 @@
             partial template if it sees the HTMX `HX-Request` header set to `true`.
             -->
             <a hx-boost="false" href="{% url "all_pubmed" %}" {% if request.resolver_match.view_name == 'all_pubmed' %}class="navbar-item has-text-weight-bold"{% endif %} class="navbar-item">Publications</a>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        {% if is_authenticated %}
+                            <a href="#" class="button">
+                                <span class="icon is-small mr-1">
+                                    <i data-feather="log-out"></i>
+                                </span>
+                                Log Out
+                            </a>
+                            <a href="#" class="button">
+                                <span class="icon is-small mr-2">
+                                    <i data-feather="user"></i>
+                                </span>
+                                Profile
+                            </a>
+                        {% else %}
+                            <a href="#" class="button">
+                                <span class="icon is-small mr-2">
+                                    <i data-feather="log-in"></i>
+                                </span>
+                                Log In
+                            </a>
+                            <a href="{% url 'signup' %}" class="button">
+                                <span class="icon is-small mr-2">
+                                    <i data-feather="user"></i>
+                                </span>
+                                Sign Up
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
 {% endblock %}

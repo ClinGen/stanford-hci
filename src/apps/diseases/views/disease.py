@@ -3,6 +3,7 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 
+from apps.diseases.constants.views import ExternalURLs
 from apps.diseases.forms.disease import DiseaseForm
 from apps.diseases.models.disease import Disease
 from apps.diseases.services.disease import DiseaseClient
@@ -19,4 +20,8 @@ def new_disease(request: HttpRequest) -> HttpResponse:
             return redirect("home")
     else:
         form = DiseaseForm()
-    return render(request, "diseases/disease.html", {"form": form})
+    return render(
+        request,
+        "diseases/disease.html",
+        {"form": form, "mondo_search_url": ExternalURLs.MONDO_SEARCH},
+    )

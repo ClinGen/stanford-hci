@@ -49,8 +49,8 @@ class Step1(models.Model):
 
     def __str__(self) -> str:
         """Return a string representation of the answers to the questions."""
-        marker_type = f"Marker type: {self.step_1a_marker_type}"
-        allele_resolution = f"Allele resolution: {self.step_1b_allele_resolution}"
+        marker_type = f"Marker Type: {self.step_1a_marker_type}"
+        allele_resolution = f"Allele Resolution: {self.step_1b_allele_resolution}"
         zygosity = f"Zygosity: {self.step_1c_zygosity}"
-        phase_is_confirmed = f"Phase is confirmed: {self.step_1d_phase_is_confirmed}"
+        phase_is_confirmed = f"Phase is confirmed? {self.step_1d_phase_is_confirmed}"
         return f"{marker_type}, {allele_resolution}, {zygosity}, {phase_is_confirmed}"
