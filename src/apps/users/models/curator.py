@@ -3,8 +3,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from apps.users.constants.models import DefaultValues
 from apps.users.models.affiliation import Affiliation
+from constants import AffiliationsConstants
 
 
 class Curator(models.Model):
@@ -18,7 +18,7 @@ class Curator(models.Model):
         blank=True,
         on_delete=models.SET_NULL,
         related_name="active_curators",
-        default=DefaultValues.AFFILIATION_ID,
+        default=AffiliationsConstants.DEFAULT_ID,
         verbose_name="Active Affiliation",
     )
 

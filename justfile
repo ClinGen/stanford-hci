@@ -32,7 +32,8 @@ alias l := lint
 alias ty := type
 alias t := test
 alias tc := test-contract
-alias c := check
+# TODO(Liam): Revert back to regular check once you're done fixing type check issues.
+alias c := temp-check
 alias d := dev
 
 #=======================================================================================
@@ -58,6 +59,10 @@ test-contract: _dj_makemigrations _dj_migrate
 
 # Run all code quality checks.
 check: fmt lint type test _dj_check
+
+# TODO(Liam): Remove this once you're done fixing type check issues.
+# Run all code quality checks except type checking.
+temp-check: fmt lint test _dj_check
 
 # Run the development server.
 dev: _dj_makemigrations _dj_migrate

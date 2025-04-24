@@ -2,8 +2,7 @@
 
 import requests
 
-from apps.core.constants.third_party import Requests
-from apps.markers.constants.services import URLs
+from constants import IPDConstants, RequestsConstants
 
 
 class AlleleClient:
@@ -23,8 +22,8 @@ class AlleleClient:
 
     def _set_data(self) -> None:
         """Fetch the data from the IPD API for the given allele."""
-        url = f"{URLs.IPD_API}/{self.ipd_accession}"
-        response = requests.get(url, timeout=Requests.DEFAULT_TIMEOUT)
+        url = f"{IPDConstants.API_URL}/{self.ipd_accession}"
+        response = requests.get(url, timeout=RequestsConstants.DEFAULT_TIMEOUT)
         response.raise_for_status()
         self._data = response.json()
 

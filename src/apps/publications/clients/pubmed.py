@@ -7,8 +7,7 @@ from xml.etree import (  # noqa: S405 (If we can't trust XML from NCBI we have b
 
 import requests
 
-from apps.core.constants.third_party import Requests
-from apps.publications.constants.services import URLs
+from constants import PubMedConstants, RequestsConstants
 
 
 class PubMedArticleClient:
@@ -33,7 +32,9 @@ class PubMedArticleClient:
             "api_key": os.getenv("PUBMED_API_KEY"),
         }
         response = requests.get(
-            url=URLs.PUBMED_API, params=params, timeout=Requests.DEFAULT_TIMEOUT
+            url=PubMedConstants.API_URL,
+            params=params,
+            timeout=RequestsConstants.DEFAULT_TIMEOUT,
         )
         response.raise_for_status()
         self._data = ElementTree.fromstring(response.text)  # noqa: S314 (If we can't trust XML from NCBI we have bigger problems.)

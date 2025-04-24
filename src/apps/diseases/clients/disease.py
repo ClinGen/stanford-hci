@@ -2,8 +2,7 @@
 
 import requests
 
-from apps.core.constants.third_party import Requests
-from apps.diseases.constants.services import URLs
+from constants import MondoConstants, RequestsConstants
 
 
 class DiseaseClient:
@@ -21,8 +20,8 @@ class DiseaseClient:
 
     def _set_data(self) -> None:
         """Fetch the data from the OLS Mondo API for the given disease."""
-        url = f"{URLs.OLS_MONDO_API}?iri={URLs.MONDO_IRI}/{self.mondo_id}"
-        response = requests.get(url, timeout=Requests.DEFAULT_TIMEOUT)
+        url = f"{MondoConstants.API_URL}?iri={MondoConstants.IRI}/{self.mondo_id}"
+        response = requests.get(url, timeout=RequestsConstants.DEFAULT_TIMEOUT)
         response.raise_for_status()
         json = response.json()
         if "_embedded" in json:
