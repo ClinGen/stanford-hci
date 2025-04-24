@@ -113,3 +113,6 @@ strict_settings = true
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings.dev"
 python_files = ["*_test.py"]
+markers = [
+    "contract: Mark a test as a contract test with an external API."
+]
