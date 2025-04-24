@@ -27,8 +27,13 @@ set dotenv-load := true
 # Aliases
 #=======================================================================================
 
+alias f := fmt
+alias l := lint
+alias ty := type
 alias t := test
 alias tc := test-contract
+alias c := check
+alias d := dev
 
 #=======================================================================================
 # Public Recipes
@@ -43,7 +48,7 @@ lint: _py_lint
 # Check Python code for problems with type hints.
 type: _py_type
 
-# Run the test suite.
+# Run all tests.
 test: _dj_makemigrations _dj_migrate
     cd src && pytest
 
