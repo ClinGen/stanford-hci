@@ -15,7 +15,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_htmx",
-    "apps.core.apps.CoreAppConfig",
+    "apps.home.apps.HomeAppConfig",
     "apps.curations.apps.CurationsAppConfig",
     "apps.diseases.apps.DiseasesAppConfig",
     "apps.markers.apps.MarkersAppConfig",
@@ -41,7 +41,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             BASE_DIR / "templates",
-            BASE_DIR / "apps" / "core" / "templates",
+            BASE_DIR / "apps" / "home" / "templates",
             BASE_DIR / "apps" / "curations" / "templates",
             BASE_DIR / "apps" / "markers" / "templates",
             BASE_DIR / "apps" / "publications" / "templates",
