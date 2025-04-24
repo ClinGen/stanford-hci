@@ -3,9 +3,9 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 
+from apps.publications.clients.pubmed import PubMedArticleClient
 from apps.publications.forms.pubmed import PubMedArticleForm
 from apps.publications.models.pubmed import PubMedArticle
-from apps.publications.services.pubmed import PubMedArticleClient
 
 
 def new_pubmed(request: HttpRequest) -> HttpResponse:

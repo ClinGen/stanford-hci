@@ -1,8 +1,11 @@
 """Test PubMed service."""
 
-from apps.publications.services.pubmed import PubMedArticleClient
+import pytest
+
+from apps.publications.clients.pubmed import PubMedArticleClient
 
 
+@pytest.mark.contract
 def test_client() -> None:
     """Make sure we can get info about an article from PubMed."""
     pmid = "10446108"
