@@ -40,6 +40,10 @@ type: _py_type
 test: _dj_makemigrations _dj_migrate
     cd src && pytest
 
+# Run contract tests.
+test-contract: _dj_makemigrations _dj_migrate
+    cd src && pytest -m contract
+
 # Run all code quality checks.
 check: fmt lint type test _dj_check
 

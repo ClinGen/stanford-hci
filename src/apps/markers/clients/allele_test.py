@@ -1,8 +1,11 @@
 """Test the allele service."""
 
-from apps.markers.services.allele import AlleleClient
+import pytest
+
+from apps.markers.clients.allele import AlleleClient
 
 
+@pytest.mark.contract
 def test_client() -> None:
     """Make sure we can get info about an allele from IPD."""
     accession = "HLA00902"

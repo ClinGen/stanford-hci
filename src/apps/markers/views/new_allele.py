@@ -3,9 +3,9 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 
+from apps.markers.clients.allele import AlleleClient
 from apps.markers.forms.allele import AlleleForm
 from apps.markers.models.allele import Allele
-from apps.markers.services.allele import AlleleClient
 
 
 def new_allele(request: HttpRequest) -> HttpResponse:
@@ -19,4 +19,4 @@ def new_allele(request: HttpRequest) -> HttpResponse:
             return redirect("home")
     else:
         form = AlleleForm()
-    return render(request, "markers/allele.html", {"form": form})
+    return render(request, "markers/new_allele.html", {"form": form})
