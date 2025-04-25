@@ -1,5 +1,28 @@
 # Things That Need to Be Done Before User Testing on May 5th
 
+## We're done refactoring. 
+
+- [ ] Templates have been refactored.
+    - For example, `markers/new_allele.html` should be `markers/allele/new.html`.
+    - [ ] We've found all templates where this refactor is needed.
+    - [ ] We've made the changes.
+
+- [ ] Views have been refactored.
+    - For example, `views/new_allele.py` should be `views/allele.py`.
+    - [ ] We've found all views where this refactor is needed.
+    - [ ] We've made the changes.
+
+- [ ] Abstract base classes are in use.
+    - [ ] Clients implement an abstract base class.
+    - [ ] Selectors implement an abstract base class.
+    - [ ] Services implement an abstract base class.
+    - [ ] Views implement an abstract base class.
+
+## The missing tests have been added.
+
+- [ ] We've found all modules that are missing tests.
+- [ ] We've added the tests.
+
 ## The `reorg` branch is merged into the `main` branch.
 
 - [x] We've extracted all tasks from my personal to-do list.
@@ -21,26 +44,6 @@
     - (The prior history is too messy to be useful.)
 
 ## MVP functionality is complete.
-
-- [ ] Templates have been refactored.
-    - For example, `markers/new_allele.html` should be `markers/allele/new.html`.
-    - [ ] We've found all templates where this refactor is needed.
-    - [ ] We've made the changes.
-
-- [ ] Views have been refactored.
-    - For example, `views/new_allele.py` should be `views/allele.py`.
-    - [ ] We've found all views where this refactor is needed.
-    - [ ] We've made the changes.
-
-- [ ] Abstract base classes are in use.
-    - [ ] Clients implement an abstract base class.
-    - [ ] Selectors implement an abstract base class.
-    - [ ] Services implement an abstract base class.
-    - [ ] Views implement an abstract base class.
-
-- [ ] The missing tests have been added.
-    - [ ] We've found all modules that are missing tests.
-    - [ ] We've added the tests.
 
 - [ ] The basic workflow for the app is in place.
     - [x] The user can sign up.
