@@ -1,20 +1,22 @@
 # Conventions
 
 This document describes the software engineering conventions we follow in
-developing the HCI.
+developing the HCI. Lint rules enforce most of our conventions automatically, but
+there are still some conventions to be aware of.
 
 ## Python Comments
 
-- Don't write obvious comments.
-- Prefer the imperative mood for comments.
+- Prefer the [imperative mood](https://en.wikipedia.org/wiki/Imperative_mood) for
+  comments.
 
 ### Docstring Comments
 
 The "top-level" docstring for a module, class, or function should almost always
-be in the imperative mood.
+be in the [imperative mood](https://en.wikipedia.org/wiki/Imperative_mood).
 
 ### TODO Comments
 
+- Try to avoid writing these "I'll do it later" comments.
 - TODO comments *must* have an author.
 - TODO comments *must* be accompanied by a link to a GitHub issue.
 
