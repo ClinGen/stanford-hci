@@ -121,11 +121,11 @@
 
 ## Nice-to-have tasks are complete.
 
-- [ ] We have the following CI workflow: PR opened -> checks pass -> deploy to test.
-- [ ] We have the following CI workflow: PR approved and merged -> deploy to prod.
+- [ ] We have the following CI workflow: PR opened → checks pass → deploy to test.
+- [ ] We have the following CI workflow: PR approved and merged → deploy to prod.
 - [ ] We have a footer in Ingrid's purple.
 - [ ] The help text can be edited by non-developers.
 - [ ] We have a Sphinx dev docs site.
-- [ ] We have the following CI workflow: PR opened -> check dev docs site.
-- [ ] We have the following CI workflow: PR approved and merged -> deploy dev docs.
+- [ ] We have the following CI workflow: PR opened → check dev docs site.
+- [ ] We have the following CI workflow: PR approved and merged → deploy dev docs.
 - [ ] We've added Firebase.
