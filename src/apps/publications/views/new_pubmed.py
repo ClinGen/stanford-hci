@@ -19,4 +19,4 @@ def new_pubmed(request: HttpRequest) -> HttpResponse:
             return redirect("home")
     else:
         form = PubMedArticleForm()
-    return render(request, "publications/new_pubmed.html", {"form": form})
+    return render(request, "publications/pubmed/new.html", {"form": form})

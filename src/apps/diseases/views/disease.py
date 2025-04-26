@@ -22,6 +22,6 @@ def new_disease(request: HttpRequest) -> HttpResponse:
         form = DiseaseForm()
     return render(
         request,
-        "diseases/disease.html",
+        "diseases/mondo/new.html",
         {"form": form, "mondo_search_url": MondoConstants.SEARCH_URL},
     )

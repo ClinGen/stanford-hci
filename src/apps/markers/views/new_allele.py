@@ -19,4 +19,4 @@ def new_allele(request: HttpRequest) -> HttpResponse:
             return redirect("home")
     else:
         form = AlleleForm()
-    return render(request, "markers/new_allele.html", {"form": form})
+    return render(request, "markers/allele/new.html", {"form": form})

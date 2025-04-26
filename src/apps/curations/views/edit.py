@@ -32,4 +32,4 @@ def edit(request: HttpRequest) -> HttpResponse:
         "step_2_form": step_2_form,
         "step_3_form": step_3_form,
     }
-    return render(request, "curations/edit.html", context)
+    return render(request, "curations/allele/edit.html", context)

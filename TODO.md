@@ -2,20 +2,20 @@
 
 ## We're done refactoring. 
 
-- [ ] Templates have been refactored to match routes as much as possible.
+- [x] Templates have been refactored to match routes as much as possible.
     - See [`routes.txt`](./routes.txt).
     - For example, `markers/new_allele.html` should be `markers/allele/new.html`.
-    - [ ] We've found all templates where this refactor is needed.
-    - [ ] We've made the changes.
-        - [ ] curations
+    - [x] We've found all templates where this refactor is needed.
+    - [x] We've made the changes.
+        - [x] curations
             - `curations/edit.html` -> `curations/allele/edit.html`
-        - [ ] diseases
+        - [x] diseases
             - `diseases/disease.html` -> `diseases/mondo/new.html`
-        - [ ] home
+        - [x] home
             - `core/home.html` -> `home/index.html`
-        - [ ] markers
+        - [x] markers
             - `markers/new_allele.html` -> `markers/allele/new.html`
-        - [ ] publications
+        - [x] publications
             - `publications/all_pubmed.html` -> `publications/pubmed/all.html`
             - `publications/new_pubmed.html` -> `publications/pubmed/new.html`
 

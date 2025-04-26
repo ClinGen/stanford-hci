@@ -26,4 +26,4 @@ def home(request: HttpRequest) -> HttpResponse:
         context = {
             "is_authenticated": False,
         }
-    return render(request, "core/home.html", context)
+    return render(request, "home/index.html", context)
