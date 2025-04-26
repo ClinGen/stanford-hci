@@ -33,6 +33,7 @@ alias ty := type
 alias t := test
 alias tc := test-contract
 # TODO(Liam): Revert back to regular check once you're done fixing type check issues.
+alias cv := coverage
 alias c := temp-check
 alias d := dev
 
@@ -51,11 +52,15 @@ type: _py_type
 
 # Run all tests.
 test: _dj_makemigrations _dj_migrate
-    cd src && pytest
+    cd src && coverage run -m pytest
 
 # Run contract tests.
 test-contract: _dj_makemigrations _dj_migrate
     cd src && pytest -m contract
+
+# Show test coverage.
+coverage:
+    cd src && coverage report -m
 
 # Run all code quality checks.
 check: fmt lint type test _dj_check

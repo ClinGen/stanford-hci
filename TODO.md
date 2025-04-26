@@ -36,6 +36,7 @@
 
 - [ ] We've found all modules that are missing tests.
 - [ ] We've added the tests.
+- [x] We're monitoring our test coverage.
 
 ## The `reorg` branch is merged into the `main` branch.
 
