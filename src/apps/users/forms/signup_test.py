@@ -5,6 +5,7 @@ import pytest
 from apps.users.forms.signup import SignupForm
 
 
+@pytest.mark.component
 @pytest.mark.django_db
 def test_valid_data() -> None:
     """Make sure the signup form works when given valid data."""

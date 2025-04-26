@@ -7,67 +7,103 @@ on:
     branches:
       - "reorg"
 jobs:
-  format:
+  code_is_formatted:
     runs-on: "ubuntu-latest"
     steps:
       - uses: "actions/checkout@v4"
-      - uses: "./.github/actions/install-dependencies"
+      - uses: "./.github/actions/install-python-dependencies"
+      - uses: "./.github/actions/install-just"
       - name: "Make sure the code is properly formatted"
-        working-directory: ./src
-        run: "uv run ruff format --check"
-  lint:
+        run: "just qual-format-check"
+  code_is_linted:
     runs-on: "ubuntu-latest"
     steps:
       - uses: "actions/checkout@v4"
-      - uses: "./.github/actions/install-dependencies"
+      - uses: "./.github/actions/install-python-dependencies"
+      - uses: "./.github/actions/install-just"
       - name: "Make sure the code is free of lint errors"
-        working-directory: ./src
-        run: "uv run ruff check"
-  type:
+        run: "just qual-lint"
+  type_hints_are_correct:
     runs-on: "ubuntu-latest"
     steps:
       - uses: "actions/checkout@v4"
-      - uses: "./.github/actions/install-dependencies"
+      - uses: "./.github/actions/install-python-dependencies"
+      - uses: "./.github/actions/install-just"
       - name: "Run the type checker on the code"
         working-directory: ./src
-        run: "uv run mypy ."
-  check:
+        run: "just qual-type-check"
+  django_check_passes:
     runs-on: "ubuntu-latest"
     steps:
       - uses: "actions/checkout@v4"
-      - uses: "./.github/actions/install-dependencies"
+      - uses: "./.github/actions/install-python-dependencies"
+      - uses: "./.github/actions/install-just"
       - name: "Run the Django check utility"
         working-directory: ./src
-        run: "uv run manage.py check"
-  test:
+        run: "just django-check"
+  unit_tests_pass:
     runs-on: "ubuntu-latest"
-    env:
-      DJANGO_SECRET_KEY: "dummy"
-      DJANGO_SETTINGS_MODULE: "config.settings.dev"
-      PUBMED_API_KEY: "dummy"
-      PYTHONUNBUFFERED: "1"
     steps:
       - uses: "actions/checkout@v4"
-      - uses: "./.github/actions/install-dependencies"
-      - name: "Run tests"
+      - uses: "./.github/actions/install-python-dependencies"
+      - uses: "./.github/actions/install-just"
+      - name: "Run unit tests"
         working-directory: ./src
-        run: "uv run pytest"
-  build_docs:
+        run: "just test-unit"
+  component_tests_pass:
     runs-on: "ubuntu-latest"
     steps:
       - uses: "actions/checkout@v4"
-      - uses: "./.github/actions/install-dependencies"
+      - uses: "./.github/actions/install-python-dependencies"
+      - uses: "./.github/actions/install-just"
+      - name: "Run component tests"
+        working-directory: ./src
+        run: "just test-component"
+  integration_tests_pass:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "./.github/actions/install-python-dependencies"
+      - uses: "./.github/actions/install-just"
+      - name: "Run integration tests"
+        working-directory: ./src
+        run: "just test-integration"
+  contract_tests_pass:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "./.github/actions/install-python-dependencies"
+      - uses: "./.github/actions/install-just"
+      - name: "Run contract tests"
+        working-directory: ./src
+        run: "just test-contract"
+  e2e_tests_pass:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "./.github/actions/install-python-dependencies"
+      - uses: "./.github/actions/install-just"
+      - name: "Run end-to-end tests"
+        working-directory: ./src
+        run: "just test-e2e"
+  dev_docs_site_builds:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "./.github/actions/install-python-dependencies"
+      - uses: "./.github/actions/install-just"
       - name: "Build the developer documentation site"
         working-directory: ./docs
-        run: "uv run make html"
-  build_coverage:
+        run: "just docs-build-html"
+  test_coverage_report_builds:
     runs-on: "ubuntu-latest"
     steps:
       - uses: "actions/checkout@v4"
-      - uses: "./.github/actions/install-dependencies"
+      - uses: "./.github/actions/install-python-dependencies"
+      - uses: "./.github/actions/install-just"
       - name: "Collect test coverage stats"
         working-directory: ./src
         run: "uv run coverage run -m pytest"
       - name: "Build the test coverage report"
         working-directory: ./src
-        run: "uv run coverage html"
+        run: "just coverage-build-html"

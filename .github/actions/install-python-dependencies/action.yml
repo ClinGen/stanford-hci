@@ -1,4 +1,4 @@
-name: "Install the dependencies for the HCI project"
+name: "Install Python dependencies"
 description: "Install uv, and then use uv to install Python dependencies for the project"
 runs:
   using: "composite"
@@ -6,5 +6,5 @@ runs:
     - name: "Install uv"
       uses: "astral-sh/setup-uv@v5"
     - name: "Install Python dependencies"
-      shell: bash
+      shell: "bash"
       run: "uv sync"

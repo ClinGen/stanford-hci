@@ -12,6 +12,7 @@ def client() -> Client:
     return Client()
 
 
+@pytest.mark.integration
 def test_get(client: Client) -> None:
     """Test the GET request."""
     url = reverse("signup")

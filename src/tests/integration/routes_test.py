@@ -69,6 +69,7 @@ ROUTES = [
 # fmt: on
 
 
+@pytest.mark.integration
 @pytest.mark.django_db
 def test_all_routes_return_200(client: Client) -> None:
     """Make sure all routes return a 200 status code."""

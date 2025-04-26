@@ -29,7 +29,7 @@ exclude = [
     "migrations",
     ".mypy_cache",
     "__pycache__",
-    "tests",
+    "docs"
 ]
 
 [tool.ruff.lint]
@@ -97,7 +97,11 @@ convention = "google"
     "D104"  # ignore docstring requirement
 ]
 "*_test.py" = [
-    "S101"
+    "S101"  # allow assert statements
+]
+"conftest.py" = [
+    "ARG001",  # allow unused arguments
+    "T201",    # allow print statements
 ]
 
 [tool.mypy]
@@ -117,5 +121,9 @@ strict_settings = true
 DJANGO_SETTINGS_MODULE = "config.settings.dev"
 python_files = ["*_test.py"]
 markers = [
-    "contract: Mark a test as a contract test with an external API."
+    "unit: Make sure a single module with no other dependencies works.",
+    "component: Make sure a single module works, but allow for necessary dependencies, e.g. the database.",
+    "integration: Make sure multiple modules work together.",
+    "contract: Make sure an external data source works.",
+    "e2e: Make sure a workflow from the frontend to the database works."
 ]
