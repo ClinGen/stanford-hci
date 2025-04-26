@@ -3,5 +3,6 @@
 .mypy_cache
 .venv
 __pycache__
+build
 db.sqlite3
 public
