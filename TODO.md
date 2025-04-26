@@ -3,10 +3,12 @@
 ## We're done refactoring. 
 
 - [x] Templates have been refactored to match routes as much as possible.
-    - See [`routes.txt`](./routes.txt).
+    - See [the routes test](./src/tests/integration/routes_test.py).
     - For example, `markers/new_allele.html` should be `markers/allele/new.html`.
     - [x] We've found all templates where this refactor is needed.
     - [x] We've made the changes.
+
+- [x] Create an integration test that makes sure all routes return a 200 status code.
 
 - [ ] We no longer prepend includes with underscores.
 - [ ] Includes have been refactored to be inside their app namespace.
@@ -56,6 +58,15 @@
     - (The prior history is too messy to be useful.)
 
 ## MVP functionality is complete.
+
+- [ ] Models have a human-readable ID.
+    - Ideas:
+        - `AL`: denotes allele
+        - `HP`: denotes haplotype
+        - `ALC`: denotes allele curation
+        - `HPC`: denotes haplotype curation
+        - `ALA`: denotes allele association
+        - `HPA`: denotes haplotype association
 
 - [ ] The basic workflow for the app is in place.
     - [x] The user can sign up.
