@@ -1,0 +1,65 @@
+name: "CI"
+on:
+  pull_request:
+    branches:
+      - "reorg"
+  push:
+    branches:
+      - "reorg"
+jobs:
+  format:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "./.github/actions/install-dependencies"
+      - name: "Make sure the code is properly formatted"
+        working-directory: ./src
+        run: "uv run ruff format --check"
+  lint:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "./.github/actions/install-dependencies"
+      - name: "Make sure the code is free of lint errors"
+        working-directory: ./src
+        run: "uv run ruff check"
+  type:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "./.github/actions/install-dependencies"
+      - name: "Run the type checker on the code"
+        working-directory: ./src
+        run: "uv run mypy ."
+  test:
+    runs-on: "ubuntu-latest"
+    env:
+      DJANGO_SECRET_KEY: "dummy"
+      DJANGO_SETTINGS_MODULE: "config.settings.dev"
+      PUBMED_API_KEY: "dummy"
+      PYTHONUNBUFFERED: "1"
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "./.github/actions/install-dependencies"
+      - name: "Run tests"
+        working-directory: ./src
+        run: "uv run pytest"
+  build_docs:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "./.github/actions/install-dependencies"
+      - name: "Build the developer documentation site"
+        working-directory: ./docs
+        run: "uv run make html"
+  build_coverage:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "./.github/actions/install-dependencies"
+      - name: "Collect test coverage stats"
+        working-directory: ./src
+        run: "uv run coverage run -m pytest"
+      - name: "Build the test coverage report"
+        working-directory: ./src
+        run: "uv run coverage html"

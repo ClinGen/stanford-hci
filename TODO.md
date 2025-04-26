@@ -114,6 +114,8 @@
     - [ ] The code transforms the underscore into a colon.
 - [ ] There is an include for help text
     - [ ] All help texts use this include.
+- [x] The public recipes in the justfile use the private recipes.
+- [x] All recipes in the justfile use `uv run`.
 
 ## The app test deployed to the test server and the prod server.
 
@@ -126,7 +128,9 @@
 - [ ] We have the following CI workflow: PR approved and merged → deploy to prod.
 - [ ] We have a footer in Ingrid's purple.
 - [ ] The help text can be edited by non-developers.
-- [ ] We have a Sphinx dev docs site.
-- [ ] We have the following CI workflow: PR opened → check dev docs site.
-- [ ] We have the following CI workflow: PR approved and merged → deploy dev docs.
+- [x] We have a Sphinx dev docs site.
+- [x] We have the following CI workflow: PR opened → check dev docs site.
+- [x] We have the following CI workflow: PR opened → check test coverage report.
+- [ ] We have the following CI workflow: PR approved and merged → deploy dev docs site.
+- [ ] We have the following CI workflow: PR approved and merged → test coverage report.
 - [ ] We've added Firebase.

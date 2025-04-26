@@ -24,59 +24,32 @@
 set dotenv-load := true
 
 #=======================================================================================
-# Aliases
-#=======================================================================================
-
-alias f := fmt
-alias l := lint
-alias ty := type
-alias t := test
-alias tc := test-contract
-# TODO(Liam): Revert back to regular check once you're done fixing type check issues.
-alias cv := coverage
-alias do := docs
-alias c := temp-check
-alias d := dev
-
-#=======================================================================================
 # Public Recipes
 #=======================================================================================
 
+# Run all code quality checks.
+check: format lint type _dj_check test coverage
+
+# Show test coverage.
+coverage: _py_coverage
+
+# Run the development server.
+dev: _dj_makemigrations _dj_migrate _dj_runserver
+
+# Build the developer documentation site.
+docs: _sp_build_html
+
 # Format Python code.
-fmt: _py_fmt
+format: _py_format
 
 # Check Python code for common mistakes that can be identified by static analysis.
 lint: _py_lint
 
+# Run all tests.
+test: _dj_makemigrations _dj_migrate _py_test
+
 # Check Python code for problems with type hints.
 type: _py_type
-
-# Run all tests.
-test: _dj_makemigrations _dj_migrate
-    cd src && coverage run -m pytest
-
-# Run contract tests.
-test-contract: _dj_makemigrations _dj_migrate
-    cd src && pytest -m contract
-
-# Show test coverage.
-coverage:
-    cd src && coverage report -m
-
-# Build the developer documentation site.
-docs:
-    cd docs && make html
-
-# Run all code quality checks.
-check: fmt lint type test _dj_check
-
-# TODO(Liam): Remove this once you're done fixing type check issues.
-# Run all code quality checks except type checking.
-temp-check: fmt lint test _dj_check
-
-# Run the development server.
-dev: _dj_makemigrations _dj_migrate
-    cd src && python manage.py runserver
 
 #=======================================================================================
 # Django Recipes
@@ -84,54 +57,64 @@ dev: _dj_makemigrations _dj_migrate
 
 # Use the system check framework to inspect the project for common problems.
 _dj_check:
-    cd src && python manage.py check
+    cd src && uv run manage.py check
 
 # Make migrations.
 _dj_makemigrations:
-    cd src && python manage.py makemigrations
+    cd src && uv run manage.py makemigrations
 
 # Apply migrations.
 _dj_migrate:
-    cd src && python manage.py migrate
+    cd src && uv run manage.py migrate
 
 # Run the development server.
 _dj_runserver:
-    cd src && python manage.py runserver
+    cd src && uv run manage.py runserver
 
 # Enter the shell.
 _dj_shell:
-    cd src && python manage.py shell
+    cd src && uv run manage.py shell
 
 #=======================================================================================
 # Python Code Quality Recipes
 #=======================================================================================
 
 # Format all files in the current directory and all subdirectories.
-_py_fmt:
-    uv run ruff format
+_py_format:
+    cd src && uv run ruff format
 
 # Check all files in the current directory and all subdirectories for formatting issues.
-_py_fmt_check:
-    uv run ruff format --check
+_py_format_check:
+    cd src && uv run ruff format --check
 
 # Lint all files in the current directory and all subdirectories.
 _py_lint:
-    uv run ruff check
+    cd src && uv run ruff check
 
 # Try to fix lint errors in current directory and all subdirectories.
 _py_lint_fix:
-    uv run ruff check --fix
+    cd src && uv run ruff check --fix
 
 # Check type hints in the `src` directory and all subdirectories.
 _py_type:
     cd src && uv run mypy .
 
+# Run test suite and collect coverage stats.
+_py_test:
+    cd src && uv run coverage run -m pytest
+
+# Report the test coverage stats.
+_py_coverage:
+    cd src && uv run coverage report
+
+# Build the test coverage report site.
+_py_build_coverage_html:
+    cd src && uv run coverage html
+
 #=======================================================================================
 # Sphinx Documentation Recipes
 #=======================================================================================
 
-_sp_build:
-    cd docs && make html
-
-_sp_run:
-    echo "Serving developer documentation: http://localhost:8001/html/index.html" && cd docs/build && python -m http.server 8001 --directory .
+# Build the developer documentation site.
+_sp_build_html:
+    cd docs && uv run make html
