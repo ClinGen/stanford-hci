@@ -9,7 +9,7 @@
                 {% if is_authenticated %}
                 <p class="subtitle">Welcome, {{ first_name }}. You are curating as part of the {{ affiliation }} affiliation.</p>
                 <p class="helptext">
-                    {% include "includes/_icon.html" with name="info" %}
+                    {% include "includes/icon.html" with name="info" %}
                     If you need to change your affiliation, you can do so <a href="#">here</a>.
                 </p>
                 {% else %}
@@ -18,16 +18,16 @@
             </div>
         </section>
     </div>
-    {% include "includes/_add_buttons.html" %}
+    {% include "includes/add_buttons.html" %}
     {% if is_authenticated %}
     <div class="block">
         <h3 class="title is-4">Your Curations</h3>
-        {% include "includes/_dummy_your_curations_table.html" %}
+        {% include "includes/dummy_table_your_curations.html" %}
     </div>
     {% else %}
     <div class="block">
         <h3 class="title is-4">All Curations</h3>
-        {% include "includes/_dummy_all_curations.html" %}
+        {% include "includes/dummy_table_all_curations.html" %}
     </div>
     {% endif %}
 {% endblock %}

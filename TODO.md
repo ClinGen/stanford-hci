@@ -10,7 +10,7 @@
 
 - [x] Create an integration test that makes sure all routes return a 200 status code.
 
-- [ ] We no longer prepend includes with underscores.
+- [x] We no longer prepend includes with underscores.
 - [ ] Includes have been refactored to be inside their app namespace.
     - [ ] We've found all templates where this refactor is needed.
     - [ ] We've made the changes.

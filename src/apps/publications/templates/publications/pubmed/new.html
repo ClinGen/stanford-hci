@@ -6,8 +6,8 @@
         <h1 class="title">Add PubMed Article</h1>
         <form method="post">
             {% csrf_token %}
-            {% include "includes/_form_input.html" with field=form.pubmed_id placeholder="PubMed ID" %}
-            {% include "includes/_form_submit_button.html" %}
+            {% include "includes/form_input.html" with field=form.pubmed_id placeholder="PubMed ID" %}
+            {% include "includes/form_submit_button.html" %}
         </form>
     </div>
 {% endblock %}

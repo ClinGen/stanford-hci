@@ -6,8 +6,8 @@
         <h1 class="title">Add Allele</h1>
         <form method="post">
             {% csrf_token %}
-            {% include "includes/_form_input.html" with field=form.ipd_accession placeholder="IPD Accession" %}
-            {% include "includes/_form_submit_button.html" %}
+            {% include "includes/form_input.html" with field=form.ipd_accession placeholder="IPD Accession" %}
+            {% include "includes/form_submit_button.html" %}
         </form>
     </div>
 {% endblock %}
