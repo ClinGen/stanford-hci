@@ -2,10 +2,33 @@
 
 ## We're done refactoring. 
 
-- [ ] Templates have been refactored.
+- [ ] Templates have been refactored to match routes as much as possible.
+    - See [`routes.txt`](./routes.txt).
     - For example, `markers/new_allele.html` should be `markers/allele/new.html`.
     - [ ] We've found all templates where this refactor is needed.
     - [ ] We've made the changes.
+        - [ ] curations
+            - `curations/edit.html` -> `curations/allele/edit.html`
+        - [ ] diseases
+            - `diseases/disease.html` -> `diseases/mondo/new.html`
+        - [ ] home
+            - `core/home.html` -> `home/index.html`
+        - [ ] markers
+            - `markers/new_allele.html` -> `markers/allele/new.html`
+        - [ ] publications
+            - `publications/all_pubmed.html` -> `publications/pubmed/all.html`
+            - `publications/new_pubmed.html` -> `publications/pubmed/new.html`
+
+- [ ] We no longer prepend includes with underscores.
+- [ ] Includes have been refactored to be inside their app namespace.
+    - [ ] We've found all templates where this refactor is needed.
+    - [ ] We've made the changes.
+        - [ ] curations
+        - [ ] diseases
+        - [ ] home
+        - [ ] markers
+        - [ ] publications
+        - [ ] users
 
 - [ ] Views have been refactored.
     - For example, `views/new_allele.py` should be `views/allele.py`.
