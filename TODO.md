@@ -7,17 +7,6 @@
     - For example, `markers/new_allele.html` should be `markers/allele/new.html`.
     - [x] We've found all templates where this refactor is needed.
     - [x] We've made the changes.
-        - [x] curations
-            - `curations/edit.html` -> `curations/allele/edit.html`
-        - [x] diseases
-            - `diseases/disease.html` -> `diseases/mondo/new.html`
-        - [x] home
-            - `core/home.html` -> `home/index.html`
-        - [x] markers
-            - `markers/new_allele.html` -> `markers/allele/new.html`
-        - [x] publications
-            - `publications/all_pubmed.html` -> `publications/pubmed/all.html`
-            - `publications/new_pubmed.html` -> `publications/pubmed/new.html`
 
 - [ ] We no longer prepend includes with underscores.
 - [ ] Includes have been refactored to be inside their app namespace.
