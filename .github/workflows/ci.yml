@@ -31,6 +31,14 @@ jobs:
       - name: "Run the type checker on the code"
         working-directory: ./src
         run: "uv run mypy ."
+  check:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v4"
+      - uses: "./.github/actions/install-dependencies"
+      - name: "Run the Django check utility"
+        working-directory: ./src
+        run: "uv run manage.py check"
   test:
     runs-on: "ubuntu-latest"
     env:
