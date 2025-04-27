@@ -2,7 +2,7 @@
 
 from django.urls import path
 
-from apps.curations.views.edit import edit
+from apps.curations.views.curation import edit
 
 urlpatterns = [
     path("curation/edit", edit, name="edit"),

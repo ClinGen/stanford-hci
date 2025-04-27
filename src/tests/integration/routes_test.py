@@ -15,7 +15,7 @@ ROUTES = [
     "/",
 
     # Mondo diseases: Create, view all, or view specific.
-    # "/diseases/mondo/new",
+    "/diseases/mondo/new",
     # "/diseases/mondo/all",
     # "/diseases/mondo/<str:mondo_id>",
 

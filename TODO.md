@@ -15,10 +15,16 @@
     - [x] We've found all templates where this refactor is needed.
     - [x] We've made the changes.
 
-- [ ] Views have been refactored.
+- [x] Views have been refactored.
     - For example, `views/new_allele.py` should be `views/allele.py`.
-    - [ ] We've found all views where this refactor is needed.
-    - [ ] We've made the changes.
+    - [x] We've found all views where this refactor is needed.
+    - [x] We've made the changes.
+        - [x] curations
+        - [x] diseases
+        - [x] home
+        - [x] markers
+        - [x] publications
+        - [x] users
 
 - [ ] Abstract base classes are in use.
     - [ ] Clients implement an abstract base class.

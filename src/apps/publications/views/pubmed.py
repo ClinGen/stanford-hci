@@ -1,5 +1,6 @@
-"""Provide a view for adding a new PubMed article."""
+"""Provide views related to PubMed publications."""
 
+from django.db.models import Q
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 
@@ -20,3 +21,18 @@ def new_pubmed(request: HttpRequest) -> HttpResponse:
     else:
         form = PubMedArticleForm()
     return render(request, "publications/pubmed/new.html", {"form": form})
+
+
+def all_pubmed(request: HttpRequest) -> HttpResponse:
+    """Return the all PubMed articles view."""
+    query = request.GET.get("q", "")
+    articles = PubMedArticle.objects.filter(
+        Q(pubmed_id__icontains=query) | Q(title__icontains=query)
+    )
+
+    if request.htmx:
+        template_name = "publications/includes/pubmed_table.html"
+    else:
+        template_name = "publications/pubmed/all.html"
+
+    return render(request, template_name, {"articles": articles})

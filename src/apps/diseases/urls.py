@@ -2,8 +2,8 @@
 
 from django.urls import path
 
-from apps.diseases.views.disease import new_disease
+from apps.diseases.views.mondo import new_disease
 
 urlpatterns = [
-    path("disease/new", new_disease, name="new_disease"),
+    path("mondo/new", new_disease, name="new_disease"),
 ]
