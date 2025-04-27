@@ -21,7 +21,7 @@
     - [x] We've made the changes.
 
 - [ ] Abstract base classes have been created.
-    - [ ] We have an ABC for clients.
+    - [x] We have an ABC for clients.
     - [ ] We have an ABC for selectors.
     - [ ] We have an ABC for services.
     - [x] We have an ABC for views.
