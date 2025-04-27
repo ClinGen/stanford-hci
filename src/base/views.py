@@ -6,7 +6,7 @@ from django.http import HttpResponse
 
 
 class EntityView(ABC):
-    """Provide an abstract base class for entity views.
+    """Create, view all, or view a specific entity.
 
     Here an entity refers to a model in the HCI that has a new page, an all page,
     and an overview page. Some examples include: curations, diseases, markers (alleles
