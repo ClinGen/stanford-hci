@@ -55,8 +55,8 @@
 - [ ] All code quality checks are passing.
 - [ ] We are using conventional commits.
 - [ ] The garbage development migrations are blown away.
-- [ ] The old Terraform code is preserved.
-- [ ] The old infrastructure is destroyed.
+- [x] The old Terraform code is preserved.
+- [x] The old infrastructure is destroyed.
 - [ ] The commit history is restricted to the new organization of the code and the new commit convention.
     - (The prior history is too messy to be useful.)
 
