@@ -20,16 +20,20 @@
     - [x] We've found all views where this refactor is needed.
     - [x] We've made the changes.
 
-- [ ] Abstract base classes have been created.
-    - [x] We have an ABC for clients.
-    - [ ] We have an ABC for selectors.
-    - [ ] We have an ABC for services.
-    - [x] We have an ABC for views.
+- [ ] Selectors are in use.
+    - [ ] We've found all the read-only logic.
+    - [ ] We've made the changes.
+
+- [ ] Services are in use.
+    - [ ] We've found all the CUD logic.
+    - [ ] We've made the changes.
+
+- [x] Abstract base classes have been created.
+  - [x] We have an ABC for clients.
+  - [x] We have an ABC for views.
 
 - [ ] Abstract base views are in use.
     - [ ] Clients implement an ABC.
-    - [ ] Selectors implement an ABC.
-    - [ ] Services implement an ABC.
     - [ ] Views implement an ABC.
 
 ## The missing tests have been added.
