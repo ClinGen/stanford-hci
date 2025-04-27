@@ -18,16 +18,16 @@
             </div>
         </section>
     </div>
-    {% include "includes/add_buttons.html" %}
+    {% include "home/includes/add_buttons.html" %}
     {% if is_authenticated %}
     <div class="block">
         <h3 class="title is-4">Your Curations</h3>
-        {% include "includes/dummy_table_your_curations.html" %}
+        {% include "home/includes/dummy_table_your_curations.html" %}
     </div>
     {% else %}
     <div class="block">
         <h3 class="title is-4">All Curations</h3>
-        {% include "includes/dummy_table_all_curations.html" %}
+        {% include "home/includes/dummy_table_all_curations.html" %}
     </div>
     {% endif %}
 {% endblock %}

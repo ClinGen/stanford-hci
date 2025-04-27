@@ -11,15 +11,9 @@
 - [x] Create an integration test that makes sure all routes return a 200 status code.
 
 - [x] We no longer prepend includes with underscores.
-- [ ] Includes have been refactored to be inside their app namespace.
-    - [ ] We've found all templates where this refactor is needed.
-    - [ ] We've made the changes.
-        - [ ] curations
-        - [ ] diseases
-        - [ ] home
-        - [ ] markers
-        - [ ] publications
-        - [ ] users
+- [x] Includes have been refactored to be inside their app namespace.
+    - [x] We've found all templates where this refactor is needed.
+    - [x] We've made the changes.
 
 - [ ] Views have been refactored.
     - For example, `views/new_allele.py` should be `views/allele.py`.
