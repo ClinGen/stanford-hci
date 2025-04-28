@@ -25,7 +25,6 @@
   - [x] We have an ABC for views.
   - [x] We have an ABC for selectors.
   - [x] We have an ABC for services.
-  - [ ] We have an ABC for permissions.
 
 - [ ] Selectors are in use.
     - [ ] We've found all the read-only logic.
