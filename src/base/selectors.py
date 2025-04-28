@@ -14,8 +14,22 @@ class EntitySelector(ABC):
 
     @abstractmethod
     def get(self, human_readable_id: str) -> Any:  # noqa: ANN401 (We don't care about this for abstract methods.)
-        """Return a specific entity based on its human-readable ID."""
+        """Return a specific entity based on its human-readable ID.
+
+        Args:
+             human_readable_id: The human-readable ID of the model for the entity.
+
+        Returns:
+            The entity.
+        """
 
     @abstractmethod
-    def list(self, filters: dict | None) -> Any:  # noqa: ANN401 (We don't care about this for abstract methods.)
-        """Return all entities or a subset of entities based on the filters."""
+    def list(self, query: str | None) -> Any:  # noqa: ANN401 (We don't care about this for abstract methods.)
+        """Return all entities or a subset of entities based on the query.
+
+        Args:
+            query: The string to filter the entities by.
+
+        Returns:
+            The entities matching the query.
+        """

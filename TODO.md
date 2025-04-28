@@ -26,9 +26,9 @@
   - [x] We have an ABC for selectors.
   - [x] We have an ABC for services.
 
-- [ ] Selectors are in use.
-    - [ ] We've found all the read-only logic.
-    - [ ] We've made the changes.
+- [x] Selectors are in use.
+    - [x] We've found all the read-only logic.
+    - [x] We've made the changes.
 
 - [ ] Services are in use.
     - [ ] We've found all the CUD logic.
@@ -37,8 +37,10 @@
 - [ ] Base classes are in use.
     - [ ] Clients implement their base class.
     - [ ] Views implement their ABC.
-    - [ ] Selectors implement their ABC.
+    - [x] Selectors implement their ABC.
     - [ ] Services implement their ABC.
+
+- [ ] The URLs use "list" instead of "all."
 
 ## The missing tests have been added.
 
@@ -61,7 +63,7 @@
 - [ ] We are linting Django templates as part of code quality checks.
 - [ ] The score calculator code is integrated.
 - [ ] All code quality checks are passing.
-- [ ] We are using conventional commits.
+- [x] We are using conventional commits.
 - [ ] The garbage development migrations are blown away.
 - [x] The old Terraform code is preserved.
 - [x] The old infrastructure is destroyed.

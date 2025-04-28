@@ -1,12 +1,12 @@
 """Provide views related to PubMed publications."""
 
-from django.db.models import Q
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 
 from apps.publications.clients.pubmed import PubMedArticleClient
 from apps.publications.forms.pubmed import PubMedArticleForm
 from apps.publications.models.pubmed import PubMedArticle
+from apps.publications.selectors.pubmed import PubMedArticleSelector
 
 
 def new_pubmed(request: HttpRequest) -> HttpResponse:
@@ -25,10 +25,9 @@ def new_pubmed(request: HttpRequest) -> HttpResponse:
 
 def all_pubmed(request: HttpRequest) -> HttpResponse:
     """Return the all PubMed articles view."""
-    query = request.GET.get("q", "")
-    articles = PubMedArticle.objects.filter(
-        Q(pubmed_id__icontains=query) | Q(title__icontains=query)
-    )
+    query = request.GET.get("q", None)
+    selector = PubMedArticleSelector()
+    articles = selector.list(query)
 
     if request.htmx:
         template_name = "publications/includes/pubmed_table.html"

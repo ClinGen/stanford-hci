@@ -128,8 +128,8 @@ strict_settings = true
 DJANGO_SETTINGS_MODULE = "config.settings.dev"
 python_files = ["*_test.py"]
 markers = [
-    "unit: Make sure a single module with no other dependencies works.",
-    "component: Make sure a single module works, but allow for necessary dependencies, e.g. the database.",
+    "unit: Make sure a single module with no other dependencies works in isolation.",
+    "component: Make sure a single module, allowing necessary dependencies like the database, works.",
     "integration: Make sure multiple modules work together.",
     "contract: Make sure an external data source works.",
     "e2e: Make sure a workflow from the frontend to the database works.",
