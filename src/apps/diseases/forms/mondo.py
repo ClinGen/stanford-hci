@@ -5,8 +5,8 @@ from django.forms import ModelForm
 from apps.diseases.models.mondo import Mondo
 
 
-class DiseaseForm(ModelForm):
-    """Add a disease to the database."""
+class MondoDiseaseForm(ModelForm):
+    """Add a Mondo disease to the database."""
 
     class Meta:
         """Define metadata options."""

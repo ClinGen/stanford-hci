@@ -1,7 +1,8 @@
 """Provide base classes for views."""
 
 from abc import ABC, abstractmethod
-from typing import Any
+
+from django.http import HttpRequest, HttpResponse
 
 
 class EntityView(ABC):
@@ -13,17 +14,26 @@ class EntityView(ABC):
     """
 
     @abstractmethod
-    def new(self) -> Any:  # noqa: ANN401 (We don't care about this for abstract methods.)
-        """View the page that provides a form that creates a new entity."""
-
-    @abstractmethod
-    def list(self) -> Any:  # noqa: ANN401 (We don't care about this for abstract methods.)
-        """View the searchable table page for an entity."""
-
-    @abstractmethod
-    def details(self, human_readable_id: str) -> Any:  # noqa: ANN401 (We don't care about this for abstract methods.)
-        """View the details page for an entity.
+    def new(self, request: HttpRequest) -> HttpResponse:  # noqa: ANN401 (We don't care about this for abstract methods.)
+        """Return the page that provides a form that creates a new entity.
 
         Args:
-             human_readable_id: The human-readable ID of the model for the entity.
+             request: The Django HTTP request object.
+        """
+
+    @abstractmethod
+    def list(self, request: HttpRequest) -> HttpResponse:  # noqa: ANN401 (We don't care about this for abstract methods.)
+        """Return the searchable table page for an entity.
+
+        Args:
+             request: The Django HTTP request object.
+        """
+
+    @abstractmethod
+    def details(self, request: HttpRequest, human_readable_id: str) -> HttpResponse:  # noqa: ANN401 (We don't care about this for abstract methods.)
+        """Return the details page for an entity.
+
+        Args:
+            request: The Django HTTP request object.
+            human_readable_id: The human-readable ID of the model for the entity.
         """

@@ -36,7 +36,10 @@
 
 - [ ] Base classes are in use.
     - [ ] Clients implement their base class.
-    - [ ] Views implement their ABC.
+  - [ ] Entity views implement their ABC.
+    - [x] diseases/mondo
+    - [ ] markers/allele
+    - [ ] publications/pubmed
     - [x] Selectors implement their ABC.
     - [x] Services implement their ABC.
 
