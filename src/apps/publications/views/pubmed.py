@@ -5,8 +5,8 @@ from django.shortcuts import redirect, render
 
 from apps.publications.clients.pubmed import PubMedArticleClient
 from apps.publications.forms.pubmed import PubMedArticleForm
-from apps.publications.models.pubmed import PubMedArticle
 from apps.publications.selectors.pubmed import PubMedArticleSelector
+from apps.publications.services.pubmed import PubMedArticleService
 
 
 def new_pubmed(request: HttpRequest) -> HttpResponse:
@@ -16,7 +16,8 @@ def new_pubmed(request: HttpRequest) -> HttpResponse:
         if form.is_valid():
             pubmed_id = form.cleaned_data["pubmed_id"]
             client = PubMedArticleClient(pubmed_id)
-            PubMedArticle.objects.create(pubmed_id=client.pubmed_id, title=client.title)
+            service = PubMedArticleService(client)
+            service.create(pubmed_id)
             return redirect("home")
     else:
         form = PubMedArticleForm()

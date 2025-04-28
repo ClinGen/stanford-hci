@@ -30,15 +30,15 @@
     - [x] We've found all the read-only logic.
     - [x] We've made the changes.
 
-- [ ] Services are in use.
+- [x] Services are in use.
   - [x] We've found all the CUD logic.
-    - [ ] We've made the changes.
+    - [x] We've made the changes.
 
 - [ ] Base classes are in use.
     - [ ] Clients implement their base class.
     - [ ] Views implement their ABC.
     - [x] Selectors implement their ABC.
-    - [ ] Services implement their ABC.
+    - [x] Services implement their ABC.
 
 - [ ] The URLs use "list" instead of "all."
 
