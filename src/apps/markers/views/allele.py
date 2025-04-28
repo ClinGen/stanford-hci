@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 
 from apps.markers.clients.allele import AlleleClient
 from apps.markers.forms.allele import AlleleForm
-from apps.markers.models.allele import Allele
+from apps.markers.services.allele import AlleleService
 
 
 def new_allele(request: HttpRequest) -> HttpResponse:
@@ -15,7 +15,8 @@ def new_allele(request: HttpRequest) -> HttpResponse:
         if form.is_valid():
             ipd_accession = form.cleaned_data["ipd_accession"]
             client = AlleleClient(ipd_accession)
-            Allele.objects.create(ipd_accession=client.ipd_accession, name=client.name)
+            service = AlleleService(client)
+            service.create(ipd_accession)
             return redirect("home")
     else:
         form = AlleleForm()

@@ -32,13 +32,13 @@ class MondoService(EntityService):
 
         Args:
              mondo_id: The Mondo Disease Ontology ID, e.g., MONDO_0005052.
-             label: The label of the Mondo disease we want to update.
+             label: The Mondo disease label we want to update.
 
         Raises:
             MondoServiceError: When the Mondo disease to update does not exist.
 
         Returns:
-            The updated or newly created Mondo disease.
+            The updated Mondo disease.
         """
         try:
             disease = Mondo.objects.get(mondo_id=mondo_id)
