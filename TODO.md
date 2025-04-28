@@ -21,25 +21,25 @@
     - [x] We've made the changes.
 
 - [x] Base classes have been created.
-  - [x] We have a base class for clients.
-  - [x] We have an ABC for views.
-  - [x] We have an ABC for selectors.
-  - [x] We have an ABC for services.
+    - [x] We have a base class for clients.
+    - [x] We have an ABC for views.
+    - [x] We have an ABC for selectors.
+    - [x] We have an ABC for services.
 
 - [x] Selectors are in use.
     - [x] We've found all the read-only logic.
     - [x] We've made the changes.
 
 - [x] Services are in use.
-  - [x] We've found all the CUD logic.
-    - [x] We've made the changes.
+    - [x] We've found all the CUD logic.
+        - [x] We've made the changes.
 
 - [ ] Base classes are in use.
     - [ ] Clients implement their base class.
-  - [ ] Entity views implement their ABC.
-    - [x] diseases/mondo
-    - [ ] markers/allele
-    - [ ] publications/pubmed
+    - [ ] Entity views implement their ABC.
+        - [x] diseases/mondo
+        - [ ] markers/allele
+        - [ ] publications/pubmed
     - [x] Selectors implement their ABC.
     - [x] Services implement their ABC.
 
