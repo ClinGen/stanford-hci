@@ -32,9 +32,9 @@
   - [x] We have a base class for clients.
   - [x] We have an ABC for views.
 
-- [ ] Abstract base views are in use.
-    - [ ] Clients implement an ABC.
-    - [ ] Views implement an ABC.
+- [ ] Base classes are in use.
+    - [ ] Clients implement their base class.
+    - [ ] Views implement their ABC.
 
 ## The missing tests have been added.
 
@@ -65,6 +65,9 @@
     - (The prior history is too messy to be useful.)
 
 ## MVP functionality is complete.
+
+- [ ] Logging is configured.
+- [ ] We log when we're supposed to log.
 
 - [ ] Models have a human-readable ID.
     - Ideas:

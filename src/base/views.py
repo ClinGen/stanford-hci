@@ -18,12 +18,12 @@ class EntityView(ABC):
         """View the page that provides a form that creates a new entity."""
 
     @abstractmethod
-    def all(self) -> HttpResponse:
+    def list(self) -> HttpResponse:
         """View the searchable table page for an entity."""
 
     @abstractmethod
-    def overview(self, human_readable_id: str) -> HttpResponse:
-        """View the overview page for an entity.
+    def details(self, human_readable_id: str) -> HttpResponse:
+        """View the details page for an entity.
 
         Args:
              human_readable_id: The human-readable ID of the model for the entity.
