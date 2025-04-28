@@ -2,8 +2,11 @@
 Explanations
 ============
 
-Our Custom Django App Structure
--------------------------------
+Project Structure
+=================
+
+App Structure
+-------------
 
 ::
 

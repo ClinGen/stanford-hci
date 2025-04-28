@@ -26,6 +26,7 @@ Navigation
 
 .. toctree::
    :caption: Table of Contents
+   :maxdepth: 3
 
    tutorials
    how-to-guides

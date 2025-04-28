@@ -28,8 +28,8 @@
     - [ ] We've found all the CUD logic.
     - [ ] We've made the changes.
 
-- [x] Abstract base classes have been created.
-  - [x] We have an ABC for clients.
+- [x] Base classes have been created.
+  - [x] We have a base class for clients.
   - [x] We have an ABC for views.
 
 - [ ] Abstract base views are in use.

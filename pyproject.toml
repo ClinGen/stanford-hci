@@ -29,7 +29,7 @@ exclude = [
     "migrations",
     ".mypy_cache",
     "__pycache__",
-    "docs"
+    "docs",
 ]
 
 [tool.ruff.lint]
@@ -86,22 +86,29 @@ select = [
     "RUF",   # Ruff-specific rules (provide a set of miscellaneous lint rules)
     "TRY",   # tryceratops (provide a set of lint rules for try-except statements)
 ]
-ignore = ["COM812", "RUF100", "RUF012"]
+ignore = [
+    "COM812", # This rule clashes with Ruff.
+    "G004",   # Not using f-strings in logs seems like a premature optimization.
+    "RUF012", # Django models be like that.
+    "RUF100", # With Ruff 0.11.5, I'm seeing false positives.
+    "S314",   # While I agree with this rule, it suggests using an outdated third-party package.
+    "S405",   # While I agree with this rule, it suggests using an outdated third-party package.
+]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = [
-    "F401", # ignore unused imports
-    "D104"  # ignore docstring requirement
+    "D104", # Docstrings in these files are overkill.
+    "F401", # In some cases, I want to be able to import the package name rather than the individual modules.
 ]
 "*_test.py" = [
-    "S101"  # allow assert statements
+    "S101", # We need `assert` statements in tests.
 ]
-"conftest.py" = [
-    "ARG001",  # allow unused arguments
-    "T201",    # allow print statements
+"conftest.py" = [  # This file configures pytest and adds a custom pytest rule.
+    "ARG001",      # The unused argument is required in this case.
+    "T201",        # I want to report probelms to the user.
 ]
 
 [tool.mypy]
@@ -125,5 +132,5 @@ markers = [
     "component: Make sure a single module works, but allow for necessary dependencies, e.g. the database.",
     "integration: Make sure multiple modules work together.",
     "contract: Make sure an external data source works.",
-    "e2e: Make sure a workflow from the frontend to the database works."
+    "e2e: Make sure a workflow from the frontend to the database works.",
 ]
