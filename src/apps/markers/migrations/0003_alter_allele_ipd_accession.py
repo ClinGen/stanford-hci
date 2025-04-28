@@ -4,15 +4,17 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('markers', '0002_alter_allele_options_alter_allele_ipd_accession_and_more'),
+        ("markers", "0002_alter_allele_options_alter_allele_ipd_accession_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='allele',
-            name='ipd_accession',
-            field=models.CharField(help_text='A unique identifier for the allele, e.g. HLA00902.', verbose_name='IPD Accession'),
+            model_name="allele",
+            name="ipd_accession",
+            field=models.CharField(
+                help_text="A unique identifier for the allele, e.g., HLA00902.",
+                verbose_name="IPD Accession",
+            ),
         ),
     ]

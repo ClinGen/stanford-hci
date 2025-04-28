@@ -2,7 +2,7 @@
 
 from django.forms import ModelForm
 
-from apps.diseases.models.disease import Disease
+from apps.diseases.models.mondo import Mondo
 
 
 class DiseaseForm(ModelForm):
@@ -11,5 +11,5 @@ class DiseaseForm(ModelForm):
     class Meta:
         """Define metadata options."""
 
-        model = Disease
+        model = Mondo
         fields = ["mondo_id"]

@@ -4,15 +4,17 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('diseases', '0001_initial'),
+        ("diseases", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='disease',
-            name='mondo_id',
-            field=models.CharField(help_text='The Mondo Disease Ontology ID, e.g. MONDO_0005052.', verbose_name='Mondo ID'),
+            model_name="disease",
+            name="mondo_id",
+            field=models.CharField(
+                help_text="The Mondo Disease Ontology ID, e.g., MONDO_0005052.",
+                verbose_name="Mondo ID",
+            ),
         ),
     ]

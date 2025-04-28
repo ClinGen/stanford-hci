@@ -24,7 +24,7 @@ class Client:
         """Set the base URL and timeout.
 
         Args:
-             base_url: The base URL of the external source, e.g. "https://example.com".
+             base_url: The base URL of the external source, e.g., "https://example.com".
              timeout: The timeout in seconds for the request.
         """
         self.base_url = base_url
@@ -35,7 +35,7 @@ class Client:
         """Perform a GET request to the external source.
 
         Args:
-            endpoint: The portion of the URL after the base, e.g. "path/to/resource".
+            endpoint: The portion of the URL after the base, e.g., "path/to/resource".
             params: Query parameters to be included in the request.
 
         Raises:
@@ -60,7 +60,7 @@ class Client:
         """Perform a GET request to the external source and return the JSON response.
 
         Args:
-            endpoint: The portion of the URL after the base, e.g. "path/to/resource".
+            endpoint: The portion of the URL after the base, e.g., "path/to/resource".
             params: Query parameters to be included in the request.
 
         Raises:
@@ -82,7 +82,7 @@ class Client:
         """Perform a GET request to the external source and return the XML response.
 
         Args:
-            endpoint: The portion of the URL after the base, e.g. "path/to/resource".
+            endpoint: The portion of the URL after the base, e.g., "path/to/resource".
             params: Query parameters to be included in the request.
 
         Raises:

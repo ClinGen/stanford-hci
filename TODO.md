@@ -31,7 +31,7 @@
     - [x] We've made the changes.
 
 - [ ] Services are in use.
-    - [ ] We've found all the CUD logic.
+  - [x] We've found all the CUD logic.
     - [ ] We've made the changes.
 
 - [ ] Base classes are in use.
@@ -41,6 +41,8 @@
     - [ ] Services implement their ABC.
 
 - [ ] The URLs use "list" instead of "all."
+
+- [ ] All arguments, returns, and raises are documented in docstrings.
 
 ## The missing tests have been added.
 

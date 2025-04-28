@@ -2,6 +2,6 @@
 
 from django.contrib import admin
 
-from apps.diseases.models.disease import Disease
+from apps.diseases.models.mondo import Mondo
 
-admin.site.register(Disease)
+admin.site.register(Mondo)

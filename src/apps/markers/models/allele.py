@@ -17,7 +17,7 @@ class Allele(models.Model):
     name: models.CharField = models.CharField(verbose_name="IPD-IMGT Name")
     ipd_accession: models.CharField = models.CharField(
         verbose_name="IPD Accession",
-        help_text="A unique identifier for the allele, e.g. HLA00902.",
+        help_text="A unique identifier for the allele, e.g., HLA00902.",
     )
 
     class Meta:

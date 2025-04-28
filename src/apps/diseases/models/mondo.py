@@ -3,7 +3,7 @@
 from django.db import models
 
 
-class Disease(models.Model):
+class Mondo(models.Model):
     """A disease is uniquely identified by its Mondo ID.
 
     The Mondo Disease Ontology (Mondo) aims to harmonize disease definitions across the
@@ -13,7 +13,7 @@ class Disease(models.Model):
 
     mondo_id: models.CharField = models.CharField(
         verbose_name="Mondo ID",
-        help_text="The Mondo Disease Ontology ID, e.g. MONDO_0005052.",
+        help_text="The Mondo Disease Ontology ID, e.g., MONDO_0005052.",
     )
     label: models.CharField = models.CharField(verbose_name="Label")
 

@@ -36,8 +36,8 @@ Here's an example:
 
     # TODO(Liam): Fix the foo feature. Tracked in https://github.com/org/repo/issue/123.
 
-Lint Comments
-^^^^^^^^^^^^^
+Lint Ignore Comments
+^^^^^^^^^^^^^^^^^^^^
 
 If you ignore a lint rule, you *must* provide a justification for doing so.
 
@@ -46,6 +46,17 @@ Here's an example:
 .. code-block:: python
 
     from .base import (  # noqa: F401 (We don't care about unused imports in this context.)
+
+Type Hint Comments
+^^^^^^^^^^^^^^^^^^
+
+If you ignore type hints, you *must* provide a justification for doing so.
+
+Here's an example:
+
+.. code-block:: python
+
+    service = MondoService(client=client)  # type: ignore (We are using a mock client for our test.)
 
 Logs
 ----

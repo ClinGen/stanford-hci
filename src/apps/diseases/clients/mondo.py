@@ -1,12 +1,12 @@
-"""Provide services related to diseases."""
+"""Provide services related to diseases whose information is stored in Mondo."""
 
 import requests
 
 from constants import MondoConstants, RequestsConstants
 
 
-class DiseaseClient:
-    """Fetch a disease's info."""
+class MondoClient:
+    """Fetch a Mondo disease's info."""
 
     def __init__(self, mondo_id: str) -> None:
         """Get info the for disease."""
@@ -32,5 +32,5 @@ class DiseaseClient:
                     self._data = terms[0]
 
     def _set_label(self) -> None:
-        """Set the label of the disease."""
+        """Set the label of the Mondo disease."""
         self.label = self._data["label"]
