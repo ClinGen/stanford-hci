@@ -1,8 +1,7 @@
 """Provide base classes for views."""
 
 from abc import ABC, abstractmethod
-
-from django.http import HttpResponse
+from typing import Any
 
 
 class EntityView(ABC):
@@ -14,15 +13,15 @@ class EntityView(ABC):
     """
 
     @abstractmethod
-    def new(self) -> HttpResponse:
+    def new(self) -> Any:  # noqa: ANN401 (We don't care about this for abstract methods.)
         """View the page that provides a form that creates a new entity."""
 
     @abstractmethod
-    def list(self) -> HttpResponse:
+    def list(self) -> Any:  # noqa: ANN401 (We don't care about this for abstract methods.)
         """View the searchable table page for an entity."""
 
     @abstractmethod
-    def details(self, human_readable_id: str) -> HttpResponse:
+    def details(self, human_readable_id: str) -> Any:  # noqa: ANN401 (We don't care about this for abstract methods.)
         """View the details page for an entity.
 
         Args:

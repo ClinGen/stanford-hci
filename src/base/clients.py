@@ -15,7 +15,7 @@ class ClientError(Exception):
     """Raise when a client encounters an error."""
 
 
-class BaseClient:
+class Client:
     """Get data from an external source."""
 
     def __init__(

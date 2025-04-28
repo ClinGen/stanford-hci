@@ -20,6 +20,13 @@
     - [x] We've found all views where this refactor is needed.
     - [x] We've made the changes.
 
+- [x] Base classes have been created.
+  - [x] We have a base class for clients.
+  - [x] We have an ABC for views.
+  - [x] We have an ABC for selectors.
+  - [x] We have an ABC for services.
+  - [ ] We have an ABC for permissions.
+
 - [ ] Selectors are in use.
     - [ ] We've found all the read-only logic.
     - [ ] We've made the changes.
@@ -28,13 +35,11 @@
     - [ ] We've found all the CUD logic.
     - [ ] We've made the changes.
 
-- [x] Base classes have been created.
-  - [x] We have a base class for clients.
-  - [x] We have an ABC for views.
-
 - [ ] Base classes are in use.
     - [ ] Clients implement their base class.
     - [ ] Views implement their ABC.
+    - [ ] Selectors implement their ABC.
+    - [ ] Services implement their ABC.
 
 ## The missing tests have been added.
 
@@ -93,6 +98,9 @@
     - [ ] The user can view all markers.
     - [x] The user can view all publications.
     - [ ] The user can curate.
+
+- [ ] We've decided on permissions.
+- [ ] Permissions have been implemented.
 
 - [ ] We have end-to-end tests for all workflows.
     - [ ] sign up
