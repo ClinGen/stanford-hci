@@ -1,4 +1,4 @@
-"""Provide a view for adding a new allele."""
+"""Provide a views for alleles."""
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render

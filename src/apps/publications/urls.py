@@ -2,9 +2,11 @@
 
 from django.urls import path
 
-from apps.publications.views.pubmed import all_pubmed, new_pubmed
+from apps.publications.views.pubmed import PubMedView
+
+view = PubMedView()
 
 urlpatterns = [
-    path("pubmed/all", all_pubmed, name="all_pubmed"),
-    path("pubmed/new", new_pubmed, name="new_pubmed"),
+    path("pubmed/new", view.new, name="new_pubmed"),
+    path("pubmed/all", view.list, name="all_pubmed"),
 ]
