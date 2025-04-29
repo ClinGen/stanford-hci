@@ -38,12 +38,13 @@
     - [ ] Clients implement their base class.
     - [ ] Entity views implement their ABC.
         - [x] diseases/mondo
-        - [ ] markers/allele
+        - [x] markers/allele
         - [ ] publications/pubmed
     - [x] Selectors implement their ABC.
     - [x] Services implement their ABC.
 
-- [ ] The URLs use "list" instead of "all."
+- [ ] We've replaced instances of "all" with "list."
+- [ ] We've replaced instances of "overview" with "details."
 
 - [ ] All arguments, returns, and raises are documented in docstrings.
 
@@ -104,6 +105,17 @@
     - [ ] The user can view all markers.
     - [x] The user can view all publications.
     - [ ] The user can curate.
+
+- [ ] Entity forms have links to external search sites.
+  - [ ] disease
+    - [ ] mondo
+  - [ ] markers
+    - [ ] allele
+    - [ ] haplotype
+  - [ ] publications
+    - [ ] pubmed
+    - [ ] biorxiv
+    - [ ] medrxiv
 
 - [ ] We've decided on permissions.
 - [ ] Permissions have been implemented.
