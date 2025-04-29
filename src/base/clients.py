@@ -2,6 +2,8 @@
 
 import json
 import logging
+from abc import ABC, abstractmethod
+from typing import Any
 from xml.etree import ElementTree as ET
 
 import requests
@@ -11,25 +13,62 @@ from constants import RequestsConstants
 logger = logging.getLogger(__name__)
 
 
-class ClientError(Exception):
+class EntityClientError(Exception):
     """Raise when a client encounters an error."""
 
 
-class Client:
+class HTTPClient(ABC):
+    """Perform HTTP requests to an external source."""
+
+    @abstractmethod
+    def get(
+        self,
+        url: str,
+        params: dict | None = None,
+        headers: dict | None = None,
+        timeout: float | None = None,
+    ) -> Any:  # noqa: ANN401 (We don't care about this for abstract methods.)
+        """Perform a GET request to the external source."""
+
+
+class RequestsHTTPClient(HTTPClient):
+    """Perform HTTP requests to an external source using the `requests` library."""
+
+    def get(
+        self,
+        url: str,
+        params: dict | None = None,
+        headers: dict | None = None,
+        timeout: dict | None = None,
+    ) -> requests.Response:
+        """Perform a GET request to the external source using the `requests` library.
+
+        Returns:
+             The response from the external source.
+        """
+        return requests.get(url, params=params, headers=headers, timeout=timeout)
+
+
+class EntityClient:
     """Get data from an external source."""
 
     def __init__(
-        self, base_url: str = "", timeout: int = RequestsConstants.DEFAULT_TIMEOUT
+        self,
+        base_url: str = "",
+        timeout: int = RequestsConstants.DEFAULT_TIMEOUT,
+        http_client: HTTPClient | None = None,
     ) -> None:
         """Set the base URL and timeout.
 
         Args:
              base_url: The base URL of the external source, e.g., "https://example.com".
              timeout: The timeout in seconds for the request.
+             http_client: The HTTP client to use for the request.
         """
         self.base_url = base_url
         self.timeout = timeout
         self.headers = {}
+        self._http_client = http_client or RequestsHTTPClient()
 
     def _get(self, endpoint: str, params: dict | None = None) -> requests.Response:
         """Perform a GET request to the external source.
@@ -39,7 +78,7 @@ class Client:
             params: Query parameters to be included in the request.
 
         Raises:
-            ClientError: If the request fails.
+            EntityClientError: If the request fails.
 
         Returns:
              The response from the external source.
@@ -47,13 +86,13 @@ class Client:
         url = f"{self.base_url}/{endpoint.lstrip('/')}"
         try:
             logger.debug(f"GET {url} with params {params}")
-            response = requests.get(
+            response = self._http_client.get(
                 url, params=params, headers=self.headers, timeout=self.timeout
             )
             response.raise_for_status()
         except requests.exceptions.RequestException as exc:
             error_message = f"Error during GET request to {url}: {exc}"
-            raise ClientError(error_message) from exc
+            raise EntityClientError(error_message) from exc
         return response
 
     def get_json(self, endpoint: str, params: dict | None = None) -> dict:
@@ -64,7 +103,7 @@ class Client:
             params: Query parameters to be included in the request.
 
         Raises:
-             ClientError:
+             EntityClientError:
                  If the request fails or the response is not valid JSON.
 
         Returns:
@@ -75,7 +114,7 @@ class Client:
             data = response.json()
         except json.JSONDecodeError as exc:
             error_message = f"Failed to decode JSON from response: {exc}"
-            raise ClientError(error_message) from exc
+            raise EntityClientError(error_message) from exc
         return data
 
     def get_xml(self, endpoint: str, params: dict | None = None) -> ET.Element:
@@ -86,7 +125,7 @@ class Client:
             params: Query parameters to be included in the request.
 
         Raises:
-            ClientError: If the request fails or the response is not valid XML.
+            EntityClientError: If the request fails or the response is not valid XML.
 
         Returns:
             An ET object representing the XML response.
@@ -96,5 +135,13 @@ class Client:
             data = ET.fromstring(response.content)
         except ET.ParseError as exc:
             error_message = f"Failed to parse XML from response: {exc}"
-            raise ClientError(error_message) from exc
+            raise EntityClientError(error_message) from exc
         return data
+
+    @abstractmethod
+    def fetch(self) -> None:
+        """Fetch data from the external source and populate the members.
+
+        This method provides an explicit method to call to perform the HTTP request.
+        It should be overridden by subclasses.
+        """

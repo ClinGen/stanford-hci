@@ -36,6 +36,9 @@
 
 - [ ] Base classes are in use.
     - [ ] Clients implement their base class.
+        - [x] diseases/mondo
+        - [ ] markers/allele
+        - [ ] publications/pubmed
     - [x] Entity views implement their ABC.
         - [x] diseases/mondo
         - [x] markers/allele
