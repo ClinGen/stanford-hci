@@ -17,6 +17,7 @@ App Structure
    ├── migrations  # House generated database migrations.
    ├── models      # House database models
    ├── permissions # Centralize access control logic.
+   ├── schemas     # House code used to validate data from external sources.
    ├── selectors   # Centralize read logic.
    ├── services    # Centralize create, update, and delete logic.
    ├── static      # House static assets like images, CSS, and JavaScript.
