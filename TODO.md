@@ -46,15 +46,6 @@
     - [x] Selectors implement their ABC.
     - [x] Services implement their ABC.
 
-- [ ] We've replaced instances of "all" with "list."
-- [ ] We've replaced instances of "overview" with "details."
-- [ ] We've replaced instances of "allele" with "HLA allele."
-
-- [ ] All arguments, returns, and raises are documented in docstrings.
-    - [ ] We've considered using https://pypi.org/project/flake8-docstrings-complete/.
-- [ ] There are no "stop sign" docstrings.
-    - That is, there are no signs above stop signs saying: "This is a stop sign."
-
 ## The missing tests have been added.
 
 - [ ] We've found all modules that are missing tests.
@@ -64,20 +55,34 @@
 ## The new repo is in use.
 
 - [x] We've extracted all tasks from my personal to-do list.
+
+- [ ] We've replaced instances of "all" with "list."
+- [ ] We've replaced instances of "overview" with "details."
+- [ ] We've replaced instances of "allele" with "HLA allele."
+
+- [ ] All arguments, returns, and raises are documented in docstrings.
+    - [ ] We've considered using https://pypi.org/project/flake8-docstrings-complete/.
+- [ ] There are no "stop sign" docstrings.
+    - That is, there are no signs above stop signs saying: "This is a stop sign."
+
 - [x] The documentation system is set up.
     - [x] We have a document for how-to guides.
     - [x] We have a document for tutorials.
     - [x] We have a document for explanations.
     - [x] The README links to the documentation.
+  
 - [ ] We've fixed the type check issues.
 - [ ] All TODOs in the code have been resolved.
 - [ ] We are linting Django templates as part of code quality checks.
+
 - [ ] The score calculator code is integrated.
 - [ ] All code quality checks are passing.
-- [x] We are using conventional commits.
-- [ ] The garbage development migrations are blown away.
+
 - [x] The old Terraform code is preserved.
 - [x] The old infrastructure is destroyed.
+
+- [ ] The garbage development migrations are blown away.
+- [x] We are using conventional commits.
 - [ ] The commit history is restricted to the new organization of the code and the new commit convention.
     - (The prior history is too messy to be useful.)
 - [ ] We've created the new repo.
