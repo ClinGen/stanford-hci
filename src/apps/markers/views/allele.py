@@ -7,6 +7,7 @@ from apps.markers.clients.allele import AlleleClient
 from apps.markers.forms.allele import AlleleForm
 from apps.markers.services.allele import AlleleService
 from base.views import EntityView
+from constants import IPDConstants
 
 
 class AlleleView(EntityView):
@@ -24,7 +25,11 @@ class AlleleView(EntityView):
                 return redirect("home")
         else:
             form = AlleleForm()
-        return render(request, "markers/allele/new.html", {"form": form})
+        return render(
+            request,
+            "markers/allele/new.html",
+            {"form": form, "ipd_search_url": IPDConstants.SEARCH_URL},
+        )
 
     def list(self, request: HttpRequest) -> None:
         """Return the searchable table page for an allele."""

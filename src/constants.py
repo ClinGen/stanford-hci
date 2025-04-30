@@ -20,6 +20,12 @@ class CARConstants:
     API_URL = "https://reg.genome.network/allele/hla"
 
 
+class IPDConstants:
+    """Define constants related to IPD-IMGT/HLA database."""
+
+    SEARCH_URL = "https://www.ebi.ac.uk/ipd/imgt/hla/alleles/"
+
+
 class ModelsConstants:
     """Define constants related to models."""
 
@@ -38,6 +44,7 @@ class PubMedConstants:
     """Define constants related to PubMed."""
 
     API_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
+    SEARCH_URL = "https://pubmed.ncbi.nlm.nih.gov/"
 
 
 class RequestsConstants:

@@ -8,6 +8,7 @@ from apps.publications.forms.pubmed import PubMedArticleForm
 from apps.publications.selectors.pubmed import PubMedArticleSelector
 from apps.publications.services.pubmed import PubMedArticleService
 from base.views import EntityView
+from constants import PubMedConstants
 
 
 class PubMedView(EntityView):
@@ -25,7 +26,11 @@ class PubMedView(EntityView):
                 return redirect("home")
         else:
             form = PubMedArticleForm()
-        return render(request, "publications/pubmed/new.html", {"form": form})
+        return render(
+            request,
+            "publications/pubmed/new.html",
+            {"form": form, "pubmed_search_url": PubMedConstants.SEARCH_URL},
+        )
 
     def list(self, request: HttpRequest) -> HttpResponse:
         """Return the searchable table page for a PubMed publication."""
