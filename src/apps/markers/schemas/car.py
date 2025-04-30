@@ -1,4 +1,4 @@
-"""Define schemas for the ClinGen Allele Registry."""
+"""Define schemas for the ClinGen Allele Registry API."""
 
 from pydantic import BaseModel, Field, RootModel, field_validator
 

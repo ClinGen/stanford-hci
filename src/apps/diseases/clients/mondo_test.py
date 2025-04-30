@@ -19,109 +19,22 @@ def json_data_valid() -> dict:
 
     This is the expected format of the JSON data returned by the Mondo API.
     """
-    # fmt: off
-    return {
-        "_embedded": {
-            "terms": [
-                {
-                    "label": "disease label",
-                    "other": "info"
-                }
-            ]
-        }
-    }
-    # fmt: on
+    return {"label": "disease label", "other": "info"}
 
 
 @pytest.fixture
-def json_data_no_embedded() -> dict:
-    """Return JSON data with no `_embedded` key from the Mondo API."""
-    # fmt: off
-    return {
-        "no_embedded": {
-            "terms": [
-                {
-                    "label": "disease label",
-                    "other": "info"
-                }
-            ]
-        }
-    }
-    # fmt: on
+def json_data_invalid() -> dict:
+    """Return invalid JSON data from the Mondo API.
 
-
-@pytest.fixture
-def json_data_no_terms() -> dict:
-    """Return JSON data with no `terms` key from the Mondo API."""
-    # fmt: off
-    return {
-        "_embedded": {
-            "no_terms": [
-                {
-                    "label": "disease label",
-                    "other": "info"
-                }
-            ]
-        }
-    }
-    # fmt: on
-
-
-@pytest.fixture
-def json_data_empty_terms() -> dict:
-    """Return JSON data with an empty `terms` list from the Mondo API."""
-    # fmt: off
-    return {
-        "_embedded": {
-            "terms": []
-        }
-    }
-    # fmt: on
-
-
-@pytest.fixture
-def expected_extracted_data() -> dict:
-    """Return the JSON data that should be extracted from the Mondo API response."""
-    # fmt: off
-    return {
-        "label": "disease label",
-        "other": "info"
-    }
-    # fmt: on
-
-
-class TestMondoClientExtractData:
-    """Make sure the `_extract_data` static method works as expected.
-
-    This class contains tests for various scenarios when extracting data from Mondo API
-    responses.
+    This response is missing the fields we care about.
     """
+    return {"other": "info"}
 
-    @pytest.mark.unit
-    def test_extract_data_success(
-        self, json_data_valid: dict, expected_extracted_data: dict
-    ) -> None:
-        """Test successful data extraction from a valid response."""
-        actual_extracted_data = MondoClient._extract_data(json_data_valid)  # noqa: SLF001 (We want to access the private member to test it.)
-        assert actual_extracted_data == expected_extracted_data
 
-    @pytest.mark.unit
-    def test_extract_data_no_embedded(self, json_data_no_embedded: dict) -> None:
-        """Test handling of responses missing the `_embedded` key."""
-        extracted = MondoClient._extract_data(json_data_no_embedded)  # noqa: SLF001 (We want to access the private member to test it.)
-        assert extracted is None
-
-    @pytest.mark.unit
-    def test_extract_data_no_terms(self, json_data_no_terms: dict) -> None:
-        """Test handling of responses missing the `terms` list in `_embedded`."""
-        extracted = MondoClient._extract_data(json_data_no_terms)  # noqa: SLF001 (We want to access the private member to test it.)
-        assert extracted is None
-
-    @pytest.mark.unit
-    def test_extract_data_empty_terms(self, json_data_empty_terms: dict) -> None:
-        """Test handling of responses with an empty `terms` list."""
-        extracted = MondoClient._extract_data(json_data_empty_terms)  # noqa: SLF001 (We want to access the private member to test it.)
-        assert extracted is None
+@pytest.fixture
+def expected() -> dict:
+    """Return the data we expect to extract from the JSON data."""
+    return {"label": "disease label"}
 
 
 @pytest.fixture
@@ -141,12 +54,12 @@ def mock_response_valid_data(json_data_valid: dict) -> Mock:
 
 
 @pytest.fixture
-def mock_response_invalid_data(json_data_no_embedded: dict) -> Mock:
+def mock_response_invalid_data(json_data_invalid: dict) -> Mock:
     """Return a mocked response from the Mondo API with invalid data."""
     mock_response = Mock()
     mock_response.status_code = 200
     mock_response.raise_for_status.return_value = None
-    mock_response.json.return_value = json_data_no_embedded
+    mock_response.json.return_value = json_data_invalid
     return mock_response
 
 
@@ -196,17 +109,26 @@ class TestMondoClient:
         client = MondoClient(mondo_id=mondo_id)
         assert client.base_url == MondoConstants.API_URL
         assert client.mondo_id == mondo_id
-        assert client._data is None  # noqa: SLF001 (We want to access the private member to test it.)
         assert client.label is None
 
     @pytest.mark.unit
-    def test_fetch_success(
-        self, mock_client_valid_data: Mock, expected_extracted_data: dict
-    ) -> None:
+    def test_fetch_success(self, mock_client_valid_data: Mock, expected: dict) -> None:
         """Test successful API data fetching."""
         client = mock_client_valid_data
         client.fetch()
-        assert client.label == expected_extracted_data["label"]
+        assert client.label == expected["label"]
+
+    @pytest.mark.unit
+    def test_fetch_failure_invalid_data(
+        self, mondo_id: str, mock_client_invalid_data: MondoClient
+    ) -> None:
+        """Test handling of data extraction failures."""
+        client = mock_client_invalid_data
+        with pytest.raises(MondoClientError) as exc:
+            client.fetch()
+        error_message = f"Error validating data for {mondo_id}"
+        assert error_message in str(exc.value)
+        assert client.label is None
 
     @pytest.mark.unit
     def test_fetch_failure_request(
@@ -218,18 +140,4 @@ class TestMondoClient:
             client.fetch()
         error_message = f"Error fetching Mondo data for {mondo_id}"
         assert error_message in str(exc.value)
-        assert client._data is None  # noqa: SLF001 (We want to access the private member to test it.)
-        assert client.label is None
-
-    @pytest.mark.unit
-    def test_fetch_failure_extract_data(
-        self, mondo_id: str, mock_client_invalid_data: MondoClient
-    ) -> None:
-        """Test handling of data extraction failures."""
-        client = mock_client_invalid_data
-        with pytest.raises(MondoClientError) as exc:
-            client.fetch()
-        error_message = f"Unable to extract data from Mondo API response for {mondo_id}"
-        assert error_message in str(exc.value)
-        assert client._data is None  # noqa: SLF001 (We want to access the private member to test it.)
         assert client.label is None
