@@ -14,10 +14,10 @@ class AffiliationsConstants:
     MAX_LENGTH_ID = 5
 
 
-class IPDConstants:
-    """Define constants related to the IPD-IMGT/HLA Database."""
+class CARConstants:
+    """Define constants related to the ClinGen Allele Registry."""
 
-    API_URL = "https://www.ebi.ac.uk/cgi-bin/ipd/api/allele"
+    API_URL = "https://reg.genome.network/allele/hla"
 
 
 class ModelsConstants:

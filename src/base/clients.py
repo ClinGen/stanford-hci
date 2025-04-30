@@ -17,6 +17,18 @@ class EntityClientError(Exception):
     """Raise when a client encounters an error."""
 
 
+class EntityClientRequestError(Exception):
+    """Raise when a client encounters a request error."""
+
+
+class EntityClientJSONError(Exception):
+    """Raise when a client can't decode JSON."""
+
+
+class EntityClientXMLError(Exception):
+    """Raise when a client can't parse XML."""
+
+
 class HTTPClient(ABC):
     """Perform HTTP requests to an external source."""
 
@@ -39,7 +51,7 @@ class RequestsHTTPClient(HTTPClient):
         url: str,
         params: dict | None = None,
         headers: dict | None = None,
-        timeout: dict | None = None,
+        timeout: float | None = None,
     ) -> requests.Response:
         """Perform a GET request to the external source using the `requests` library.
 
@@ -78,21 +90,23 @@ class EntityClient:
             params: Query parameters to be included in the request.
 
         Raises:
-            EntityClientError: If the request fails.
+            EntityClientRequestError: If the request fails.
 
         Returns:
              The response from the external source.
         """
         url = f"{self.base_url}/{endpoint.lstrip('/')}"
         try:
-            logger.debug(f"GET {url} with params {params}")
+            logger.debug(f"GET {url} params {params}")
+            logger.debug(f"    Params: {params}")
+            logger.debug(f"    Headers: {self.headers}")
             response = self._http_client.get(
                 url, params=params, headers=self.headers, timeout=self.timeout
             )
             response.raise_for_status()
         except requests.exceptions.RequestException as exc:
             error_message = f"Error during GET request to {url}: {exc}"
-            raise EntityClientError(error_message) from exc
+            raise EntityClientRequestError(error_message) from exc
         return response
 
     def get_json(self, endpoint: str, params: dict | None = None) -> dict:
@@ -103,8 +117,7 @@ class EntityClient:
             params: Query parameters to be included in the request.
 
         Raises:
-             EntityClientError:
-                 If the request fails or the response is not valid JSON.
+             EntityClientJSONError: If the JSON can't be decoded.
 
         Returns:
             A dictionary representing the JSON response.
@@ -114,7 +127,7 @@ class EntityClient:
             data = response.json()
         except json.JSONDecodeError as exc:
             error_message = f"Failed to decode JSON from response: {exc}"
-            raise EntityClientError(error_message) from exc
+            raise EntityClientJSONError(error_message) from exc
         return data
 
     def get_xml(self, endpoint: str, params: dict | None = None) -> ET.Element:
@@ -125,17 +138,17 @@ class EntityClient:
             params: Query parameters to be included in the request.
 
         Raises:
-            EntityClientError: If the request fails or the response is not valid XML.
+            EntityClientXMLError: If the XML can't be parsed.
 
         Returns:
-            An ET object representing the XML response.
+            An `Element` object representing the XML response.
         """
         response = self._get(endpoint, params=params)
         try:
             data = ET.fromstring(response.content)
         except ET.ParseError as exc:
             error_message = f"Failed to parse XML from response: {exc}"
-            raise EntityClientError(error_message) from exc
+            raise EntityClientXMLError(error_message) from exc
         return data
 
     @abstractmethod

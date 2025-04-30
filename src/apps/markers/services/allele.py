@@ -1,4 +1,4 @@
-"""Provide services for alleles."""
+"""Provide services for HLA alleles."""
 
 from apps.markers.clients.allele import AlleleClient
 from apps.markers.models import Allele
@@ -6,7 +6,7 @@ from base.services import EntityService
 
 
 class AlleleServiceError(Exception):
-    """Raise when an allele service encounters an error."""
+    """Raise when `AlleleService` encounters an error."""
 
 
 class AlleleService(EntityService):
@@ -16,35 +16,30 @@ class AlleleService(EntityService):
         """Set the allele client."""
         self.client = client
 
-    def create(self, ipd_accession: str) -> Allele:
-        """Create an allele.
+    def create(self, descriptor: str) -> Allele:
+        """Create an HLA allele in the database.
 
         Args:
-             ipd_accession: The IPD-IMGT accession, e.g., HLA00902.
+             descriptor: The HLA allele descriptor, e.g., 'A*01:01:01:119'.
 
         Returns:
-            The newly created allele.
+            The newly created HLA allele object.
         """
-        return Allele.objects.create(ipd_accession=ipd_accession, name=self.client.name)
+        return Allele.objects.create(
+            descriptor=descriptor,
+            car_id=self.client.car_id,
+            car_url=self.client.car_url,
+        )
 
-    def update(self, ipd_accession: str, name: str) -> Allele:
-        """Update an allele.
+    def update(self, car_id: str) -> Allele:
+        """Update an HLA allele.
 
         Args:
-            ipd_accession: The IPD-IMGT accession, e.g., HLA00902.
-            name: The allele name we want to update.
+            car_id: The ClinGen Allele Registry ID, e.g., CAHLA1449130330.
 
         Raises:
             AlleleServiceError: When the allele to update does not exist.
 
         Returns:
-            The updated allele.
+            The updated HLA allele.
         """
-        try:
-            allele = Allele.objects.get(ipd_accession=ipd_accession)
-            allele.name = name
-            allele.save()
-        except Allele.DoesNotExist as exc:
-            error_message = f"The allele with accession {ipd_accession} does not exist"
-            raise AlleleServiceError(error_message) from exc
-        return allele

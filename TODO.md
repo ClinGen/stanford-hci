@@ -37,7 +37,7 @@
 - [ ] Base classes are in use.
     - [ ] Clients implement their base class.
         - [x] diseases/mondo
-        - [ ] markers/allele
+        - [x] markers/allele
         - [ ] publications/pubmed
     - [x] Entity views implement their ABC.
         - [x] diseases/mondo
@@ -48,8 +48,12 @@
 
 - [ ] We've replaced instances of "all" with "list."
 - [ ] We've replaced instances of "overview" with "details."
+- [ ] We've replaced instances of "allele" with "HLA allele."
 
 - [ ] All arguments, returns, and raises are documented in docstrings.
+    - [ ] We've considered using https://pypi.org/project/flake8-docstrings-complete/.
+- [ ] There are no "stop sign" docstrings.
+    - That is, there are no signs above stop signs saying: "This is a stop sign."
 
 ## The missing tests have been added.
 
@@ -57,16 +61,14 @@
 - [ ] We've added the tests.
 - [x] We're monitoring our test coverage.
 
-## The `reorg` branch is merged into the `main` branch.
+## The new repo is in use.
 
 - [x] We've extracted all tasks from my personal to-do list.
-
 - [x] The documentation system is set up.
     - [x] We have a document for how-to guides.
     - [x] We have a document for tutorials.
     - [x] We have a document for explanations.
     - [x] The README links to the documentation.
-
 - [ ] We've fixed the type check issues.
 - [ ] All TODOs in the code have been resolved.
 - [ ] We are linting Django templates as part of code quality checks.
@@ -78,11 +80,23 @@
 - [x] The old infrastructure is destroyed.
 - [ ] The commit history is restricted to the new organization of the code and the new commit convention.
     - (The prior history is too messy to be useful.)
+- [ ] We've created the new repo.
+- [ ] We've moved the code to the new repo.
+- [ ] We're running all checks in the new repo.
 
-## MVP functionality is complete.
+## Code quality standards are documented and adhered to.
 
+- [x] We've documented logging practices.
 - [ ] Logging is configured.
 - [ ] We log when we're supposed to log.
+
+- [ ] We've documented error handling practices.
+- [ ] We handle errors the way we're supposed to.
+
+- [ ] We've documented our data validation practices.
+- [ ] We validate data the way we're supposed to.
+
+## MVP functionality is complete.
 
 - [ ] Models have a human-readable ID.
     - Ideas:
@@ -110,15 +124,15 @@
     - [ ] The user can curate.
 
 - [ ] Entity forms have links to external search sites.
-  - [ ] disease
-    - [ ] mondo
-  - [ ] markers
-    - [ ] allele
-    - [ ] haplotype
-  - [ ] publications
-    - [ ] pubmed
-    - [ ] biorxiv
-    - [ ] medrxiv
+    - [ ] disease
+        - [ ] mondo
+    - [ ] markers
+        - [ ] allele
+        - [ ] haplotype
+    - [ ] publications
+        - [ ] pubmed
+        - [ ] biorxiv
+        - [ ] medrxiv
 
 - [ ] We've decided on permissions.
 - [ ] Permissions have been implemented.
@@ -141,10 +155,9 @@
     - [ ] curate
 
 - [ ] The data validation plan has been implemented.
-    - The three different validation layers:
-        - 1: Basic checking that we actually got what we needed in the client
-        - 2: Decoupled "validators" (possibly Pydantic) that make sure the data conforms to what we expect
-        - 3: Django validators in the models to perform extra checks
+    - The two different validation layers:
+        - Pydantic schemas are used in the clients
+        - Django validators in the models to perform extra checks
 
 ## All miscellaneous tasks have been resolved.
 

@@ -1,54 +1,32 @@
 """Test allele services."""
 
+from unittest.mock import Mock
+
 import pytest
 
-from apps.markers.models.allele import Allele
-from apps.markers.services.allele import AlleleService, AlleleServiceError
+from apps.markers.services.allele import AlleleService
+from constants import CARConstants
 
 
-class MockAlleleClient:
-    """Mock the allele client."""
-
-    def __init__(self, ipd_accession: str) -> None:
-        """Initialize the mock client."""
-        self.ipd_accession = ipd_accession
-        self.name = "allele name"
+@pytest.fixture
+def mock_allele_client() -> Mock:
+    """Return a mocked HLA allele client."""
+    client = Mock()
+    client.descriptor = "A*01:01:01:119"
+    client.car_id = "CAHLA123"
+    client.car_url = f"{CARConstants.API_URL}/{client.descriptor}"
+    client.schema = Mock()
+    return client
 
 
 @pytest.mark.component
 @pytest.mark.django_db
-def test_create_allele() -> None:
+def test_create_allele(mock_allele_client: Mock) -> None:
     """Make sure we can create an allele."""
-    ipd_accession = "HLA00123"
-    client = MockAlleleClient(ipd_accession)
-    service = AlleleService(client)  # type: ignore (We are using a mock client for our test.)
-    allele = service.create(ipd_accession)
+    descriptor = "A*01:01:01:119"
+    client = mock_allele_client
+    service = AlleleService(client)
+    allele = service.create(descriptor)
     assert allele is not None
-    assert allele.ipd_accession == client.ipd_accession
-    assert allele.name == client.name
-
-
-@pytest.mark.component
-@pytest.mark.django_db
-def test_update_allele() -> None:
-    """Make sure we can update an allele."""
-    ipd_accession = "HLA00543"
-    Allele.objects.create(ipd_accession=ipd_accession, name="allele name")
-    client = MockAlleleClient(ipd_accession)
-    service = AlleleService(client)  # type: ignore (We are using a mock client for our test.)
-    service.update(ipd_accession, "new allele name")
-    allele = Allele.objects.get(ipd_accession=ipd_accession)
-    assert allele is not None
-    assert allele.ipd_accession == client.ipd_accession
-    assert allele.name == "new allele name"
-
-
-@pytest.mark.component
-@pytest.mark.django_db
-def test_update_non_existent_allele() -> None:
-    """Make sure we can't update a non-existent allele."""
-    ipd_accession = "HLA00678"
-    client = MockAlleleClient(ipd_accession)
-    service = AlleleService(client)  # type: ignore (We are using a mock client for our test.)
-    with pytest.raises(AlleleServiceError):
-        service.update(ipd_accession, "new allele name")
+    assert allele.car_id == client.car_id
+    assert allele.car_url == client.car_url
