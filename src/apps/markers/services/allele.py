@@ -31,7 +31,10 @@ class AlleleService(EntityService):
             car_url=self.client.car_url,
         )
 
-    def update(self, car_id: str) -> Allele:
+    # TODO(Liam): Do the following tasks.  # noqa: FIX002, TD003
+    # - Implement the method below.
+    # - Remove the pyright ignore directive.
+    def update(self, car_id: str) -> Allele:  # type: ignore
         """Update an HLA allele.
 
         Args:

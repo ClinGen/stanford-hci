@@ -16,7 +16,7 @@ class MondoClientError(Exception):
 class MondoClient(EntityClient):
     """Get data from the Mondo Disease Ontology API."""
 
-    def __init__(self, mondo_id: str, schema: TermsSchema = TermsSchema) -> None:
+    def __init__(self, mondo_id: str, schema: type[TermsSchema] = TermsSchema) -> None:
         """Set up the Mondo client."""
         super().__init__(base_url=MondoConstants.API_URL)
         self.mondo_id = mondo_id

@@ -31,8 +31,14 @@ class MondoView(EntityView):
             {"form": form, "mondo_search_url": MondoConstants.SEARCH_URL},
         )
 
-    def list(self, request: HttpRequest) -> None:
+    # TODO(Liam): Do the following tasks.  # noqa: FIX002, TD003
+    # - Implement the method below.
+    # - Remove the pyright ignore directive.
+    def list(self, request: HttpRequest) -> HttpResponse:  # type: ignore
         """Return the searchable table page for a Mondo disease."""
 
-    def details(self, request: HttpRequest, mondo_id: str) -> None:
+    # TODO(Liam): Do the following tasks.  # noqa: FIX002, TD003
+    # - Implement the method below.
+    # - Remove the pyright ignore directive.
+    def details(self, request: HttpRequest, human_readable_id: str) -> HttpResponse:  # type: ignore
         """Return the details page for a Mondo disease."""

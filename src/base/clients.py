@@ -79,7 +79,7 @@ class EntityClient:
         """
         self.base_url = base_url
         self.timeout = timeout
-        self.headers = {}
+        self.headers: dict = {}
         self._http_client = http_client or RequestsHTTPClient()
 
     def _get(self, endpoint: str, params: dict | None = None) -> requests.Response:

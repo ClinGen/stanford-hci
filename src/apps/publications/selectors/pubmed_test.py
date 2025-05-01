@@ -12,7 +12,7 @@ def test_get_existing_pubmed_article() -> None:
     """Make sure we can get an existing PubMed article."""
     PubMedArticle.objects.create(pubmed_id="123456789", title="Test Article")
     selector = PubMedArticleSelector()
-    retrieved_article = selector.get(pubmed_id="123456789")
+    retrieved_article = selector.get(human_readable_id="123456789")
     assert retrieved_article is not None
     assert retrieved_article.pubmed_id == "123456789"
     assert retrieved_article.title == "Test Article"
@@ -23,7 +23,7 @@ def test_get_existing_pubmed_article() -> None:
 def test_get_non_existent_pubmed_article() -> None:
     """Make sure we can't get a non-existing PubMed article."""
     selector = PubMedArticleSelector()
-    retrieved_article = selector.get(pubmed_id="999")
+    retrieved_article = selector.get(human_readable_id="999")
     assert retrieved_article is None
 
 
@@ -35,6 +35,7 @@ def test_list_pubmed_articles_with_no_query() -> None:
     PubMedArticle.objects.create(pubmed_id="987654321", title="Test Article B")
     selector = PubMedArticleSelector()
     articles = selector.list()
+    assert articles is not None
     assert len(articles) == 2
     assert articles[0].pubmed_id == "123456789"
     assert articles[0].title == "Test Article A"
@@ -51,6 +52,7 @@ def test_list_pubmed_articles_with_pubmed_id_query() -> None:
     PubMedArticle.objects.create(pubmed_id="333333333", title="Test Article C")
     selector = PubMedArticleSelector()
     articles = selector.list("1")
+    assert articles is not None
     assert len(articles) == 2
     assert articles[0].pubmed_id == "111111111"
     assert articles[0].title == "Test Article A"
@@ -73,6 +75,7 @@ def test_list_pubmed_articles_with_title_query() -> None:
     )
     selector = PubMedArticleSelector()
     articles = selector.list("common")
+    assert articles is not None
     assert len(articles) == 2
     assert articles[0].pubmed_id == "111111111"
     assert articles[0].title == "Title with a common word A"

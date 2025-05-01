@@ -38,12 +38,15 @@ class PubMedView(EntityView):
         selector = PubMedArticleSelector()
         articles = selector.list(query)
 
-        if request.htmx:
+        if request.htmx:  # type: ignore (This attribute is added by the django-htmx app.)
             template_name = "publications/includes/pubmed_table.html"
         else:
             template_name = "publications/pubmed/all.html"
 
         return render(request, template_name, {"articles": articles})
 
-    def details(self, request: HttpRequest, pubmed_id: str) -> HttpResponse:
+    # TODO(Liam): Do the following tasks.  # noqa: FIX002, TD003
+    # - Implement the method below.
+    # - Remove the pyright ignore directive.
+    def details(self, request: HttpRequest, human_readable_id: str) -> HttpResponse:  # type: ignore
         """Return the details page for a PubMed publication."""

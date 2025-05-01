@@ -18,10 +18,10 @@ class AlleleView(EntityView):
         if request.method == "POST":
             form = AlleleForm(request.POST)
             if form.is_valid():
-                ipd_accession = form.cleaned_data["ipd_accession"]
-                client = AlleleClient(ipd_accession)
+                descriptor = form.cleaned_data["descriptor"]
+                client = AlleleClient(descriptor)
                 service = AlleleService(client)
-                service.create(ipd_accession)
+                service.create(descriptor)
                 return redirect("home")
         else:
             form = AlleleForm()
@@ -31,8 +31,14 @@ class AlleleView(EntityView):
             {"form": form, "ipd_search_url": IPDConstants.SEARCH_URL},
         )
 
-    def list(self, request: HttpRequest) -> None:
+    # TODO(Liam): Do the following tasks.  # noqa: FIX002, TD003
+    # - Implement the method below.
+    # - Remove the pyright ignore directive.
+    def list(self, request: HttpRequest) -> None:  # type: ignore
         """Return the searchable table page for an allele."""
 
-    def details(self, request: HttpRequest, ipd_accession: str) -> None:
+    # TODO(Liam): Do the following tasks.  # noqa: FIX002, TD003
+    # - Implement the method below.
+    # - Remove the pyright ignore directive.
+    def details(self, request: HttpRequest, human_readable_id: str) -> None:  # type: ignore
         """Return the details page for an allele."""

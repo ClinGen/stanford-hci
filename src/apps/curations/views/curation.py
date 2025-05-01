@@ -10,6 +10,9 @@ from apps.curations.forms.step_3 import Step3Form
 
 def edit(request: HttpRequest) -> HttpResponse:
     """Return the edit curation forms."""
+    step_1_form = Step1Form()
+    step_2_form = Step2Form()
+    step_3_form = Step3Form()
     if request.method == "POST":
         if "step_1" in request.POST:
             step_1_form = Step1Form(request.POST)

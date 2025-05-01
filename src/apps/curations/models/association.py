@@ -10,10 +10,10 @@ from apps.curations.models.step_3 import Step3
 class Association(models.Model):
     """This model represents an association."""
 
-    step_1: models.OneToOneField = models.OneToOneField(Step1)
-    step_2: models.OneToOneField = models.OneToOneField(Step2)
-    step_3: models.OneToOneField = models.OneToOneField(Step3)
+    step_1: models.OneToOneField = models.OneToOneField(Step1, on_delete=models.CASCADE)
+    step_2: models.OneToOneField = models.OneToOneField(Step2, on_delete=models.CASCADE)
+    step_3: models.OneToOneField = models.OneToOneField(Step3, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         """Return a string representation of the association."""
-        return f"Association ID: {self.id}"
+        return "Association <human readable ID here>"

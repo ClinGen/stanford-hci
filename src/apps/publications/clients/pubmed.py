@@ -1,4 +1,8 @@
+# type: ignore
 """Provide services related to PubMed."""
+# TODO(Liam): Do the following tasks.  # noqa: FIX002, TD003
+# - Refactor the `PubMedArticleClient` class to use the base client class.
+# - Remove the pyright ignore directive.
 
 import os
 from xml.etree import (  # noqa: S405 (If we can't trust XML from NCBI we have bigger problems.)

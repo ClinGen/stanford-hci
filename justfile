@@ -47,7 +47,7 @@ alias qlf := qual-lint-fix
 
 # Check Python type hints.
 qual-type-check:
-    cd src && uv run mypy .
+    cd src && uv run pyright .
 alias qtc := qual-type-check
 
 #=======================================================================================

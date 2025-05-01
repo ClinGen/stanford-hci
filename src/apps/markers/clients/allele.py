@@ -35,7 +35,9 @@ class AlleleClientJSONError(EntityClientJSONError):
 class AlleleClient(EntityClient):
     """Get data from the ClinGen Allele Registry."""
 
-    def __init__(self, descriptor: str, schema: HLADescriptorSchema) -> None:
+    def __init__(
+        self, descriptor: str, schema: type[HLADescriptorSchema] = HLADescriptorSchema
+    ) -> None:
         """Set the base URL and other members.
 
         Args:
@@ -75,8 +77,8 @@ class AlleleClient(EntityClient):
             # As part of the validation, Pydantic checks to make sure the list of HLA
             # allele records is of length 1.
             descriptor_record = descriptor_data[0]
-            self.car_url = descriptor_record.at_id
-            self.car_id = descriptor_record.car_id
+            self.car_url = descriptor_record.at_id  # type: ignore (Should work just fine.)
+            self.car_id = descriptor_record.car_id  # type: ignore (Should work just fine.)
         except ValidationError as exc:
             error_message = f"Error validating data for {self.descriptor}: {exc}"
             raise AlleleClientDataError(error_message) from exc
