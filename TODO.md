@@ -2,7 +2,7 @@
 
 ## We are using the new repo.
 
-- [ ] All checks and tests pass locally.
+- [x] All checks and tests pass locally.
 - [ ] We've blown away old development migrations.
 - [ ] We've made the new repo.
 - [ ] We've documented using Conventional Commits.
