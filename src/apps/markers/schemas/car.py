@@ -1,5 +1,7 @@
 """Define schemas for the ClinGen Allele Registry API."""
 
+from collections.abc import Iterator
+
 from pydantic import BaseModel, Field, RootModel, field_validator
 
 # ======================================================================================
@@ -101,14 +103,27 @@ class HLADescriptorSchema(RootModel):
 
     root: list[HLADescriptorRecord]
 
-    def __iter__(self):  # noqa
+    def __iter__(self) -> Iterator[HLADescriptorRecord]:  # type: ignore[override]
+        """Return an iterator over the records in the schema."""
         return iter(self.root)
 
-    def __getitem__(self, item):  # noqa
+    def __getitem__(self, item: int) -> HLADescriptorRecord | None:
+        """Return a record from the schema."""
         return self.root[item]
 
     @field_validator("root")
-    def validate_list_length(cls, v):  # noqa
+    def validate_list_length(
+        cls,  # noqa: N805 (Pydantic conventions supersede lint conventions here.)
+        v: list[HLADescriptorRecord],
+    ) -> list[HLADescriptorRecord]:
+        """Return the list of records, validating its length is 1.
+
+        I'm not sure why the CAR decided to provide these endpoints where the top-level
+        item is a list, but I want to make sure we're handling it correctly.
+
+        Raises:
+            ValueError: If the list of records is not of length 1.
+        """
         if len(v) != 1:
             error_message = "List of records must be of length 1"
             raise ValueError(error_message)
