@@ -1,6 +1,36 @@
 # Things That Need to Be Done Before User Testing on May 5th
 
-## We're done refactoring. 
+## We are using the new repo.
+
+- [ ] All checks and tests pass locally.
+- [ ] We've blown away old development migrations.
+- [ ] We've made the new repo.
+- [ ] We've documented using Conventional Commits.
+- [ ] We've documented our commit message conventions.
+- [ ] We've added our code to the new repo using Conventional Commits.
+- [ ] We've set up CI in the new repo.
+- [ ] We've set up a PR template.
+- [ ] We've documented how we process issues.
+- [ ] We've set up issue labels (critical, bug, feature, improvement).
+- [ ] We've set up issue templates (critical, bug, feature, improvement).
+
+## The app test deployed to the test server and the prod server.
+
+- [ ] The test server is running the HCI with all MVP functionality.
+- [ ] The prod server is running the HCI with all MVP functionality.
+- [ ] We have the following CI workflow: PR opened → checks pass → deploy to test.
+- [ ] We have the following CI workflow: PR approved and merged → deploy to prod.
+- [ ] We have the following CI workflow: PR approved and merged → deploy dev docs site.
+- [ ] We have the following CI workflow: PR approved and merged → deploy test coverage report.
+
+## The score calculator code is integrated.
+
+- [ ] We've added the code to the code base.
+- [ ] All checks and tests pass.
+- [ ] We've recorded the to-do items for the score calculator.
+- [ ] The score calculator is being used to calculate association scores.
+
+## We're done refactoring.
 
 - [x] Templates have been refactored to match routes as much as possible.
     - See [the routes test](./src/tests/integration/routes_test.py).
@@ -46,60 +76,43 @@
     - [x] Selectors implement their ABC.
     - [x] Services implement their ABC.
 
-## The missing tests have been added.
+- [ ] We've renamed things that need to be renamed.
+    - [ ] We've replaced instances of "all" with "list."
+    - [ ] We've replaced instances of "overview" with "details."
+    - [ ] We've replaced instances of "allele" with "HLA allele."
 
-- [ ] We've found all modules that are missing tests.
-- [ ] We've added the tests.
-- [x] We're monitoring our test coverage.
+## We're handling errors as best we can.
 
-## The new repo is in use.
+- [ ] We've documented our error handling conventions.
+- [ ] We've located parts of the code base that need improved error handling.
+- [ ] We're handling errors in the parts of the code base we located.
+- [ ] We've identified existing tests that need to be modified.
+- [ ] Existing tests take error handling into consideration.
 
-- [x] We've extracted all tasks from my personal to-do list.
+## We're logging where necessary.
 
-- [ ] We've replaced instances of "all" with "list."
-- [ ] We've replaced instances of "overview" with "details."
-- [ ] We've replaced instances of "allele" with "HLA allele."
+- [x] We've documented our error logging conventions.
+- [ ] We've located parts of the code base that might need logs.
+- [ ] We're logging in the parts of the code base we located.
 
-- [ ] All arguments, returns, and raises are documented in docstrings.
-    - [ ] We've considered using https://pypi.org/project/flake8-docstrings-complete/.
-- [ ] There are no "stop sign" docstrings.
-    - That is, there are no signs above stop signs saying: "This is a stop sign."
+## We have tests where necessary.
 
-- [x] The documentation system is set up.
-    - [x] We have a document for how-to guides.
-    - [x] We have a document for tutorials.
-    - [x] We have a document for explanations.
-    - [x] The README links to the documentation.
-  
-- [ ] We've fixed the type check issues.
-- [ ] All TODOs in the code have been resolved.
-- [ ] We are linting Django templates as part of code quality checks.
+- [ ] We've documented our testing conventions.
+- [ ] We've located modules missing tests.
+- [ ] We've implemented missing tests.
 
-- [ ] The score calculator code is integrated.
-- [ ] All code quality checks are passing.
+## We're validating data.
 
-- [x] The old Terraform code is preserved.
-- [x] The old infrastructure is destroyed.
+- [ ] We've documented our data validation conventions.
+- [ ] We've located places in the code that need data validation.
+- [ ] We've implemented data validation.
 
-- [ ] The garbage development migrations are blown away.
-- [x] We are using conventional commits.
-- [ ] The commit history is restricted to the new organization of the code and the new commit convention.
-    - (The prior history is too messy to be useful.)
-- [ ] We've created the new repo.
-- [ ] We've moved the code to the new repo.
-- [ ] We're running all checks in the new repo.
+## Docstrings are useful.
 
-## Code quality standards are documented and adhered to.
-
-- [x] We've documented logging practices.
-- [ ] Logging is configured.
-- [ ] We log when we're supposed to log.
-
-- [ ] We've documented error handling practices.
-- [ ] We handle errors the way we're supposed to.
-
-- [ ] We've documented our data validation practices.
-- [ ] We validate data the way we're supposed to.
+- [ ] We've identified stop-sign docstrings.
+- [ ] We've fixed stop-sign docstrings.
+- [ ] We've found docstrings that don't have arguments documented.
+- [ ] We've documented all arguments.
 
 ## MVP functionality is complete.
 
@@ -128,20 +141,6 @@
     - [x] The user can view all publications.
     - [ ] The user can curate.
 
-- [ ] Entity forms have links to external search sites.
-    - [ ] disease
-        - [ ] mondo
-    - [ ] markers
-        - [ ] allele
-        - [ ] haplotype
-    - [ ] publications
-        - [ ] pubmed
-        - [ ] biorxiv
-        - [ ] medrxiv
-
-- [ ] We've decided on permissions.
-- [ ] Permissions have been implemented.
-
 - [ ] We have end-to-end tests for all workflows.
     - [ ] sign up
     - [ ] log in
@@ -159,34 +158,11 @@
     - [ ] view all publications
     - [ ] curate
 
-- [ ] The data validation plan has been implemented.
-    - The two different validation layers:
-        - Pydantic schemas are used in the clients
-        - Django validators in the models to perform extra checks
-
-## All miscellaneous tasks have been resolved.
-
-- [ ] In the UI, the underscore in the Mondo ID should be a colon.
-    - [ ] The code transforms the underscore into a colon.
-- [ ] There is an include for help text
-    - [ ] All help texts use this include.
-- [x] The public recipes in the justfile use the private recipes.
-- [x] All recipes in the justfile use `uv run`.
-
-## The app test deployed to the test server and the prod server.
-
-- [ ] The test server is running the HCI with all MVP functionality.
-- [ ] The prod server is running the HCI with all MVP functionality.
+- [ ] We've decided on permissions.
+- [ ] Permissions have been implemented.
 
 ## Nice-to-have tasks are complete.
 
-- [ ] We have the following CI workflow: PR opened → checks pass → deploy to test.
-- [ ] We have the following CI workflow: PR approved and merged → deploy to prod.
 - [ ] We have a footer in Ingrid's purple.
 - [ ] The help text can be edited by non-developers.
-- [x] We have a Sphinx dev docs site.
-- [x] We have the following CI workflow: PR opened → check dev docs site.
-- [x] We have the following CI workflow: PR opened → check test coverage report.
-- [ ] We have the following CI workflow: PR approved and merged → deploy dev docs site.
-- [ ] We have the following CI workflow: PR approved and merged → test coverage report.
 - [ ] We've added Firebase.
